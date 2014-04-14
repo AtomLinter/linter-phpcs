@@ -1,15 +1,16 @@
 {
   "name": "linter-phpcs",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "./lib/init",
   "linter-package": true,
   "description": "A short description of your package",
-  "activationEvents": ["linter-phpcs:toggle"],
+  "activationEvents": [
+    "linter-phpcs:toggle"
+  ],
   "repository": "https://github.com/AtomLinter/linter-phpcs",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
