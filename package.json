@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "./lib/init",
   "linter-package": true,
-  "description": "A short description of your package",
+  "description": "Linter plugin for PHP, using phpcs",
   "activationEvents": [
     "linter-phpcs:toggle"
   ],
