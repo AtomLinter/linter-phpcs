@@ -20,8 +20,11 @@ class LinterPhpcs extends Linter
   standard: null
 
   constructor: (editorView)->
-    @executablePath = atom.config.get 'linter-phpcs.phpcsExecutablePath'
-    @standard = atom.config.get 'linter-phpcs.standard'
+    atom.config.observe 'linter-phpcs.phpcsExecutablePath', =>
+      @executablePath = atom.config.get 'linter-phpcs.phpcsExecutablePath'
+
+    atom.config.observe 'linter-phpcs.standard', =>
+      @standard = atom.config.get 'linter-phpcs.standard'
 
   getCmd:(filePath) ->
     cmd = super(filePath)
