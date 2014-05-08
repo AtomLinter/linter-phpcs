@@ -1,6 +1,6 @@
 {
   "name": "linter-phpcs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "./lib/init",
   "linter-package": true,
   "description": "Lint PHP on the fly, using phpcs",
