@@ -26,6 +26,10 @@ class LinterPhpcs extends Linter
     atom.config.observe 'linter-phpcs.standard', =>
       @standard = atom.config.get 'linter-phpcs.standard'
 
+  destroy: ->
+    atom.config.unobserve 'linter-phpcs.phpcsExecutablePath'
+    atom.config.unobserve 'linter-phpcs.standard'
+
   getCmd:(filePath) ->
     cmd = super(filePath)
     cmd.replace('@standard', @standard)
