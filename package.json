@@ -4,9 +4,6 @@
   "main": "./lib/init",
   "linter-package": true,
   "description": "Lint PHP on the fly, using phpcs",
-  "activationEvents": [
-    "linter-phpcs:toggle"
-  ],
   "repository": "https://github.com/AtomLinter/linter-phpcs",
   "license": "MIT",
   "engines": {
