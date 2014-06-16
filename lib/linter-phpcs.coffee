@@ -6,10 +6,6 @@ class LinterPhpcs extends Linter
   # list/tuple of strings. Names should be all lowercase.
   @syntax: ['text.html.php', 'source.php']
 
-  # A string, list, tuple or callable that returns a string, list or tuple,
-  # containing the command line (with arguments) used to lint.
-  cmd: 'phpcs --report=checkstyle --standard=@standard'
-
   executablePath: null
 
   linterName: 'phpcs'
@@ -27,13 +23,10 @@ class LinterPhpcs extends Linter
 
     atom.config.observe 'linter-phpcs.standard', =>
       @standard = atom.config.get 'linter-phpcs.standard'
+      @cmd = 'phpcs --report=checkstyle --standard=@standard'.replace('@standard', @standard)
 
   destroy: ->
     atom.config.unobserve 'linter-phpcs.phpcsExecutablePath'
     atom.config.unobserve 'linter-phpcs.standard'
-
-  getCmd:(filePath) ->
-    cmd = super(filePath)
-    cmd.replace('@standard', @standard)
 
 module.exports = LinterPhpcs
