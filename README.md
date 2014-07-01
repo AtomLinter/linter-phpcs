@@ -29,7 +29,7 @@ $ apm install linter-phpcs
 You can configure linter-phpcs by editing ~/.atom/config.cson (choose Open Your Config in Atom menu):
 ```
 'linter-phpcs':
-  'phpcsExecutablePath': null #phpcs path. run 'which phpcs' to find the path
+  'phpcsExecutablePath': null # phpcs path. run 'which phpcs' to find the path
   'standard': 'PSR2' #phpcs standard
 ```
 
