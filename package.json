@@ -2,7 +2,7 @@
   "name": "linter-phpcs",
   "version": "0.0.9",
   "main": "./lib/init",
-  "linter-package": false,
+  "linter-package": true,
   "activationEvents": [],
   "description": "Lint PHP on the fly, using phpcs",
   "repository": "https://github.com/AtomLinter/linter-phpcs",
