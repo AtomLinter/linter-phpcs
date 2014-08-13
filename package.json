@@ -1,6 +1,6 @@
 {
   "name": "linter-phpcs",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "main": "./lib/init",
   "linter-package": true,
   "activationEvents": [],
