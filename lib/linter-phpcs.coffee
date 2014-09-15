@@ -25,20 +25,20 @@ class LinterPhpcs extends Linter
     atom.config.observe 'linter-phpcs.ignore', =>
       @updateCommand()
 
-    atom.config.observe 'linter-phpcs.EnableWarning', =>
+    atom.config.observe 'linter-phpcs.enableWarning', =>
       @updateCommand()
 
 
   destroy: ->
     atom.config.unobserve 'linter-phpcs.phpcsExecutablePath'
     atom.config.unobserve 'linter-phpcs.standard'
-    atom.config.unobserve 'linter-phpcs.EnableWarning'
+    atom.config.unobserve 'linter-phpcs.enableWarning'
     atom.config.unobserve 'linter-phpcs.ignore'
 
    updateCommand: ->
     standard = atom.config.get 'linter-phpcs.standard'
     ignore = atom.config.get 'linter-phpcs.ignore'
-    warning = atom.config.get 'linter-phpcs.EnableWarning'
+    warning = atom.config.get 'linter-phpcs.enableWarning'
 
     @cmd = "phpcs --report=checkstyle --warning-severity=#{warning}"
 

@@ -3,7 +3,7 @@ module.exports =
     phpcsExecutablePath: null
     standard: 'PSR2'
     ignore: '*.blade.php,*.twig.php'
-    EnableWarning: 1
+    enableWarning: 1
 
   activate: ->
     console.log 'activate linter-phpcs'
