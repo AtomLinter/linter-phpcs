@@ -6,14 +6,12 @@ class LinterPhpcs extends Linter
   # list/tuple of strings. Names should be all lowercase.
   @syntax: ['text.html.php', 'source.php']
 
-  executablePath: null
-
   linterName: 'phpcs'
 
   # A regex pattern used to extract information from the executable's output.
   regex: '.*line="(?<line>[0-9]+)" column="(?<col>[0-9]+)" severity="((?<error>error)|(?<warning>warning))" message="(?<message>.*)" source'
 
-  standard: null
+  executablePath: null
 
   constructor: (editor)->
     super(editor)
@@ -22,11 +20,32 @@ class LinterPhpcs extends Linter
       @executablePath = atom.config.get 'linter-phpcs.phpcsExecutablePath'
 
     atom.config.observe 'linter-phpcs.standard', =>
-      @standard = atom.config.get 'linter-phpcs.standard'
-      @cmd = 'phpcs --report=checkstyle --standard=@standard'.replace('@standard', @standard)
+      @updateCommand()
+
+    atom.config.observe 'linter-phpcs.ignore', =>
+      @updateCommand()
+
+    atom.config.observe 'linter-phpcs.enableWarning', =>
+      @updateCommand()
+
 
   destroy: ->
     atom.config.unobserve 'linter-phpcs.phpcsExecutablePath'
     atom.config.unobserve 'linter-phpcs.standard'
+    atom.config.unobserve 'linter-phpcs.enableWarning'
+    atom.config.unobserve 'linter-phpcs.ignore'
+
+   updateCommand: ->
+    standard = atom.config.get 'linter-phpcs.standard'
+    ignore = atom.config.get 'linter-phpcs.ignore'
+    warning = atom.config.get 'linter-phpcs.enableWarning'
+
+    @cmd = "phpcs --report=checkstyle --warning-severity=#{warning}"
+
+    if standard
+        @cmd += " --standard=#{standard}"
+
+    if ignore
+        @cmd += " --ignore=#{ignore}"
 
 module.exports = LinterPhpcs
