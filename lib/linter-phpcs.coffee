@@ -1,5 +1,6 @@
 linterPath = atom.packages.getLoadedPackage("linter").path
 Linter = require "#{linterPath}/lib/linter"
+findFile = require "#{linterPath}/lib/util"
 
 class LinterPhpcs extends Linter
   # The syntax that the linter handles. May be a string or
@@ -42,10 +43,17 @@ class LinterPhpcs extends Linter
 
     @cmd = "phpcs --report=checkstyle --warning-severity=#{warning}"
 
-    if standard
+    # Check for per-project settings and fall back to editor settings
+    # if none are found.
+    config = findFile @cwd, ['phpcs.xml']
+    if config
+      @cmd += " --standard=#{config}"
+
+    else
+      if standard
         @cmd += " --standard=#{standard}"
 
-    if ignore
+      if ignore
         @cmd += " --ignore=#{ignore}"
 
 module.exports = LinterPhpcs
