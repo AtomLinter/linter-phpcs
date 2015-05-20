@@ -3,7 +3,7 @@
   "version": "0.0.14",
   "main": "./lib/init",
   "linter-package": true,
-  "activationEvents": [],
+  "activationCommands": [],
   "description": "Lint PHP on the fly, using phpcs",
   "repository": "https://github.com/AtomLinter/linter-phpcs",
   "license": "MIT",
