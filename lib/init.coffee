@@ -2,7 +2,7 @@ module.exports =
   config:
     phpcsExecutablePath:
       type: 'string'
-      default: null
+      default: ''
     standard:
       type: 'string'
       default: 'PSR2'
