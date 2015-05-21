@@ -1,6 +1,7 @@
 linterPath = atom.packages.getLoadedPackage("linter").path
 Linter = require "#{linterPath}/lib/linter"
 findFile = require "#{linterPath}/lib/util"
+{CompositeDisposable} = require 'atom'
 
 class LinterPhpcs extends Linter
   # The syntax that the linter handles. May be a string or
@@ -17,24 +18,23 @@ class LinterPhpcs extends Linter
   constructor: (editor)->
     super(editor)
 
-    atom.config.observe 'linter-phpcs.phpcsExecutablePath', =>
+    @disposables = new CompositeDisposable()
+
+    @disposables.add atom.config.observe 'linter-phpcs.phpcsExecutablePath', =>
       @executablePath = atom.config.get 'linter-phpcs.phpcsExecutablePath'
 
-    atom.config.observe 'linter-phpcs.standard', =>
+    @disposables.add atom.config.observe 'linter-phpcs.standard', =>
       @updateCommand()
 
-    atom.config.observe 'linter-phpcs.ignore', =>
+    @disposables.add atom.config.observe 'linter-phpcs.ignore', =>
       @updateCommand()
 
-    atom.config.observe 'linter-phpcs.enableWarning', =>
+    @disposables.add atom.config.observe 'linter-phpcs.enableWarning', =>
       @updateCommand()
-
 
   destroy: ->
-    atom.config.unobserve 'linter-phpcs.phpcsExecutablePath'
-    atom.config.unobserve 'linter-phpcs.standard'
-    atom.config.unobserve 'linter-phpcs.enableWarning'
-    atom.config.unobserve 'linter-phpcs.ignore'
+    super
+    @disposables.dispose()
 
    updateCommand: ->
     standard = atom.config.get 'linter-phpcs.standard'
