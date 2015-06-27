@@ -30,6 +30,8 @@ You can configure linter-phpcs by editing ~/.atom/config.cson (choose Open Your 
 ```
 'linter-phpcs':
   'phpcsExecutablePath': null #phpcs path. run 'which phpcs' to find the path
+  'phpcsConfigXMLPath': null #phpcs XML path. directory to look for XML standards file, cwd by default
+  'phpcsConfigXMLFile': 'phpcs.xml' #phpcs XML name. name of the file to search for
   'standard': 'PSR2' #phpcs standard
   'ignore': '*.blade.php,*.twig.php' #phpcs ignore files
   'enableWarning': 1 #phpcs warning-severity 1 = true | 0 = false

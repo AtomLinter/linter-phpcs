@@ -23,6 +23,12 @@ class LinterPhpcs extends Linter
     @disposables.add atom.config.observe 'linter-phpcs.phpcsExecutablePath', =>
       @executablePath = atom.config.get 'linter-phpcs.phpcsExecutablePath'
 
+    @disposables.add atom.config.observe 'linter-phpcs.phpcsConfigXMLPath', =>
+      @updateCommand()
+
+    @disposables.add atom.config.observe 'linter-phpcs.phpcsConfigXMLFile', =>
+      @updateCommand()
+
     @disposables.add atom.config.observe 'linter-phpcs.standard', =>
       @updateCommand()
 
@@ -36,18 +42,24 @@ class LinterPhpcs extends Linter
     super
     @disposables.dispose()
 
-   updateCommand: ->
+  updateCommand: ->
     standard = atom.config.get 'linter-phpcs.standard'
     ignore = atom.config.get 'linter-phpcs.ignore'
     warning = atom.config.get 'linter-phpcs.enableWarning'
+    configXMLPath = atom.config.get 'linter-phpcs.phpcsConfigXMLPath'
+    configXMLFile = atom.config.get 'linter-phpcs.phpcsConfigXMLFile'
 
     @cmd = "phpcs --report=checkstyle --warning-severity=#{warning}"
 
     # Check for per-project settings and fall back to editor settings
     # if none are found.
-    config = findFile @cwd, ['phpcs.xml']
-    if config
-      @cmd += " --standard=#{config}"
+    cwdXML = findFile @cwd, [configXMLFile]
+    configXML = findFile configXMLPath, [configXMLFile]
+    if cwdXML
+      @cmd += " --standard=#{cwdXML}"
+
+    else if configXML
+      @cmd += " --standard=#{configXML}"
 
     else
       if standard
