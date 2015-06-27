@@ -3,6 +3,12 @@ module.exports =
     phpcsExecutablePath:
       type: 'string'
       default: ''
+    phpcsConfigXmlPath:
+      type: 'string'
+      default: ''
+    phpcsConfigXmlFile:
+      type: 'string'
+      default: 'phpcs.xml'
     standard:
       type: 'string'
       default: 'PSR2'
