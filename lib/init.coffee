@@ -3,10 +3,10 @@ module.exports =
     phpcsExecutablePath:
       type: 'string'
       default: ''
-    phpcsConfigXMLPath:
+    phpcsConfigXmlPath:
       type: 'string'
       default: ''
-    phpcsConfigXMLFile:
+    phpcsConfigXmlFile:
       type: 'string'
       default: 'phpcs.xml'
     standard:

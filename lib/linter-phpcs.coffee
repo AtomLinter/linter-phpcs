@@ -23,10 +23,10 @@ class LinterPhpcs extends Linter
     @disposables.add atom.config.observe 'linter-phpcs.phpcsExecutablePath', =>
       @executablePath = atom.config.get 'linter-phpcs.phpcsExecutablePath'
 
-    @disposables.add atom.config.observe 'linter-phpcs.phpcsConfigXMLPath', =>
+    @disposables.add atom.config.observe 'linter-phpcs.phpcsConfigXmlPath', =>
       @updateCommand()
 
-    @disposables.add atom.config.observe 'linter-phpcs.phpcsConfigXMLFile', =>
+    @disposables.add atom.config.observe 'linter-phpcs.phpcsConfigXmlFile', =>
       @updateCommand()
 
     @disposables.add atom.config.observe 'linter-phpcs.standard', =>
@@ -46,8 +46,8 @@ class LinterPhpcs extends Linter
     standard = atom.config.get 'linter-phpcs.standard'
     ignore = atom.config.get 'linter-phpcs.ignore'
     warning = atom.config.get 'linter-phpcs.enableWarning'
-    configXMLPath = atom.config.get 'linter-phpcs.phpcsConfigXMLPath'
-    configXMLFile = atom.config.get 'linter-phpcs.phpcsConfigXMLFile'
+    configXMLPath = atom.config.get 'linter-phpcs.phpcsConfigXmlPath'
+    configXMLFile = atom.config.get 'linter-phpcs.phpcsConfigXmlFile'
 
     @cmd = "phpcs --report=checkstyle --warning-severity=#{warning}"
 
