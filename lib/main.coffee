@@ -16,5 +16,3 @@ module.exports =
       type: 'integer'
       default: 0
 
-  activate: ->
-    console.log 'activate linter-phpcs'
