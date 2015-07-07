@@ -1,13 +1,21 @@
 {
   "name": "linter-phpcs",
   "version": "0.0.15",
-  "main": "./lib/init",
-  "linter-package": true,
+  "main": "./lib/main",
   "description": "Lint PHP on the fly, using phpcs",
   "repository": "https://github.com/AtomLinter/linter-phpcs",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "atom-linter": "^1.0.0"
+  },
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  }
 }
