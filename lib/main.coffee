@@ -18,13 +18,13 @@ module.exports =
       type: 'integer'
       default: 0
   activate: ->
-    @command = new Array(5)
+    @parameters = new Array(5)
     @standard = ""
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
       unless value
         value = "phpcs" # Let os's $PATH handle the rest
-      @command[0] = "#{value} --report=json"
+      @command = "#{value} --report=json"
     )
     @subscriptions.add atom.config.observe('linter-phpcs.codeStandardOrConfigFile', (value) =>
       @standard = value
@@ -32,17 +32,17 @@ module.exports =
     @subscriptions.add atom.config.observe('linter-phpcs.ignore', (value) =>
       if value
         value = "--ignore=#{value}"
-        @command[2] = value
-      else @command[2] = null
+        @parameters[2] = value
+      else @parameters[2] = null
     )
     @subscriptions.add atom.config.observe('linter-phpcs.warningSeverity', (value) =>
-      @command[3] = "--warning-severity=#{value}"
+      @parameters[3] = "--warning-severity=#{value}"
     )
     @subscriptions.add atom.config.observe('linter-phpcs.tabWidth', (value) =>
       if value
         value = "--tab-width=#{value}"
-        @command[4] = value
-      else @command[4] = null
+        @parameters[4] = value
+      else @parameters[4] = null
     )
 
   deactivate: ->
@@ -57,11 +57,11 @@ module.exports =
       lintOnFly: false
       lint: (textEditor) =>
         filePath = textEditor.getPath()
-        command = @command.join(' ')
+        command = @parameters.join(' ')
         standard = @standard
         unless standard
           standard = helpers.findFile(path.dirname(filePath), 'phpcs.xml')
         if standard then command += " --standard=#{@standard}"
-        return new Promise (resolve)->
+        return new Promise (resolve) ->
           message = {filePath, type: 'Error', text: 'Something went wrong', range:[[0,0], [0,1]]}
           resolve([message])
