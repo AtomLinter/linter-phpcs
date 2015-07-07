@@ -3,6 +3,9 @@ module.exports =
     phpcsExecutablePath:
       type: 'string'
       default: ''
+    phpcsConfigFile:
+      type: 'string'
+      default: ''
     standard:
       type: 'string'
       default: 'PSR2'
@@ -16,6 +19,7 @@ module.exports =
       type: 'integer'
       default: 0
   provideLinter: ->
+    helpers = require('atom-linter')
     provider =
       grammarScopes: ['source.php']
       scope: 'file'
