@@ -49,6 +49,7 @@ module.exports =
     @subscriptions.dispose()
 
   provideLinter: ->
+    path = require 'path'
     helpers = require('atom-linter')
     provider =
       grammarScopes: ['source.php']
@@ -57,8 +58,10 @@ module.exports =
       lint: (textEditor) =>
         filePath = textEditor.getPath()
         command = @command.join(' ')
-        if @standard then command += " --standard=#{@standard}"
-        console.log command
+        standard = @standard
+        unless standard
+          standard = helpers.findFile(path.dirname(filePath), 'phpcs.xml')
+        if standard then command += " --standard=#{@standard}"
         return new Promise (resolve)->
           message = {filePath, type: 'Error', text: 'Something went wrong', range:[[0,0], [0,1]]}
           resolve([message])
