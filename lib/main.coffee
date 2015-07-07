@@ -71,7 +71,7 @@ module.exports =
             startPoint = [message.line - 1, message.column - 1]
             endPoint = [message.line - 1, message.column]
             return {
-              type: message.type[0].toUpperCase() + message.type.substr(1).toLowerCase()
+              type: message.type
               text: message.message
               filePath,
               range: [startPoint, endPoint]
