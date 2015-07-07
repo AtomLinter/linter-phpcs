@@ -15,4 +15,13 @@ module.exports =
     tabWidth:
       type: 'integer'
       default: 0
-
+  provideLinter: ->
+    provider =
+      grammarScopes: ['source.php']
+      scope: 'file'
+      lintOnFly: false
+      lint: (textEditor)->
+        filePath = textEditor.getPath()
+        return new Promise (resolve)->
+          message = {filePath, type: 'Error', text: 'Something went wrong', range:[[0,0], [0,1]]}
+          resolve([message])
