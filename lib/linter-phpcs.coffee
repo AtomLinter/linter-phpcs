@@ -32,6 +32,9 @@ class LinterPhpcs extends Linter
     @disposables.add atom.config.observe 'linter-phpcs.enableWarning', =>
       @updateCommand()
 
+    @disposables.add atom.config.observe 'linter-phpcs.tabWidth', =>
+      @updateCommand()
+
   destroy: ->
     super
     @disposables.dispose()
@@ -40,6 +43,7 @@ class LinterPhpcs extends Linter
     standard = atom.config.get 'linter-phpcs.standard'
     ignore = atom.config.get 'linter-phpcs.ignore'
     warning = atom.config.get 'linter-phpcs.enableWarning'
+    tabWidth = atom.config.get 'linter-phpcs.tabWidth'
 
     @cmd = "phpcs --report=checkstyle --warning-severity=#{warning}"
 
@@ -55,5 +59,8 @@ class LinterPhpcs extends Linter
 
       if ignore
         @cmd += " --ignore=#{ignore}"
+        
+      if tabWidth
+        @cmd += " --tab-width=#{tabWidth}"
 
 module.exports = LinterPhpcs

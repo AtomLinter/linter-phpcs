@@ -33,6 +33,7 @@ You can configure linter-phpcs by editing ~/.atom/config.cson (choose Open Your 
   'standard': 'PSR2' #phpcs standard
   'ignore': '*.blade.php,*.twig.php' #phpcs ignore files
   'enableWarning': 1 #phpcs warning-severity 1 = true | 0 = false
+  'tabWidth': 4 #phpcs number of spaces to replace tab with; 0 to disable
 ```
 
 ## Contributing

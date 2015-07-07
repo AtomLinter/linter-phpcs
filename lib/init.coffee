@@ -12,6 +12,9 @@ module.exports =
     enableWarning:
       type: 'integer'
       default: 1
+    tabWidth:
+      type: 'integer'
+      default: 0
 
   activate: ->
     console.log 'activate linter-phpcs'
