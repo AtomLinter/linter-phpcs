@@ -39,7 +39,7 @@ class LinterPhpcs extends Linter
     super
     @disposables.dispose()
 
-   updateCommand: ->
+  updateCommand: ->
     standard = atom.config.get 'linter-phpcs.standard'
     ignore = atom.config.get 'linter-phpcs.ignore'
     warning = atom.config.get 'linter-phpcs.enableWarning'
@@ -62,5 +62,21 @@ class LinterPhpcs extends Linter
         
       if tabWidth
         @cmd += " --tab-width=#{tabWidth}"
+
+  # Parse HTML character entities in output.
+  formatMessage: (match) ->
+    map = {
+      quot: '"'
+      amp: '&'
+      lt: '<'
+      gt: '>'
+    }
+    message = match.message
+
+    for key,value of map
+      regex = new RegExp '&' + key + ';', 'g'
+      message = message.replace(regex, value)
+
+    return message
 
 module.exports = LinterPhpcs
