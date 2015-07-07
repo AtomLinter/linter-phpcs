@@ -1,12 +1,10 @@
+{CompositeDisposable} = require 'atom'
 module.exports =
   config:
-    phpcsExecutablePath:
+    executablePath:
       type: 'string'
       default: ''
-    phpcsConfigFile:
-      type: 'string'
-      default: ''
-    standard:
+    standardOrConfigFile:
       type: 'string'
       default: 'PSR2'
     ignore:
@@ -18,6 +16,36 @@ module.exports =
     tabWidth:
       type: 'integer'
       default: 0
+  activate: ->
+    @command = new Array(5)
+    @subscriptions = new CompositeDisposable
+    @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
+      @command[0] = "#{value} --report=json"
+    )
+    @subscriptions.add atom.config.observe('linter-phpcs.standardOrConfigFile', (value) =>
+      if value
+        value = "--standard=#{value}"
+      @command[1] = value
+    )
+    @subscriptions.add atom.config.observe('linter-phpcs.ignore', (value) =>
+      if value
+        value = "--ignore=#{value}"
+      @command[2] = value
+    )
+    @subscriptions.add atom.config.observe('linter-phpcs.enableWarning', (value) =>
+      if value
+        value = "--warning-severity=#{value}"
+      @command[3] = value
+    )
+    @subscriptions.add atom.config.observe('linter-phpcs.tabWidth', (value) =>
+      if value
+        value = "--tab-width=#{value}"
+      @command[4] = value
+    )
+
+  deactivate: ->
+    @subscriptions.dispose()
+
   provideLinter: ->
     helpers = require('atom-linter')
     provider =
