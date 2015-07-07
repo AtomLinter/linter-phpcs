@@ -4,9 +4,10 @@ module.exports =
     executablePath:
       type: 'string'
       default: ''
-    standardOrConfigFile:
+    codeStandardOrConfigFile:
       type: 'string'
       default: 'PSR2'
+      description: "Enter path to config file or a coding standard, PSR2 for example"
     ignore:
       type: 'string'
       default: '*.blade.php,*.twig.php'
@@ -25,7 +26,7 @@ module.exports =
         value = "phpcs" # Let os's $PATH handle the rest
       @command[0] = "#{value} --report=json"
     )
-    @subscriptions.add atom.config.observe('linter-phpcs.standardOrConfigFile', (value) =>
+    @subscriptions.add atom.config.observe('linter-phpcs.codeStandardOrConfigFile', (value) =>
       @standard = value
     )
     @subscriptions.add atom.config.observe('linter-phpcs.ignore', (value) =>
