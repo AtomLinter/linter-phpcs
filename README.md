@@ -3,9 +3,6 @@ linter-phpcs
 
 This linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides an interface to [phpcs](http://pear.php.net/package/PHP_CodeSniffer/). It will be used with files that have the “PHP” and “HTML” syntax.
 
-## Installation
-Linter package must be installed in order to use this plugin. If Linter is not installed, please follow the instructions [here](https://github.com/AtomLinter/Linter).
-
 ### phpcs installation
 Before using this plugin, you must ensure that `phpcs` is installed on your system. To install `phpcs`, do the following:
 
