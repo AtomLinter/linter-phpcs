@@ -61,8 +61,8 @@ module.exports =
         parameters = @parameters.filter (item) -> item
         standard = @standard
         command = @command
-        unless standard
-          standard = helpers.findFile(path.dirname(filePath), 'phpcs.xml')
+        if standard is 'PSR2' # default value
+          standard = helpers.findFile(path.dirname(filePath), 'phpcs.xml') or standard
         if standard then parameters.push("--standard=#{@standard}")
         parameters.push(filePath)
         return helpers.exec(command, parameters).then (result) ->
