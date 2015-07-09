@@ -63,7 +63,7 @@ module.exports =
         command = @command
         if standard is 'PSR2' # default value
           standard = helpers.findFile(path.dirname(filePath), 'phpcs.xml') or standard
-        if standard then parameters.push("--standard=#{@standard}")
+        if standard then parameters.push("--standard=#{standard}")
         parameters.push(filePath)
         return helpers.exec(command, parameters).then (result) ->
           result = JSON.parse(result)
