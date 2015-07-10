@@ -18,8 +18,7 @@ module.exports =
       type: 'integer'
       default: 0
   activate: ->
-    @parameters = new Array(5)
-    @parameters.push('--report=json')
+    @parameters = []
     @standard = ""
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
@@ -64,9 +63,15 @@ module.exports =
         if standard is 'PSR2' # default value
           standard = helpers.findFile(path.dirname(filePath), 'phpcs.xml') or standard
         if standard then parameters.push("--standard=#{standard}")
+        parameters.push('--report=json')
         parameters.push(filePath)
         return helpers.exec(command, parameters).then (result) ->
-          result = JSON.parse(result)
+          try
+            result = JSON.parse(result)
+          catch error
+            atom.notifications.addError("Error parsing PHPCS response", {detail: "Check your console for more info", dismissible: true})
+            console.log("PHPCS Response", result)
+            return []
           return result.files[filePath].messages.map (message) ->
             startPoint = [message.line - 1, message.column - 1]
             endPoint = [message.line - 1, message.column]
