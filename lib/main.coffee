@@ -69,7 +69,7 @@ module.exports =
           try
             result = JSON.parse(result)
           catch error
-            atom.notifications.addError("Error parsing PHPCS response", {detail: "Check your console for more info", dismissible: true})
+            atom.notifications.addError("Error parsing PHPCS response", {detail: "Check your console for more info. It's a known bug on OSX. See https://github.com/AtomLinter/Linter/issues/726", dismissable: true})
             console.log("PHPCS Response", result)
             return []
           return result.files[filePath].messages.map (message) ->
