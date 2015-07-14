@@ -4,19 +4,23 @@ module.exports =
     executablePath:
       type: 'string'
       default: ''
+      description: "Enter the path to your phpcs executable."
     codeStandardOrConfigFile:
       type: 'string'
       default: 'PSR2'
-      description: "Enter path to config file or a coding standard, PSR2 for example"
+      description: "Enter path to config file or a coding standard, PSR2 for example."
     ignore:
       type: 'string'
       default: '*.blade.php,*.twig.php'
+      description: 'Enter filename patterns to ignore when running the linter.'
     warningSeverity:
       type: 'integer'
       default: 1
+      description: "Set the warning severity level. Enter 0 to display errors only."
     tabWidth:
       type: 'integer'
       default: 0
+      description: "Set the number of spaces that tab characters represent to the linter. Enter 0 to disable this option."
   activate: ->
     @parameters = []
     @standard = ""

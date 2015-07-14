@@ -23,14 +23,16 @@ $ apm install linter-phpcs
 ```
 
 ## Settings
-You can configure linter-phpcs by editing ~/.atom/config.cson (choose Open Your Config in Atom menu):
+You can configure linter-phpcs from the Atom package manager or by editing ~/.atom/config.cson (choose Open Your Config in Atom menu).
+
+Here's an example configuration:
 ```
 'linter-phpcs':
-  'phpcsExecutablePath': null #phpcs path. run 'which phpcs' to find the path
-  'standard': 'PSR2' #phpcs standard
-  'ignore': '*.blade.php,*.twig.php' #phpcs ignore files
-  'enableWarning': 1 #phpcs warning-severity 1 = true | 0 = false
-  'tabWidth': 4 #phpcs number of spaces to replace tab with; 0 to disable
+  executablePath: null # phpcs path. run 'which phpcs' to find the path
+  codeStandardOrConfigFile: 'PSR2' # phpcs standard or rule set file
+  warningSeverity: 0 # phpcs warning-severity (0 to display only errors)
+  tabWidth: 4 # number of spaces that tab character represents
+  ignore: '*.blade.php,*.twig.php' # phpcs ignore filename patterns
 ```
 
 ## Contributing
