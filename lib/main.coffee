@@ -71,7 +71,7 @@ module.exports =
         parameters.push(filePath)
         return helpers.exec(command, parameters).then (result) ->
           try
-            result = JSON.parse(result)
+            result = JSON.parse(result.toString().trim())
           catch error
             atom.notifications.addError("Error parsing PHPCS response", {detail: "Check your console for more info. It's a known bug on OSX. See https://github.com/AtomLinter/Linter/issues/726", dismissable: true})
             console.log("PHPCS Response", result)
