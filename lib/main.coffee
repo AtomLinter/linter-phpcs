@@ -64,7 +64,7 @@ module.exports =
         parameters = @parameters.filter (item) -> item
         standard = @standard
         command = @command
-        standard = helpers.findFile(path.dirname(filePath), 'phpcs.xml') or helpers.findFile(path.dirname(filePath), 'phpcs.ruleset.xml') or standard
+        standard = helpers.findFile(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml']) or standard
         if standard then parameters.push("--standard=#{standard}")
         parameters.push('--report=json')
         parameters.push(filePath)
