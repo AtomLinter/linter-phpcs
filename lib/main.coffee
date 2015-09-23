@@ -76,12 +76,17 @@ module.exports =
             console.log("PHPCS Response", result)
             return []
           return [] unless result.files.STDIN
-          return result.files.STDIN.messages.map (message) ->
-            startPoint = [message.line - 1, message.column - 1]
-            endPoint = [message.line - 1, message.column]
-            return {
-              type: message.type
-              text: message.message
-              filePath,
-              range: [startPoint, endPoint]
-            }
+          return result.files.STDIN.messages
+            # Filter out filename errors due to a bug in PHPCS.
+            # See https://github.com/AtomLinter/linter-phpcs/issues/60
+            .filter (message) -> message.source != 'Generic.Files.LowercasedFilename.NotFound'
+            # Map the error message to something that atom-linter understands.
+            .map (message) ->
+              startPoint = [message.line - 1, message.column - 1]
+              endPoint = [message.line - 1, message.column]
+              return {
+                type: message.type
+                text: message.message
+                filePath,
+                range: [startPoint, endPoint]
+              }
