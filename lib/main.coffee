@@ -22,6 +22,7 @@ module.exports =
       default: 0
       description: "Set the number of spaces that tab characters represent to the linter. Enter 0 to disable this option."
   activate: ->
+    require('atom-package-deps').install('linter-phpcs')
     @parameters = []
     @standard = ""
     @subscriptions = new CompositeDisposable

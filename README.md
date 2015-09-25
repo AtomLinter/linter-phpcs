@@ -1,32 +1,39 @@
 linter-phpcs
 =========================
 
-This linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides an interface to [phpcs](http://pear.php.net/package/PHP_CodeSniffer/). It will be used with files that have the “PHP” and “HTML” syntax.
+This linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides
+an interface to [phpcs](http://pear.php.net/package/PHP_CodeSniffer/). It will
+be used with files that have the “PHP” and “HTML” syntax.
 
-### phpcs installation
+### phpcs Installation
 Before using this plugin, you must ensure that `phpcs` is installed on your system. To install `phpcs`, do the following:
 
-1. Install [php](http://php.net).
+0. Install [php](http://php.net).
 
-2. Install [pear](http://pear.php.net).
+0. Install [pear](http://pear.php.net).
 
-3. Install `phpcs` by typing the following in a terminal:
-   ```
-   pear install PHP_CodeSniffer
-   ```
+0. Install `phpcs` by typing the following in a terminal:
+```ShellSession
+pear install PHP_CodeSniffer
+```
 
 Now you can proceed to install the linter-phpcs plugin.
 
-### Plugin installation
-```
+### Package Installation
+You can then install this package either from within Atom or by running the
+following command:
+```ShellSession
 $ apm install linter-phpcs
 ```
+Note: If you do not already have the `linter` package installed it will be installed
+for you to provide an interface for this package.
 
 ## Settings
-You can configure linter-phpcs from the Atom package manager or by editing ~/.atom/config.cson (choose Open Your Config in Atom menu).
+You can configure linter-phpcs from the Atom package manager or by editing
+~/.atom/config.cson (choose Open Your Config in Atom menu).
 
 Here's an example configuration:
-```
+```cson
 'linter-phpcs':
   executablePath: null # phpcs path. run 'which phpcs' to find the path
   codeStandardOrConfigFile: 'PSR2' # phpcs standard or rule set file
@@ -38,11 +45,11 @@ Here's an example configuration:
 ## Contributing
 If you would like to contribute enhancements or fixes, please do the following:
 
-1. Fork the plugin repository.
-1. Hack on a separate topic branch created from the latest `master`.
-1. Commit and push the topic branch.
-1. Make a pull request.
-1. welcome to the club
+0. Fork the plugin repository
+0. Hack on a separate topic branch created from the latest `master`
+0. Commit and push the topic branch
+0. Make a pull request
+0. Welcome to the club!
 
 Please note that modifications should follow these coding guidelines:
 
