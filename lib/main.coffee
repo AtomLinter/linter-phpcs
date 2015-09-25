@@ -62,32 +62,31 @@ module.exports =
       lintOnFly: true
       lint: (textEditor) =>
         filePath = textEditor.getPath()
+        eolChar = textEditor.getBuffer().lineEndingForRow(0)
         parameters = @parameters.filter (item) -> item
         standard = @standard
         command = @command
         standard = helpers.findFile(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml']) or standard
         if standard then parameters.push("--standard=#{standard}")
         parameters.push('--report=json')
-        text = textEditor.getText()
+        text = 'phpcs_input_file: ' + filePath + eolChar + textEditor.getText()
         return helpers.exec(command, parameters, {stdin: text}).then (result) ->
           try
             result = JSON.parse(result.toString().trim())
           catch error
-            atom.notifications.addError("Error parsing PHPCS response", {detail: "Check your console for more info. It's a known bug on OSX. See https://github.com/AtomLinter/Linter/issues/726", dismissable: true})
+            atom.notifications.addError("Error parsing PHPCS response", {
+              detail: "Something went wrong attempting to parse the PHPCS output.",
+              dismissable: true}
+            )
             console.log("PHPCS Response", result)
             return []
           return [] unless result.files.STDIN
-          return result.files.STDIN.messages
-            # Filter out filename errors due to a bug in PHPCS.
-            # See https://github.com/AtomLinter/linter-phpcs/issues/60
-            .filter (message) -> message.source != 'Generic.Files.LowercasedFilename.NotFound'
-            # Map the error message to something that atom-linter understands.
-            .map (message) ->
-              startPoint = [message.line - 1, message.column - 1]
-              endPoint = [message.line - 1, message.column]
-              return {
-                type: message.type
-                text: message.message
-                filePath,
-                range: [startPoint, endPoint]
-              }
+          return result.files.STDIN.messages.map (message) ->
+            startPoint = [message.line - 1, message.column - 1]
+            endPoint = [message.line - 1, message.column]
+            return {
+              type: message.type
+              text: message.message
+              filePath,
+              range: [startPoint, endPoint]
+            }
