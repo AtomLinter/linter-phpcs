@@ -80,8 +80,8 @@ module.exports =
             )
             console.log("PHPCS Response", result)
             return []
-          return [] unless result.files.STDIN
-          return result.files.STDIN.messages.map (message) ->
+          return [] unless result.files[filePath]
+          return result.files[filePath].messages.map (message) ->
             startPoint = [message.line - 1, message.column - 1]
             endPoint = [message.line - 1, message.column]
             return {
