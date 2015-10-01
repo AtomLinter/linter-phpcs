@@ -57,6 +57,7 @@ module.exports =
     path = require 'path'
     helpers = require('atom-linter')
     provider =
+      name: 'PHPCS'
       grammarScopes: ['source.php']
       scope: 'file'
       lintOnFly: true
