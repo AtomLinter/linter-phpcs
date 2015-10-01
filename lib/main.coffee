@@ -4,11 +4,11 @@ module.exports =
     executablePath:
       type: 'string'
       default: ''
-      description: "Enter the path to your phpcs executable."
+      description: 'Enter the path to your phpcs executable.'
     codeStandardOrConfigFile:
       type: 'string'
       default: 'PSR2'
-      description: "Enter path to config file or a coding standard, PSR2 for example."
+      description: 'Enter path to config file or a coding standard, PSR2 for example.'
     ignore:
       type: 'string'
       default: '*.blade.php,*.twig.php'
@@ -16,19 +16,20 @@ module.exports =
     warningSeverity:
       type: 'integer'
       default: 1
-      description: "Set the warning severity level. Enter 0 to display errors only."
+      description: 'Set the warning severity level. Enter 0 to display errors only.'
     tabWidth:
       type: 'integer'
       default: 0
-      description: "Set the number of spaces that tab characters represent to the linter. Enter 0 to disable this option."
+      description: 'Set the number of spaces that tab characters represent to ' +
+        'the linter. Enter 0 to disable this option.'
   activate: ->
     require('atom-package-deps').install('linter-phpcs')
     @parameters = []
-    @standard = ""
+    @standard = ''
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
       unless value
-        value = "phpcs" # Let os's $PATH handle the rest
+        value = 'phpcs' # Let os's $PATH handle the rest
       @command = value
     )
     @subscriptions.add atom.config.observe('linter-phpcs.codeStandardOrConfigFile', (value) =>
@@ -75,11 +76,11 @@ module.exports =
           try
             result = JSON.parse(result.toString().trim())
           catch error
-            atom.notifications.addError("Error parsing PHPCS response", {
-              detail: "Something went wrong attempting to parse the PHPCS output.",
+            atom.notifications.addError('Error parsing PHPCS response', {
+              detail: 'Something went wrong attempting to parse the PHPCS output.',
               dismissable: true}
             )
-            console.log("PHPCS Response", result)
+            console.log('PHPCS Response', result)
             return []
           return [] unless result.files[filePath]
           return result.files[filePath].messages.map (message) ->
