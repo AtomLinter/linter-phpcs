@@ -5,23 +5,35 @@ module.exports =
       type: 'string'
       default: ''
       description: 'Enter the path to your phpcs executable.'
+      order: 1
     codeStandardOrConfigFile:
       type: 'string'
       default: 'PSR2'
       description: 'Enter path to config file or a coding standard, PSR2 for example.'
+      order: 2
+    autoConfigSearch:
+      title: 'Search for configuration files'
+      type: 'boolean'
+      default: true
+      description: 'Automatically search for any `phpcs.xml` or `phpcs.ruleset.xml` ' +
+        'file to use as configuration. Overrides custom standards defined above.'
+      order: 3
     ignore:
       type: 'string'
       default: '*.blade.php,*.twig.php'
       description: 'Enter filename patterns to ignore when running the linter.'
+      order: 4
     warningSeverity:
       type: 'integer'
       default: 1
       description: 'Set the warning severity level. Enter 0 to display errors only.'
+      order: 5
     tabWidth:
       type: 'integer'
       default: 0
       description: 'Set the number of spaces that tab characters represent to ' +
         'the linter. Enter 0 to disable this option.'
+      order: 6
   activate: ->
     require('atom-package-deps').install('linter-phpcs')
     @parameters = []
@@ -68,7 +80,8 @@ module.exports =
         parameters = @parameters.filter (item) -> item
         standard = @standard
         command = @command
-        standard = helpers.findFile(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml']) or standard
+        confFile = helpers.findFile(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml'])
+        standard = if autoConfigSearch then confFile else standard
         if standard then parameters.push("--standard=#{standard}")
         parameters.push('--report=json')
         text = 'phpcs_input_file: ' + filePath + eolChar + textEditor.getText()
