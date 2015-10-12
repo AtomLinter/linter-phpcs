@@ -47,6 +47,9 @@ module.exports =
     @subscriptions.add atom.config.observe('linter-phpcs.codeStandardOrConfigFile', (value) =>
       @standard = value
     )
+    @subscriptions.add atom.config.observe('linter-phpcs.autoConfigSearch', (value) =>
+      @autoConfigSearch = value
+    )
     @subscriptions.add atom.config.observe('linter-phpcs.ignore', (value) =>
       if value
         value = "--ignore=#{value}"
@@ -81,7 +84,7 @@ module.exports =
         standard = @standard
         command = @command
         confFile = helpers.findFile(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml'])
-        standard = if autoConfigSearch then confFile else standard
+        standard = if @autoConfigSearch then confFile else standard
         if standard then parameters.push("--standard=#{standard}")
         parameters.push('--report=json')
         text = 'phpcs_input_file: ' + filePath + eolChar + textEditor.getText()
