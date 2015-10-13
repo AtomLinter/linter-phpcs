@@ -11,29 +11,34 @@ module.exports =
       default: 'PSR2'
       description: 'Enter path to config file or a coding standard, PSR2 for example.'
       order: 2
+    disableWhenNoConfigFile:
+      type: 'boolean'
+      default: false
+      description: 'Disable the linter when the default configuration file is not found.'
+      order: 3
     autoConfigSearch:
       title: 'Search for configuration files'
       type: 'boolean'
       default: true
       description: 'Automatically search for any `phpcs.xml` or `phpcs.ruleset.xml` ' +
         'file to use as configuration. Overrides custom standards defined above.'
-      order: 3
+      order: 4
     ignore:
       type: 'string'
       default: '*.blade.php,*.twig.php'
       description: 'Enter filename patterns to ignore when running the linter.'
-      order: 4
+      order: 5
     warningSeverity:
       type: 'integer'
       default: 1
       description: 'Set the warning severity level. Enter 0 to display errors only.'
-      order: 5
+      order: 6
     tabWidth:
       type: 'integer'
       default: 0
       description: 'Set the number of spaces that tab characters represent to ' +
         'the linter. Enter 0 to disable this option.'
-      order: 6
+      order: 7
   activate: ->
     require('atom-package-deps').install('linter-phpcs')
     @parameters = []
@@ -43,6 +48,9 @@ module.exports =
       unless value
         value = 'phpcs' # Let os's $PATH handle the rest
       @command = value
+    )
+    @subscriptions.add atom.config.observe('linter-phpcs.disableWhenNoConfigFile', (value) =>
+      @disableWhenNoConfigFile = value
     )
     @subscriptions.add atom.config.observe('linter-phpcs.codeStandardOrConfigFile', (value) =>
       @standard = value
@@ -88,6 +96,7 @@ module.exports =
         command = @command
         confFile = helpers.findFile(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml'])
         standard = if @autoConfigSearch then confFile else standard
+        return [] if @disableWhenNoConfigFile and not confFile
         if standard then parameters.push("--standard=#{standard}")
         parameters.push('--report=json')
         text = 'phpcs_input_file: ' + filePath + eolChar + textEditor.getText()
