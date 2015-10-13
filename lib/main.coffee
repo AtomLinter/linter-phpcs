@@ -68,9 +68,8 @@ module.exports =
 
   provideLinter: ->
     path = require 'path'
-    helpers = require('atom-linter')
+    helpers = require 'atom-linter'
     minimatch = require 'minimatch'
-    _ = require 'lodash'
     provider =
       name: 'PHPCS'
       grammarScopes: ['source.php']
@@ -81,7 +80,7 @@ module.exports =
 
         # Check if file should be ignored
         baseName = path.basename filePath
-        return [] if _.any @ignore, (pattern) => minimatch baseName, pattern
+        return [] if @ignore.some (pattern) -> minimatch baseName, pattern
 
         eolChar = textEditor.getBuffer().lineEndingForRow(0)
         parameters = @parameters.filter (item) -> item

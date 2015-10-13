@@ -11,7 +11,6 @@
   "dependencies": {
     "atom-linter": "^3.0.0",
     "atom-package-deps": "^2.1.3",
-    "lodash": "^3.10.1",
     "minimatch": "^3.0.0"
   },
   "devDependencies": {
