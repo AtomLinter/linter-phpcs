@@ -95,7 +95,7 @@ module.exports =
         standard = @standard
         command = @command
         confFile = helpers.findFile(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml'])
-        standard = if @autoConfigSearch then confFile else standard
+        standard = if @autoConfigSearch and confFile then confFile else standard
         return [] if @disableWhenNoConfigFile and not confFile
         if standard then parameters.push("--standard=#{standard}")
         parameters.push('--report=json')
