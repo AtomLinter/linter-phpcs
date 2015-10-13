@@ -51,10 +51,7 @@ module.exports =
       @autoConfigSearch = value
     )
     @subscriptions.add atom.config.observe('linter-phpcs.ignore', (value) =>
-      if value
-        value = "--ignore=#{value}"
-        @parameters[1] = value
-      else @parameters[1] = null
+      @ignore = value.split ','
     )
     @subscriptions.add atom.config.observe('linter-phpcs.warningSeverity', (value) =>
       @parameters[2] = "--warning-severity=#{value}"
@@ -72,6 +69,8 @@ module.exports =
   provideLinter: ->
     path = require 'path'
     helpers = require('atom-linter')
+    minimatch = require 'minimatch'
+    _ = require 'lodash'
     provider =
       name: 'PHPCS'
       grammarScopes: ['source.php']
@@ -79,6 +78,11 @@ module.exports =
       lintOnFly: true
       lint: (textEditor) =>
         filePath = textEditor.getPath()
+
+        # Check if file should be ignored
+        baseName = path.basename filePath
+        return [] if _.any @ignore, (pattern) => minimatch baseName, pattern
+
         eolChar = textEditor.getBuffer().lineEndingForRow(0)
         parameters = @parameters.filter (item) -> item
         standard = @standard
