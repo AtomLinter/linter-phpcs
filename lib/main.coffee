@@ -39,6 +39,11 @@ module.exports =
       description: 'Set the number of spaces that tab characters represent to ' +
         'the linter. Enter 0 to disable this option.'
       order: 7
+    legacy:
+      type: 'boolean'
+      default: false
+      description: 'Use the legacy PHPCS v.1 mode'
+      order: 8
   activate: ->
     require('atom-package-deps').install('linter-phpcs')
     @parameters = []
@@ -70,6 +75,9 @@ module.exports =
         @parameters[3] = value
       else @parameters[3] = null
     )
+    @subscriptions.add atom.config.observe('linter-phpcs.legacy', (value) =>
+      @legacy = value
+    )
 
   deactivate: ->
     @subscriptions.dispose()
@@ -96,10 +104,11 @@ module.exports =
         command = @command
         confFile = helpers.findFile(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml'])
         standard = if @autoConfigSearch and confFile then confFile else standard
+        legacy = @legacy
         return [] if @disableWhenNoConfigFile and not confFile
         if standard then parameters.push("--standard=#{standard}")
         parameters.push('--report=json')
-        text = 'phpcs_input_file: ' + filePath + eolChar + textEditor.getText()
+        if legacy then text = textEditor.getText() else text = 'phpcs_input_file: ' + filePath + eolChar + textEditor.getText()
         return helpers.exec(command, parameters, {stdin: text}).then (result) ->
           try
             result = JSON.parse(result.toString().trim())
@@ -110,8 +119,13 @@ module.exports =
             )
             console.log('PHPCS Response', result)
             return []
-          return [] unless result.files[filePath]
-          return result.files[filePath].messages.map (message) ->
+          if legacy
+            return [] unless result.files.STDIN
+            messages = result.files.STDIN.messages
+          else
+            return [] unless result.files[filePath]
+            messages = result.files[filePath].messages
+          return messages.map (message) ->
             startPoint = [message.line - 1, message.column - 1]
             endPoint = [message.line - 1, message.column]
             return {
