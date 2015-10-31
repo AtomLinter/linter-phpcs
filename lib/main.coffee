@@ -39,20 +39,24 @@ module.exports =
       description: 'Set the number of spaces that tab characters represent to ' +
         'the linter. Enter 0 to disable this option.'
       order: 7
-    legacy:
-      type: 'boolean'
-      default: false
-      description: 'Use the legacy PHPCS v.1 mode'
-      order: 8
   activate: ->
     require('atom-package-deps').install('linter-phpcs')
+    helpers = require 'atom-linter'
     @parameters = []
     @standard = ''
+    @legacy = false
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
       unless value
         value = 'phpcs' # Let os's $PATH handle the rest
       @command = value
+
+      # Determine if legacy mode needs to be set up (in case phpcs version = 1)
+      helpers.exec(@command, ['--version']).then (result) =>
+        versionPattern = /^PHP_CodeSniffer version ([0-9]+)/i;
+        version = result.match versionPattern
+        if version && version[1] == '1'
+          @legacy = true
     )
     @subscriptions.add atom.config.observe('linter-phpcs.disableWhenNoConfigFile', (value) =>
       @disableWhenNoConfigFile = value
@@ -74,9 +78,6 @@ module.exports =
         value = "--tab-width=#{value}"
         @parameters[3] = value
       else @parameters[3] = null
-    )
-    @subscriptions.add atom.config.observe('linter-phpcs.legacy', (value) =>
-      @legacy = value
     )
 
   deactivate: ->
