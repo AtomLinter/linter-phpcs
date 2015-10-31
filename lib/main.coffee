@@ -105,10 +105,12 @@ module.exports =
         confFile = helpers.findFile(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml'])
         standard = if @autoConfigSearch and confFile then confFile else standard
         legacy = @legacy
+        execprefix = ''
         return [] if @disableWhenNoConfigFile and not confFile
         if standard then parameters.push("--standard=#{standard}")
         parameters.push('--report=json')
-        if legacy then text = textEditor.getText() else text = 'phpcs_input_file: ' + filePath + eolChar + textEditor.getText()
+        execprefix = 'phpcs_input_file: ' + filePath + eolChar unless legacy
+        text = execprefix + textEditor.getText()
         return helpers.exec(command, parameters, {stdin: text}).then (result) ->
           try
             result = JSON.parse(result.toString().trim())
