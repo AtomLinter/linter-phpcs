@@ -53,9 +53,9 @@ module.exports =
 
       # Determine if legacy mode needs to be set up (in case phpcs version = 1)
       helpers.exec(@command, ['--version']).then (result) =>
-        versionPattern = /^PHP_CodeSniffer version ([0-9]+)/i;
+        versionPattern = /^PHP_CodeSniffer version ([0-9]+)/i
         version = result.match versionPattern
-        if version && version[1] == '1'
+        if version and version[1] is '1'
           @legacy = true
     )
     @subscriptions.add atom.config.observe('linter-phpcs.disableWhenNoConfigFile', (value) =>
