@@ -41,13 +41,22 @@ module.exports =
       order: 7
   activate: ->
     require('atom-package-deps').install('linter-phpcs')
+    helpers = require 'atom-linter'
     @parameters = []
     @standard = ''
+    @legacy = false
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
       unless value
         value = 'phpcs' # Let os's $PATH handle the rest
       @command = value
+
+      # Determine if legacy mode needs to be set up (in case phpcs version = 1)
+      helpers.exec(@command, ['--version']).then (result) =>
+        versionPattern = /^PHP_CodeSniffer version ([0-9]+)/i
+        version = result.match versionPattern
+        if version and version[1] is '1'
+          @legacy = true
     )
     @subscriptions.add atom.config.observe('linter-phpcs.disableWhenNoConfigFile', (value) =>
       @disableWhenNoConfigFile = value
@@ -96,10 +105,13 @@ module.exports =
         command = @command
         confFile = helpers.findFile(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml'])
         standard = if @autoConfigSearch and confFile then confFile else standard
+        legacy = @legacy
+        execprefix = ''
         return [] if @disableWhenNoConfigFile and not confFile
         if standard then parameters.push("--standard=#{standard}")
         parameters.push('--report=json')
-        text = 'phpcs_input_file: ' + filePath + eolChar + textEditor.getText()
+        execprefix = 'phpcs_input_file: ' + filePath + eolChar unless legacy
+        text = execprefix + textEditor.getText()
         return helpers.exec(command, parameters, {stdin: text}).then (result) ->
           try
             result = JSON.parse(result.toString().trim())
@@ -110,8 +122,13 @@ module.exports =
             )
             console.log('PHPCS Response', result)
             return []
-          return [] unless result.files[filePath]
-          return result.files[filePath].messages.map (message) ->
+          if legacy
+            return [] unless result.files.STDIN
+            messages = result.files.STDIN.messages
+          else
+            return [] unless result.files[filePath]
+            messages = result.files[filePath].messages
+          return messages.map (message) ->
             startPoint = [message.line - 1, message.column - 1]
             endPoint = [message.line - 1, message.column]
             return {
