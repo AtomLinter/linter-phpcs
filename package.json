@@ -14,7 +14,9 @@
     "minimatch": "^3.0.0"
   },
   "devDependencies": {
-    "coffeelint": "^1.13.1"
+    "coffeelint": "^1.13.1",
+    "eslint": "^1.9.0",
+    "eslint-config-airbnb": "latest"
   },
   "package-deps": [
     "linter"
@@ -27,6 +29,54 @@
       "versions": {
         "1.0.0": "provideLinter"
       }
+    }
+  },
+  "eslintConfig": {
+    "extends": "airbnb/base",
+    "globals": {
+      "atom": true,
+      "waitsForPromise": true
+    },
+    "env": {
+      "jasmine": true
+    }
+  },
+  "coffeelintConfig": {
+    "max_line_length": {
+      "value": 120,
+      "level": "warn"
+    },
+    "no_empty_param_list": {
+      "level": "error"
+    },
+    "arrow_spacing": {
+      "level": "error"
+    },
+    "no_interpolation_in_single_quotes": {
+      "level": "error"
+    },
+    "no_debugger": {
+      "level": "error"
+    },
+    "prefer_english_operator": {
+      "level": "error"
+    },
+    "colon_assignment_spacing": {
+      "spacing": {
+        "left": 0,
+        "right": 1
+      },
+      "level": "error"
+    },
+    "braces_spacing": {
+      "spaces": 0,
+      "level": "error"
+    },
+    "spacing_after_comma": {
+      "level": "error"
+    },
+    "no_stand_alone_at": {
+      "level": "error"
     }
   }
 }
