@@ -39,8 +39,9 @@ module.exports =
       description: 'Set the number of spaces that tab characters represent to ' +
         'the linter. Enter 0 to disable this option.'
       order: 7
+
   activate: ->
-    require('atom-package-deps').install('linter-phpcs')
+    require('atom-package-deps').install()
     helpers = require 'atom-linter'
     @parameters = []
     @standard = ''
@@ -50,7 +51,6 @@ module.exports =
       unless value
         value = 'phpcs' # Let os's $PATH handle the rest
       @command = value
-
       # Determine if legacy mode needs to be set up (in case phpcs version = 1)
       helpers.exec(@command, ['--version']).then (result) =>
         versionPattern = /^PHP_CodeSniffer version ([0-9]+)/i
