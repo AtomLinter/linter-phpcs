@@ -3,7 +3,7 @@ module.exports =
   config:
     executablePath:
       type: 'string'
-      default: ''
+      default: 'phpcs'
       description: 'Enter the path to your phpcs executable.'
       order: 1
     codeStandardOrConfigFile:
@@ -48,8 +48,6 @@ module.exports =
     @legacy = false
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
-      unless value
-        value = 'phpcs' # Let os's $PATH handle the rest
       @command = value
       # Determine if legacy mode needs to be set up (in case phpcs version = 1)
       helpers.exec(@command, ['--version']).then (result) =>
