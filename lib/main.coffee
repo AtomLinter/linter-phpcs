@@ -23,9 +23,11 @@ module.exports =
       description: 'Automatically search for any `phpcs.xml` or `phpcs.ruleset.xml` ' +
         'file to use as configuration. Overrides custom standards defined above.'
       order: 4
-    ignore:
-      type: 'string'
-      default: '*.blade.php,*.twig.php'
+    ignorePatterns:
+      type: 'array'
+      default: ['*.blade.php', '*.twig.php']
+      items:
+        type: 'string'
       description: 'Enter filename patterns to ignore when running the linter.'
       order: 5
     warningSeverity:
@@ -65,8 +67,13 @@ module.exports =
     @subscriptions.add atom.config.observe('linter-phpcs.autoConfigSearch', (value) =>
       @autoConfigSearch = value
     )
-    @subscriptions.add atom.config.observe('linter-phpcs.ignore', (value) =>
-      @ignore = value.split ','
+    @subscriptions.add atom.config.observe('linter-phpcs.ignorePatterns', (value) =>
+      # Translate the old setting to the new array method
+      oldSetting = atom.config.get('linter-phpcs.ignore', (old) ->
+        value = old.split(',') if old
+        atom.config.unset('linter-phpcs.ignore')
+      )
+      @ignore = value
     )
     @subscriptions.add atom.config.observe('linter-phpcs.warningSeverity', (value) =>
       @parameters[2] = "--warning-severity=#{value}"
