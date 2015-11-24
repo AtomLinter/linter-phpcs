@@ -8,15 +8,17 @@ notifications:
   email:
     on_success: never
     on_failure: change
-matrix:
-  include:
-    - os: linux
-      env: LPHP_OS=linux
-      before_script:
-        - export DISPLAY=:99.0
-        - sh -e /etc/init.d/xvfb start
-      language: php
-    - os: osx
-      env: LPHP_OS=osx
+os: osx
+before_install:
+  # Updating PHP to 5.6
+  - curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
+  - export PATH=/usr/local/php5/bin:$PATH
+  - php --version
+  # Installing Composer
+  - php -r "readfile('https://getcomposer.org/installer');" | sudo php -- --filename=composer
+  - sudo php composer config -g github-oauth.github.com cc4a091c096e7d3cfe053c3f669fb840be60ab98
+  - export PATH="$PATH:$HOME/.composer/vendor/bin"
+  #Installing PHP_CodeSniffer
+  - sudo php composer global require "squizlabs/php_codesniffer=*"
 
-script: scripts/build_package.sh
+script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
