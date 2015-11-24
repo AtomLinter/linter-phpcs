@@ -29,3 +29,14 @@ $ apm install linter-phpcs
 ```
 Note: If you do not already have the `linter` package installed it will be installed
 for you to provide an interface for this package.
+
+### Instructions for windows
+
+Windows doesn't know how to execute `.phar` files by default, therefore we have to create a `.bat` wrapper for it. To get `phpcs.phar` working with
+`linter-phpcs` you should create a `phpcs.bat` in the same folder and write these at it's contents, once you have created it, you should point
+`linter-phpcs` to that bat file instead of phar one.
+
+```
+@ECHO OFF
+C:\path\to\php.exe "%~dp0phpcs.phar" %*
+```
