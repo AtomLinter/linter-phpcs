@@ -30,17 +30,24 @@ module.exports =
         type: 'string'
       description: 'Enter filename patterns to ignore when running the linter.'
       order: 5
+    includePatterns:
+      type: 'array'
+      default: ['source.php']
+      items:
+        type: 'string'
+      description: 'Enter grammar scopes to include when running the linter. Useful for also linting JavaScript (source.js) or CSS (source.css).'
+      order: 6
     warningSeverity:
       type: 'integer'
       default: 1
       description: 'Set the warning severity level. Enter 0 to display errors only.'
-      order: 6
+      order: 7
     tabWidth:
       type: 'integer'
       default: 0
       description: 'Set the number of spaces that tab characters represent to ' +
         'the linter. Enter 0 to disable this option.'
-      order: 7
+      order: 8
 
   activate: ->
     require('atom-package-deps').install()
@@ -75,6 +82,9 @@ module.exports =
       )
       @ignore = value
     )
+    @subscriptions.add atom.config.observe('linter-phpcs.includePatterns', (value) =>
+      @grammarScopes = value
+    )
     @subscriptions.add atom.config.observe('linter-phpcs.warningSeverity', (value) =>
       @parameters[2] = "--warning-severity=#{value}"
     )
@@ -94,7 +104,7 @@ module.exports =
     minimatch = require 'minimatch'
     provider =
       name: 'PHPCS'
-      grammarScopes: ['source.php']
+      grammarScopes: @grammarScopes
       scope: 'file'
       lintOnFly: true
       lint: (textEditor) =>
