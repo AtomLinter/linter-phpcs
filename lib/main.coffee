@@ -116,10 +116,9 @@ module.exports =
 
         eolChar = textEditor.getBuffer().lineEndingForRow(0)
         parameters = @parameters.filter (item) -> item
-        standard = @standard
         command = @command
         confFile = helpers.find(path.dirname(filePath), ['phpcs.xml', 'phpcs.ruleset.xml'])
-        standard = if @autoConfigSearch and confFile then confFile else standard
+        standard = if @autoConfigSearch and confFile then confFile else @standard
         legacy = @legacy
         execprefix = ''
         return [] if @disableWhenNoConfigFile and not confFile
