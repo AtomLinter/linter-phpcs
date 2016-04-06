@@ -5,7 +5,7 @@ linter-phpcs
 [![apm](https://img.shields.io/apm/v/linter-phpcs.svg)](https://atom.io/packages/linter-phpcs)
 [![apm](https://img.shields.io/apm/dm/linter-phpcs.svg)](https://atom.io/packages/linter-phpcs)
 
-This linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides
+This linter plugin for [Linter](https://github.com/steelbrain/linter) provides
 an interface to [phpcs](http://pear.php.net/package/PHP_CodeSniffer/). It will
 be used with files that have the "PHP" and "HTML" syntax.
 
