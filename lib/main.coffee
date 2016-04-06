@@ -20,7 +20,7 @@ module.exports =
       title: 'Search for configuration files'
       type: 'boolean'
       default: true
-      description: 'Automatically search for any `phpcs.xml` or `phpcs.ruleset.xml` ' +
+      description: 'Automatically search for any `phpcs.xml`, `phpcs.xml.dist` or `phpcs.ruleset.xml` ' +
         'file to use as configuration. Overrides custom standards defined above.'
       order: 4
     ignorePatterns:
