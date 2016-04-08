@@ -116,7 +116,9 @@ module.exports =
         parameters.push('--report=json')
         execprefix = 'phpcs_input_file: ' + filePath + eolChar unless legacy
         text = execprefix + textEditor.getText()
-        return helpers.exec(command, parameters, {stdin: text}).then (result) ->
+        execOptions = {stdin: text}
+        if confFile then execOptions.cwd = path.dirname(confFile)
+        return helpers.exec(command, parameters, execOptions).then (result) ->
           try
             result = JSON.parse(result.toString().trim())
           catch error
