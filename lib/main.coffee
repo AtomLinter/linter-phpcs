@@ -20,7 +20,7 @@ module.exports =
       title: 'Search for configuration files'
       type: 'boolean'
       default: true
-      description: 'Automatically search for any `phpcs.xml`, `phpcs.xml.dist` or `phpcs.ruleset.xml` ' +
+      description: 'Automatically search for any `phpcs.xml`, `phpcs.xml.dist`, `phpcs.ruleset.xml` or `ruleset.xml` ' +
         'file to use as configuration. Overrides custom standards defined above.'
       order: 4
     ignorePatterns:
@@ -107,7 +107,7 @@ module.exports =
         eolChar = textEditor.getBuffer().lineEndingForRow(0)
         parameters = @parameters.filter (item) -> item
         command = @command
-        confFile = helpers.find(path.dirname(filePath), ['phpcs.xml', 'phpcs.xml.dist', 'phpcs.ruleset.xml'])
+        confFile = helpers.find(path.dirname(filePath), ['phpcs.xml', 'phpcs.xml.dist', 'phpcs.ruleset.xml', 'ruleset.xml'])
         standard = if @autoConfigSearch and confFile then confFile else @standard
         legacy = @legacy
         execprefix = ''
