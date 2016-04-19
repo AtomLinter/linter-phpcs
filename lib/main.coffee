@@ -92,7 +92,7 @@ module.exports =
     @subscriptions.add atom.config.observe('linter-phpcs.showSource', (value) =>
       if value
         @parameters.push('-s')
-      else if (@parameters.indexOf('-s') != -1)
+      else if (@parameters.indexOf('-s') isnt -1)
         @parameters.splice(@parameters.indexOf('-s'), 1)
 
       @showSource = value
@@ -121,7 +121,8 @@ module.exports =
         eolChar = textEditor.getBuffer().lineEndingForRow(0)
         parameters = @parameters.filter (item) -> item
         command = @command
-        confFile = helpers.find(path.dirname(filePath), ['phpcs.xml', 'phpcs.xml.dist', 'phpcs.ruleset.xml', 'ruleset.xml'])
+        confFile = helpers.find(path.dirname(filePath),
+          ['phpcs.xml', 'phpcs.xml.dist', 'phpcs.ruleset.xml', 'ruleset.xml'])
         standard = if @autoConfigSearch and confFile then confFile else @standard
         legacy = @legacy
         execprefix = ''
@@ -157,7 +158,7 @@ module.exports =
               range: [startPoint, endPoint]
             }
             if @showSource
-              ret.html = '<span class="badge badge-flexible">' + (message.source || 'Unknown') + '</span> '
+              ret.html = '<span class="badge badge-flexible">' + (message.source or 'Unknown') + '</span> '
               ret.html += escapeHtml(message.message)
             else
               ret.text = message.message
