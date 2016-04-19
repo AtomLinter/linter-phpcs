@@ -47,17 +47,17 @@ describe('The phpcs provider for Linter', () => {
       waitsForPromise(() =>
         lint(editor).then(messages => {
           expect(messages[0].type).toBeDefined();
-          expect(messages[0].type).toEqual('ERROR');
+          expect(messages[0].type).toBe('ERROR');
           expect(messages[0].html).toBeDefined();
-          expect(messages[0].html).toEqual('' +
+          expect(messages[0].html).toBe('' +
             '<span class="badge badge-flexible">Generic.PHP.LowerCaseConstant.Found</span>' +
             ' TRUE, FALSE and NULL must be lowercase; ' +
             'expected &quot;true&quot; but found &quot;TRUE&quot;');
           expect(messages[0].filePath).toBeDefined();
           expect(messages[0].filePath).toMatch(/.+bad\.php$/);
           expect(messages[0].range).toBeDefined();
-          expect(messages[0].range.length).toEqual(2);
-          expect(messages[0].range).toEqual([[1, 5], [1, 6]]);
+          expect(messages[0].range.length).toBe(2);
+          expect(messages[0].range).toBe([[1, 5], [1, 6]]);
         })
       );
     });
