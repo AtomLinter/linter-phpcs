@@ -1,4 +1,5 @@
 {CompositeDisposable} = require 'atom'
+escapeHtml = require 'escape-html'
 module.exports =
   config:
     executablePath:
@@ -41,6 +42,11 @@ module.exports =
       description: 'Set the number of spaces that tab characters represent to ' +
         'the linter. Enter 0 to disable this option.'
       order: 7
+    showSource:
+      type: 'boolean'
+      default: true
+      description: 'Show source in message.'
+      order: 8
 
   activate: ->
     require('atom-package-deps').install()
@@ -83,6 +89,9 @@ module.exports =
         value = "--tab-width=#{value}"
         @parameters[3] = value
       else @parameters[3] = null
+    )
+    @subscriptions.add atom.config.observe('linter-phpcs.showSource', (value) =>
+      @showSource = value
     )
 
   deactivate: ->
@@ -137,9 +146,14 @@ module.exports =
           return messages.map (message) ->
             startPoint = [message.line - 1, message.column - 1]
             endPoint = [message.line - 1, message.column]
-            return {
+            ret = {
               type: message.type
-              text: message.message
               filePath,
               range: [startPoint, endPoint]
             }
+            if @showSource
+              ret.html = '<span class="badge badge-flexible">' + (message.source or 'Unknown') + '</span> '
+              ret.html += escapeHtml(message.message)
+            else
+              ret.text = message.message
+            return ret
