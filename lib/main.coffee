@@ -54,6 +54,7 @@ module.exports =
     @parameters = []
     @standard = ''
     @legacy = false
+    @showSource = true
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
       @command = value
@@ -91,6 +92,10 @@ module.exports =
       else @parameters[3] = null
     )
     @subscriptions.add atom.config.observe('linter-phpcs.showSource', (value) =>
+      if value
+        @parameters[4] = "-s"
+      else @parameters[4] = null
+
       @showSource = value
     )
 
@@ -101,6 +106,7 @@ module.exports =
     path = require 'path'
     helpers = require 'atom-linter'
     minimatch = require 'minimatch'
+    showSource = @showSource
     provider =
       name: 'PHPCS'
       grammarScopes: ['source.php']
@@ -151,7 +157,7 @@ module.exports =
               filePath,
               range: [startPoint, endPoint]
             }
-            if @showSource
+            if showSource
               ret.html = '<span class="badge badge-flexible">' + (message.source or 'Unknown') + '</span> '
               ret.html += escapeHtml(message.message)
             else
