@@ -1,5 +1,4 @@
 {CompositeDisposable} = require 'atom'
-escapeHtml = require 'escape-html'
 module.exports =
   config:
     executablePath:
@@ -54,7 +53,6 @@ module.exports =
     @parameters = []
     @standard = ''
     @legacy = false
-    @showSource = true
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
       @command = value
@@ -93,8 +91,9 @@ module.exports =
     )
     @subscriptions.add atom.config.observe('linter-phpcs.showSource', (value) =>
       if value
-        @parameters[4] = "-s"
-      else @parameters[4] = null
+        @parameters.push('-s')
+      else if (@parameters.indexOf('-s') != -1)
+        @parameters.splice(@parameters.indexOf('-s'), 1)
 
       @showSource = value
     )
@@ -106,7 +105,7 @@ module.exports =
     path = require 'path'
     helpers = require 'atom-linter'
     minimatch = require 'minimatch'
-    showSource = @showSource
+    escapeHtml = require 'escape-html'
     provider =
       name: 'PHPCS'
       grammarScopes: ['source.php']
@@ -133,7 +132,7 @@ module.exports =
         text = execprefix + textEditor.getText()
         execOptions = {stdin: text}
         if confFile then execOptions.cwd = path.dirname(confFile)
-        return helpers.exec(command, parameters, execOptions).then (result) ->
+        return helpers.exec(command, parameters, execOptions).then (result) =>
           try
             result = JSON.parse(result.toString().trim())
           catch error
@@ -149,7 +148,7 @@ module.exports =
           else
             return [] unless result.files[filePath]
             messages = result.files[filePath].messages
-          return messages.map (message) ->
+          return messages.map (message) =>
             startPoint = [message.line - 1, message.column - 1]
             endPoint = [message.line - 1, message.column]
             ret = {
@@ -157,8 +156,8 @@ module.exports =
               filePath,
               range: [startPoint, endPoint]
             }
-            if showSource
-              ret.html = '<span class="badge badge-flexible">' + (message.source or 'Unknown') + '</span> '
+            if @showSource
+              ret.html = '<span class="badge badge-flexible">' + (message.source || 'Unknown') + '</span> '
               ret.html += escapeHtml(message.message)
             else
               ret.text = message.message
