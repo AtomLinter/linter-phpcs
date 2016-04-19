@@ -50,8 +50,9 @@ describe('The phpcs provider for Linter', () => {
           expect(messages[0].type).toEqual('ERROR');
           expect(messages[0].html).toBeDefined();
           expect(messages[0].html).toEqual('' +
-            '<span class="badge badge-flexible">Generic.PHP.LowerCaseConstant.Found</span> ' +
-            'TRUE, FALSE and NULL must be lowercase; expected "true" but found "TRUE"');
+            '<span class="badge badge-flexible">Generic.PHP.LowerCaseConstant.Found</span>' +
+            ' TRUE, FALSE and NULL must be lowercase; ' +
+            'expected &quot;true&quot; but found &quot;TRUE&quot;');
           expect(messages[0].filePath).toBeDefined();
           expect(messages[0].filePath).toMatch(/.+bad\.php$/);
           expect(messages[0].range).toBeDefined();
