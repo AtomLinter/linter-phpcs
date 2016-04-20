@@ -57,7 +57,7 @@ describe('The phpcs provider for Linter', () => {
           expect(messages[0].filePath).toMatch(/.+bad\.php$/);
           expect(messages[0].range).toBeDefined();
           expect(messages[0].range.length).toBe(2);
-          expect(messages[0].range).toBe([[1, 5], [1, 6]]);
+          expect(messages[0].range).toEqual([[1, 5], [1, 6]]);
         })
       );
     });
