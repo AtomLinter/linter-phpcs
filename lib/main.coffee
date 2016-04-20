@@ -41,6 +41,11 @@ module.exports =
       description: 'Set the number of spaces that tab characters represent to ' +
         'the linter. Enter 0 to disable this option.'
       order: 7
+    showSource:
+      type: 'boolean'
+      default: true
+      description: 'Show source in message.'
+      order: 8
 
   activate: ->
     require('atom-package-deps').install()
@@ -84,6 +89,14 @@ module.exports =
         @parameters[3] = value
       else @parameters[3] = null
     )
+    @subscriptions.add atom.config.observe('linter-phpcs.showSource', (value) =>
+      if value
+        @parameters.push('-s')
+      else if (@parameters.indexOf('-s') isnt -1)
+        @parameters.splice(@parameters.indexOf('-s'), 1)
+
+      @showSource = value
+    )
 
   deactivate: ->
     @subscriptions.dispose()
@@ -92,6 +105,7 @@ module.exports =
     path = require 'path'
     helpers = require 'atom-linter'
     minimatch = require 'minimatch'
+    escapeHtml = require 'escape-html'
     provider =
       name: 'PHPCS'
       grammarScopes: ['source.php']
@@ -107,7 +121,8 @@ module.exports =
         eolChar = textEditor.getBuffer().lineEndingForRow(0)
         parameters = @parameters.filter (item) -> item
         command = @command
-        confFile = helpers.find(path.dirname(filePath), ['phpcs.xml', 'phpcs.xml.dist', 'phpcs.ruleset.xml', 'ruleset.xml'])
+        confFile = helpers.find(path.dirname(filePath),
+          ['phpcs.xml', 'phpcs.xml.dist', 'phpcs.ruleset.xml', 'ruleset.xml'])
         standard = if @autoConfigSearch and confFile then confFile else @standard
         legacy = @legacy
         execprefix = ''
@@ -118,7 +133,7 @@ module.exports =
         text = execprefix + textEditor.getText()
         execOptions = {stdin: text}
         if confFile then execOptions.cwd = path.dirname(confFile)
-        return helpers.exec(command, parameters, execOptions).then (result) ->
+        return helpers.exec(command, parameters, execOptions).then (result) =>
           try
             result = JSON.parse(result.toString().trim())
           catch error
@@ -134,12 +149,17 @@ module.exports =
           else
             return [] unless result.files[filePath]
             messages = result.files[filePath].messages
-          return messages.map (message) ->
+          return messages.map (message) =>
             startPoint = [message.line - 1, message.column - 1]
             endPoint = [message.line - 1, message.column]
-            return {
+            ret = {
               type: message.type
-              text: message.message
               filePath,
               range: [startPoint, endPoint]
             }
+            if @showSource
+              ret.html = '<span class="badge badge-flexible">' + (message.source or 'Unknown') + '</span> '
+              ret.html += escapeHtml(message.message)
+            else
+              ret.text = message.message
+            return ret
