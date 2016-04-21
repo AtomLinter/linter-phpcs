@@ -176,4 +176,4 @@ module.exports =
               return -1
             else if aCol > bCol
               return 1
-            retrn 0
+            return 0
