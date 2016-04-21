@@ -149,7 +149,7 @@ module.exports =
           else
             return [] unless result.files[filePath]
             messages = result.files[filePath].messages
-          return messages.map (message) =>
+          rules = messages.map (message) =>
             startPoint = [message.line - 1, message.column - 1]
             endPoint = [message.line - 1, message.column]
             ret = {
@@ -163,3 +163,17 @@ module.exports =
             else
               ret.text = message.message
             return ret
+          return rules.sort (a, b) ->
+            aLine = a.range[0][0]
+            aCol = a.range[0][1]
+            bLine = b.range[0][0]
+            bCol = b.range[0][1]
+            if aLine < bLine
+              return -1
+            else if aLine > bLine
+              return 1
+            if aCol < bCol
+              return -1
+            else if aCol > bCol
+              return 1
+            retrn 0
