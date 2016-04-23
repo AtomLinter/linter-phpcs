@@ -135,6 +135,8 @@ module.exports =
         if confFile then execOptions.cwd = path.dirname(confFile)
         return helpers.exec(command, parameters, execOptions).then (result) =>
           try
+            # Strip time+memory information at the end; workaround for https://github.com/squizlabs/PHP_CodeSniffer/issues/969
+            result = result.replace(/Time: \d+ms; Memory: \d+Mb$/, '')
             result = JSON.parse(result.toString().trim())
           catch error
             atom.notifications.addError('Error parsing PHPCS response', {
