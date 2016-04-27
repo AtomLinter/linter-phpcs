@@ -150,8 +150,10 @@ module.exports =
             return [] unless result.files[filePath]
             messages = result.files[filePath].messages
           return messages.map (message) =>
-            startPoint = [message.line - 1, message.column - 1]
-            endPoint = [message.line - 1, message.column]
+            screenPosition = textEditor.screenPositionForBufferPosition([message.line - 1, 0])
+            bufferPosition = textEditor.bufferPositionForScreenPosition([screenPosition.row, message.column - 1])
+            startPoint = [bufferPosition.row, bufferPosition.column]
+            endPoint = [bufferPosition.row, bufferPosition.column + 1]
             ret = {
               type: message.type
               filePath,
