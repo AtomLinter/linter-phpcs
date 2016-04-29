@@ -2,13 +2,12 @@
 
 import * as path from 'path';
 
+const lint = require('../lib/main.coffee').provideLinter().lint;
 const goodPath = path.join(__dirname, 'files', 'good.php');
 const badPath = path.join(__dirname, 'files', 'bad.php');
 const emptyPath = path.join(__dirname, 'files', 'empty.php');
 
 describe('The phpcs provider for Linter', () => {
-  const lint = require('../lib/main').provideLinter().lint;
-
   beforeEach(() => {
     atom.workspace.destroyActivePaneItem();
     waitsForPromise(() => {
@@ -31,7 +30,7 @@ describe('The phpcs provider for Linter', () => {
     let editor = null;
     beforeEach(() => {
       waitsForPromise(() =>
-        atom.workspace.open(badPath).then(openEditor => {editor = openEditor;})
+        atom.workspace.open(badPath).then(openEditor => { editor = openEditor; })
       );
     });
 
