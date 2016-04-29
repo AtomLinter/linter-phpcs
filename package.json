@@ -1,7 +1,7 @@
 {
   "name": "linter-phpcs",
   "version": "1.3.2",
-  "main": "./lib/main",
+  "main": "./lib/main.coffee",
   "description": "Lint PHP on the fly, using phpcs",
   "repository": "https://github.com/AtomLinter/linter-phpcs",
   "private": true,
@@ -17,16 +17,16 @@
   },
   "devDependencies": {
     "coffeelint": "^1.14.2",
-    "eslint": "^2.7.0",
-    "eslint-config-airbnb": "^7.0.0",
-    "eslint-plugin-react": "^4.3.0",
-    "eslint-plugin-jsx-a11y": "^0.6.2"
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb-base": "^1.0.4",
+    "eslint-plugin-import": "^1.6.0"
   },
   "package-deps": [
     "linter"
   ],
   "scripts": {
-    "lint": "./node_modules/.bin/coffeelint lib"
+    "lint": "coffeelint lib && eslint spec",
+    "test": "apm test"
   },
   "providedServices": {
     "linter": {
@@ -36,13 +36,9 @@
     }
   },
   "eslintConfig": {
-    "extends": "airbnb/base",
+    "extends": "airbnb-base",
     "globals": {
-      "atom": true,
-      "waitsForPromise": true
-    },
-    "env": {
-      "jasmine": true
+      "atom": true
     }
   },
   "coffeelintConfig": {
