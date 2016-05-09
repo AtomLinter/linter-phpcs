@@ -1,14 +1,7 @@
-version: "{build}"
-os: Windows Server 2012 R2
-branches:
-  only:
-    - master
-test: off
-deploy: off
-
+# Project specific configuration
 install:
-  - appveyor DownloadFile https://atom.io/download/windows -FileName AtomSetup.exe
-  - AtomSetup.exe /silent
+  # Install Node.js 5 to run lint tools
+  - ps: Install-Product node 5
   # The following installs and sets up PHP
   - cinst -y php
   - cd c:\tools\php
@@ -17,14 +10,26 @@ install:
   - echo extension_dir=ext >> php.ini
   - echo extension=php_openssl.dll >> php.ini
   - SET PATH=C:\tools\php\;%PATH%
+  # Now install Composer
   - php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=composer
   - php composer config -g github-oauth.github.com cc4a091c096e7d3cfe053c3f669fb840be60ab98
-  - php composer global require "squizlabs/php_codesniffer=*"
   - SET PATH=%APPDATA%\Composer\vendor\bin;%PATH%
+  # Finally install PHP_CodeSniffer
+  - php composer global require "squizlabs/php_codesniffer=*"
 
 build_script:
-  - cd %APPVEYOR_BUILD_FOLDER%
-  - SET PATH=%LOCALAPPDATA%\atom\bin;%PATH%
-  - apm clean
-  - apm install
-  - apm test
+  - php --version
+  - php composer --version
+  - phpcs --version
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/atom/ci/master/build-package.ps1'))
+
+# General setup
+version: "{build}"
+platform: x64
+branches:
+  only:
+    - master
+test: off
+deploy: off
+clone_depth: 10
+skip_tags: true

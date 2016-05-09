@@ -62,7 +62,7 @@ module.exports =
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
       @command = value
       # Determine if legacy mode needs to be set up (in case phpcs version = 1)
-      helpers.exec(@command, ['--version']).then (result) =>
+      helpers.exec(@command, ['--version'], {ignoreExitCode: true}).then (result) =>
         versionPattern = /^PHP_CodeSniffer version ([0-9]+)/i
         version = result.match versionPattern
         if version and version[1] is '1'
@@ -127,7 +127,6 @@ module.exports =
 
         eolChar = textEditor.getBuffer().lineEndingForRow(0)
         parameters = @parameters.filter (item) -> item
-        command = @command
         confFile = helpers.find(path.dirname(filePath),
           ['phpcs.xml', 'phpcs.xml.dist', 'phpcs.ruleset.xml', 'ruleset.xml'])
         standard = if @autoConfigSearch and confFile then confFile else @standard
@@ -138,10 +137,13 @@ module.exports =
         parameters.push('--report=json')
         execprefix = 'phpcs_input_file: ' + filePath + eolChar unless legacy
         text = execprefix + textEditor.getText()
-        execOptions = {stdin: text}
+        execOptions = {stdin: text, ignoreExitCode: true}
         if @disableExecuteTimeout then execOptions.timeout = Infinity
         if confFile then execOptions.cwd = path.dirname(confFile)
-        return helpers.exec(command, parameters, execOptions).then (result) =>
+        console.log(@command)
+        console.log(parameters)
+        console.log(execOptions)
+        return helpers.exec(@command, parameters, execOptions).then (result) =>
           try
             result = JSON.parse(result.toString().trim())
           catch error
