@@ -6,46 +6,51 @@ module.exports =
       default: 'phpcs'
       description: 'Enter the path to your phpcs executable.'
       order: 1
+    disableExecuteTimeout:
+      type: 'boolean'
+      default: false
+      description: 'Disable the 10 second timeout on running phpcs'
+      order: 2
     codeStandardOrConfigFile:
       type: 'string'
       default: 'PSR2'
       description: 'Enter path to config file or a coding standard, PSR2 for example.'
-      order: 2
+      order: 3
     disableWhenNoConfigFile:
       type: 'boolean'
       default: false
       description: 'Disable the linter when the default configuration file is not found.'
-      order: 3
+      order: 4
     autoConfigSearch:
       title: 'Search for configuration files'
       type: 'boolean'
       default: true
       description: 'Automatically search for any `phpcs.xml`, `phpcs.xml.dist`, `phpcs.ruleset.xml` or `ruleset.xml` ' +
         'file to use as configuration. Overrides custom standards defined above.'
-      order: 4
+      order: 5
     ignorePatterns:
       type: 'array'
       default: ['*.blade.php', '*.twig.php']
       items:
         type: 'string'
       description: 'Enter filename patterns to ignore when running the linter.'
-      order: 5
+      order: 6
     warningSeverity:
       type: 'integer'
       default: 1
       description: 'Set the warning severity level. Enter 0 to display errors only.'
-      order: 6
+      order: 7
     tabWidth:
       type: 'integer'
       default: 0
       description: 'Set the number of spaces that tab characters represent to ' +
         'the linter. Enter 0 to disable this option.'
-      order: 7
+      order: 8
     showSource:
       type: 'boolean'
       default: true
       description: 'Show source in message.'
-      order: 8
+      order: 9
 
   activate: ->
     require('atom-package-deps').install()
@@ -94,8 +99,10 @@ module.exports =
         @parameters.push('-s')
       else if (@parameters.indexOf('-s') isnt -1)
         @parameters.splice(@parameters.indexOf('-s'), 1)
-
       @showSource = value
+    )
+    @subscriptions.add atom.config.observe('linter-phpcs.disableExecuteTimeout', (value) =>
+      @disableExecuteTimeout = value
     )
 
   deactivate: ->
@@ -132,6 +139,7 @@ module.exports =
         execprefix = 'phpcs_input_file: ' + filePath + eolChar unless legacy
         text = execprefix + textEditor.getText()
         execOptions = {stdin: text}
+        if @disableExecuteTimeout then execOptions.timeout = Infinity
         if confFile then execOptions.cwd = path.dirname(confFile)
         return helpers.exec(command, parameters, execOptions).then (result) =>
           try
