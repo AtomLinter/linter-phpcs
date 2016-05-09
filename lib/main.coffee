@@ -62,7 +62,7 @@ module.exports =
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
       @command = value
       # Determine if legacy mode needs to be set up (in case phpcs version = 1)
-      helpers.exec(@command, ['--version']).then (result) =>
+      helpers.exec(@command, ['--version'], {ignoreExitCode: true}).then (result) =>
         versionPattern = /^PHP_CodeSniffer version ([0-9]+)/i
         version = result.match versionPattern
         if version and version[1] is '1'
