@@ -127,7 +127,6 @@ module.exports =
 
         eolChar = textEditor.getBuffer().lineEndingForRow(0)
         parameters = @parameters.filter (item) -> item
-        command = @command
         confFile = helpers.find(path.dirname(filePath),
           ['phpcs.xml', 'phpcs.xml.dist', 'phpcs.ruleset.xml', 'ruleset.xml'])
         standard = if @autoConfigSearch and confFile then confFile else @standard
@@ -141,7 +140,10 @@ module.exports =
         execOptions = {stdin: text, ignoreExitCode: true}
         if @disableExecuteTimeout then execOptions.timeout = Infinity
         if confFile then execOptions.cwd = path.dirname(confFile)
-        return helpers.exec(command, parameters, execOptions).then (result) =>
+        console.log(@command)
+        console.log(parameters)
+        console.log(execOptions)
+        return helpers.exec(@command, parameters, execOptions).then (result) =>
           try
             result = JSON.parse(result.toString().trim())
           catch error
