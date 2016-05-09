@@ -16,7 +16,7 @@ install:
   # Finally install PHP_CodeSniffer
   - php composer global require "squizlabs/php_codesniffer=*"
 
-test_script:
+build_script:
   - php --version
   - composer --version
   - phpcs --version
