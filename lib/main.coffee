@@ -10,7 +10,7 @@ module.exports =
     @subscriptions.add atom.config.observe('linter-phpcs.executablePath', (value) =>
       @command = value
       # Determine if legacy mode needs to be set up (in case phpcs version = 1)
-      helpers.exec(@command, ['--version']).then (result) =>
+      helpers.exec(@command, ['--version'], {ignoreExitCode: true}).then (result) =>
         versionPattern = /^PHP_CodeSniffer version ([0-9]+)/i
         version = result.match versionPattern
         if version and version[1] is '1'
@@ -79,7 +79,7 @@ module.exports =
         eolChar = textEditor.getBuffer().lineEndingForRow(0)
         execPrefix = if not @legacy then 'phpcs_input_file: ' + filePath + eolChar else ''
         text = execPrefix + textEditor.getText()
-        execOptions = {stdin: text}
+        execOptions = {stdin: text, ignoreExitCode: true}
         execOptions.timeout = Infinity if @disableExecuteTimeout
         execOptions.cwd = path.dirname(confFile) if confFile
 
