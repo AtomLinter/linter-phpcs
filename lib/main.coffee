@@ -91,13 +91,13 @@ module.exports =
       @ignore = value
     )
     @subscriptions.add atom.config.observe('linter-phpcs.displayErrorsOnly', (value) =>
-        if value
-          @parameters[2] = "--warning-severity=0"
-        else
-          @parameters[2] = "--warning-severity=" + atom.config.get('linter-phpcs.warningSeverity')
+      if value
+        @parameters[2] = "--warning-severity=0"
+      else
+        @parameters[2] = "--warning-severity=" + atom.config.get('linter-phpcs.warningSeverity')
     )
     @subscriptions.add atom.config.observe('linter-phpcs.warningSeverity', (value) =>
-      if !atom.config.get('linter-phpcs.displayErrorsOnly')
+      if not atom.config.get('linter-phpcs.displayErrorsOnly')
         @parameters[2] = "--warning-severity=#{value}"
     )
     @subscriptions.add atom.config.observe('linter-phpcs.tabWidth', (value) =>
