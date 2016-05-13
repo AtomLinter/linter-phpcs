@@ -7,7 +7,73 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+    "atom": ">=1.4.0 <2.0.0"
+  },
+  "configSchema": {
+    "executablePath": {
+      "type": "string",
+      "default": "phpcs",
+      "description": "Enter the path to your phpcs executable.",
+      "order": 1
+    },
+    "disableExecuteTimeout": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable the 10 second timeout on running phpcs",
+      "order": 2
+    },
+    "codeStandardOrConfigFile": {
+      "type": "string",
+      "default": "PSR2",
+      "description": "Enter path to config file or a coding standard, PSR2 for example.",
+      "order": 3
+    },
+    "disableWhenNoConfigFile": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable the linter when the default configuration file is not found.",
+      "order": 4
+    },
+    "autoConfigSearch": {
+      "title": "Search for configuration files",
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically search for any `phpcs.xml`, `phpcs.xml.dist`, `phpcs.ruleset.xml` or `ruleset.xml` file to use as configuration. Overrides custom standards defined above.",
+      "order": 5
+    },
+    "ignorePatterns": {
+      "type": "array",
+      "default": ["*.blade.php", "*.twig.php"],
+      "items": {
+        "type": "string"
+      },
+      "description": "Enter filename patterns to ignore when running the linter.",
+      "order": 6
+    },
+    "displayErrorsOnly": {
+      "type": "boolean",
+      "default": false,
+      "description": "Ignore warnings and display errors only.",
+      "order": 7
+    },
+    "warningSeverity": {
+      "type": "integer",
+      "default": 1,
+      "description": "Set the warning severity level. Available when \"Display Errors Only\" is not checked.",
+      "order": 8
+    },
+    "tabWidth": {
+      "type": "integer",
+      "default": 0,
+      "description": "Set the number of spaces that tab characters represent to the linter. Enter 0 to disable this option.",
+      "order": 9
+    },
+    "showSource": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show source in message.",
+      "order": 10
+    }
   },
   "dependencies": {
     "atom-linter": "^4.6.1",
