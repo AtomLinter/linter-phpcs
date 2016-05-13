@@ -35,22 +35,27 @@ module.exports =
         type: 'string'
       description: 'Enter filename patterns to ignore when running the linter.'
       order: 6
+    displayErrorsOnly:
+      type: 'boolean'
+      default: false
+      description: 'Ignore warnings and display errors only.'
+      order: 7
     warningSeverity:
       type: 'integer'
       default: 1
-      description: 'Set the warning severity level. Enter 0 to display errors only.'
-      order: 7
+      description: 'Set the warning severity level. Available when "Display Errors Only" is not checked.'
+      order: 8
     tabWidth:
       type: 'integer'
       default: 0
       description: 'Set the number of spaces that tab characters represent to ' +
         'the linter. Enter 0 to disable this option.'
-      order: 8
+      order: 9
     showSource:
       type: 'boolean'
       default: true
       description: 'Show source in message.'
-      order: 9
+      order: 10
 
   activate: ->
     require('atom-package-deps').install()
@@ -85,8 +90,15 @@ module.exports =
       )
       @ignore = value
     )
+    @subscriptions.add atom.config.observe('linter-phpcs.displayErrorsOnly', (value) =>
+      if value
+        @parameters[2] = "--warning-severity=0"
+      else
+        @parameters[2] = "--warning-severity=" + atom.config.get('linter-phpcs.warningSeverity')
+    )
     @subscriptions.add atom.config.observe('linter-phpcs.warningSeverity', (value) =>
-      @parameters[2] = "--warning-severity=#{value}"
+      if not atom.config.get('linter-phpcs.displayErrorsOnly')
+        @parameters[2] = "--warning-severity=#{value}"
     )
     @subscriptions.add atom.config.observe('linter-phpcs.tabWidth', (value) =>
       if value
