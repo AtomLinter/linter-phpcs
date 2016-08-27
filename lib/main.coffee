@@ -82,6 +82,7 @@ module.exports =
         execOptions = {stdin: text}
         execOptions.timeout = Infinity if @disableExecuteTimeout
         execOptions.cwd = path.dirname(confFile) if confFile
+        execOptions.ignoreExitCode = true
 
         return helpers.exec(@command, parameters, execOptions).then (result) =>
           try
