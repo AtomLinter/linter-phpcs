@@ -101,8 +101,24 @@ module.exports =
             return [] unless result.files[filePath]
             messages = result.files[filePath].messages
           return messages.map (message) =>
-            startPoint = [message.line - 1, message.column - 1]
-            endPoint = [message.line - 1, message.column]
+
+            # fix column in line with tabs
+            column = message.column
+            if @tabWidth > 1
+              line = textEditor.lineTextForBufferRow(message.line - 1)
+              if line.includes "\t"
+                screenCol = 0
+                for char, col in line
+                  if char is "\t"
+                    screenCol += @tabWidth - (screenCol % @tabWidth)
+                  else
+                    screenCol += 1
+                  if screenCol >= column
+                    column = col + 1
+                    break
+
+            startPoint = [message.line - 1, column - 1]
+            endPoint = [message.line - 1, column]
             msg = {
               type: message.type
               filePath,

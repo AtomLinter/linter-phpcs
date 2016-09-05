@@ -5,6 +5,7 @@ import * as path from 'path';
 const lint = require('../lib/main.coffee').provideLinter().lint;
 const goodPath = path.join(__dirname, 'files', 'good.php');
 const badPath = path.join(__dirname, 'files', 'bad.php');
+const tabsPath = path.join(__dirname, 'files', 'tabs.php');
 const emptyPath = path.join(__dirname, 'files', 'empty.php');
 
 describe('The phpcs provider for Linter', () => {
@@ -53,6 +54,39 @@ describe('The phpcs provider for Linter', () => {
             'expected &quot;true&quot; but found &quot;TRUE&quot;');
           expect(messages[0].filePath).toBe(badPath);
           expect(messages[0].range).toEqual([[1, 5], [1, 6]]);
+        })
+      );
+    });
+  });
+
+  describe('checks tabs.php and', () => {
+    let editor = null;
+    beforeEach(() => {
+      atom.config.set('linter-phpcs.tabWidth', 4);
+      waitsForPromise(() =>
+        atom.workspace.open(tabsPath).then(openEditor => { editor = openEditor; })
+      );
+    });
+
+    it('finds at least two message', () => {
+      waitsForPromise(() =>
+        lint(editor).then(messages =>
+          expect(messages.length).toBeGreaterThan(1)
+        )
+      );
+    });
+
+    it('verifies the second message', () => {
+      waitsForPromise(() =>
+        lint(editor).then(messages => {
+          expect(messages[1].type).toBe('ERROR');
+          expect(messages[1].text).not.toBeDefined();
+          expect(messages[1].html).toBe('' +
+            '<span class="badge badge-flexible">Generic.PHP.LowerCaseConstant.Found</span>' +
+            ' TRUE, FALSE and NULL must be lowercase; ' +
+            'expected &quot;true&quot; but found &quot;TRUE&quot;');
+          expect(messages[1].filePath).toBe(tabsPath);
+          expect(messages[1].range).toEqual([[2, 6], [2, 7]]);
         })
       );
     });
