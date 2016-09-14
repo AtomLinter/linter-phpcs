@@ -68,7 +68,7 @@ describe('The phpcs provider for Linter', () => {
       );
     });
 
-    it('finds at least two message', () => {
+    it('finds at least two messages', () => {
       waitsForPromise(() =>
         lint(editor).then(messages =>
           expect(messages.length).toBeGreaterThan(1)
