@@ -3,6 +3,7 @@
 import * as path from 'path';
 
 const lint = require('../lib/main.coffee').provideLinter().lint;
+
 const goodPath = path.join(__dirname, 'files', 'good.php');
 const badPath = path.join(__dirname, 'files', 'bad.php');
 const tabsPath = path.join(__dirname, 'files', 'tabs.php');
@@ -31,7 +32,7 @@ describe('The phpcs provider for Linter', () => {
     let editor = null;
     beforeEach(() => {
       waitsForPromise(() =>
-        atom.workspace.open(badPath).then(openEditor => { editor = openEditor; })
+        atom.workspace.open(badPath).then((openEditor) => { editor = openEditor; })
       );
     });
 
@@ -45,7 +46,7 @@ describe('The phpcs provider for Linter', () => {
 
     it('verifies the first message', () => {
       waitsForPromise(() =>
-        lint(editor).then(messages => {
+        lint(editor).then((messages) => {
           expect(messages[0].type).toBe('ERROR');
           expect(messages[0].text).not.toBeDefined();
           expect(messages[0].html).toBe('' +
@@ -64,7 +65,7 @@ describe('The phpcs provider for Linter', () => {
     beforeEach(() => {
       atom.config.set('linter-phpcs.tabWidth', 4);
       waitsForPromise(() =>
-        atom.workspace.open(tabsPath).then(openEditor => { editor = openEditor; })
+        atom.workspace.open(tabsPath).then((openEditor) => { editor = openEditor; })
       );
     });
 
@@ -78,7 +79,7 @@ describe('The phpcs provider for Linter', () => {
 
     it('verifies the second message', () => {
       waitsForPromise(() =>
-        lint(editor).then(messages => {
+        lint(editor).then((messages) => {
           expect(messages[1].type).toBe('ERROR');
           expect(messages[1].text).not.toBeDefined();
           expect(messages[1].html).toBe('' +
@@ -95,9 +96,7 @@ describe('The phpcs provider for Linter', () => {
   it('finds nothing wrong with an empty file', () => {
     waitsForPromise(() =>
       atom.workspace.open(emptyPath).then(editor =>
-        lint(editor).then(messages => {
-          expect(messages.length).toEqual(0);
-        })
+        lint(editor).then(messages => expect(messages.length).toBe(0))
       )
     );
   });
@@ -105,9 +104,7 @@ describe('The phpcs provider for Linter', () => {
   it('finds nothing wrong with a valid file', () => {
     waitsForPromise(() =>
       atom.workspace.open(goodPath).then(editor =>
-        lint(editor).then(messages => {
-          expect(messages.length).toEqual(0);
-        })
+        lint(editor).then(messages => expect(messages.length).toBe(0))
       )
     );
   });
