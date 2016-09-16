@@ -1,24 +1,75 @@
-sudo: true
-git:
-  depth: 10
-branches:
-  only:
-    - master
+### Project specific config ###
+env:
+  global:
+    - COMPOSER_DISABLE_XDEBUG_WARN="1"
+    - secure: "JmA5S4tIX7Mkt3VI4CZyi4sP8xt/SLXC2RwRkLLuuLWfMOSzQ9jSFiAi64XK/QYZI3Sc0thbA7+ZTxbEm92saHMQk7b7ktyFHZfVUBExMHBxrWf+wmUNUi1ldPkZQydQ9xgfoWcgusuVrjcJ9stvW23vCkbl5jSHGeWkAzH8DG0="
+
+matrix:
+  include:
+    - os: linux
+      language: php
+      php: 5.6
+      env: ATOM_CHANNEL=stable
+      install:
+        # Set the GitHub OAuth token for Composer
+        - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
+        - export PATH="$PATH:$HOME/.composer/vendor/bin"
+        # Install PHPCS
+        - composer global require "squizlabs/php_codesniffer=*"
+
+    - os: linux
+      language: php
+      php: 7.0
+      env: ATOM_CHANNEL=beta
+      install:
+        # Set the GitHub OAuth token for Composer
+        - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
+        - export PATH="$PATH:$HOME/.composer/vendor/bin"
+        # Install PHPCS
+        - composer global require "squizlabs/php_codesniffer=*"
+
+    - os: osx
+      # Note: The OSX builds do not natively support PHP, so the order is swapped
+      #  from the Linux builds.
+      # Installed for linting the project
+      language: generic
+      env: ATOM_CHANNEL=stable
+      install:
+        # Install PHP 5.6
+        - curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
+        - export PATH="/usr/local/php5/bin:$PATH"
+        # Install Composer
+        - php -r "readfile('https://getcomposer.org/installer');" | sudo php -- --filename=composer
+        - export PATH="$PATH:$HOME/.composer/vendor/bin"
+        # Set the GitHub OAuth token for Composer
+        - sudo php composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
+        # Install PHPCS
+        - sudo php composer global require "squizlabs/php_codesniffer=*"
+
+before_script:
+  - phpcs --version
+
+### Generic setup follows ###
+script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+
 notifications:
   email:
     on_success: never
     on_failure: change
-os: osx
-before_install:
-  # Updating PHP to 5.6
-  - curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
-  - export PATH=/usr/local/php5/bin:$PATH
-  - php --version
-  # Installing Composer
-  - php -r "readfile('https://getcomposer.org/installer');" | sudo php -- --filename=composer
-  - sudo php composer config -g github-oauth.github.com cc4a091c096e7d3cfe053c3f669fb840be60ab98
-  - export PATH="$PATH:$HOME/.composer/vendor/bin"
-  #Installing PHP_CodeSniffer
-  - sudo php composer global require "squizlabs/php_codesniffer=*"
 
-script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+branches:
+  only:
+    - master
+
+git:
+  depth: 10
+
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - build-essential
+    - git
+    - libgnome-keyring-dev
+    - fakeroot

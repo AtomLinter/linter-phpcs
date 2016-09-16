@@ -1,30 +1,39 @@
-version: "{build}"
-os: Windows Server 2012 R2
-branches:
-  only:
-    - master
-test: off
-deploy: off
+### Project specific config ###
+environment:
+  COMPOSER_OAUTH_TOKEN: "cc4a091c096e7d3cfe053c3f669fb840be60ab98"
+
+  matrix:
+  - ATOM_CHANNEL: stable
+  - ATOM_CHANNEL: beta
 
 install:
-  - appveyor DownloadFile https://atom.io/download/windows -FileName AtomSetup.exe
-  - AtomSetup.exe /silent
   # The following installs and sets up PHP
   - cinst -y php
-  - cd c:\tools\php
+  - cd C:\tools\php
   - copy php.ini-production php.ini
   - echo date.timezone="UTC" >> php.ini
   - echo extension_dir=ext >> php.ini
   - echo extension=php_openssl.dll >> php.ini
   - SET PATH=C:\tools\php\;%PATH%
+  # Install Composer
   - php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=composer
-  - php composer config -g github-oauth.github.com cc4a091c096e7d3cfe053c3f669fb840be60ab98
-  - php composer global require "squizlabs/php_codesniffer=*"
+  - php composer config -g github-oauth.github.com "%COMPOSER_OAUTH_TOKEN%"
   - SET PATH=%APPDATA%\Composer\vendor\bin;%PATH%
+  # Install PHPCS
+  - php composer global require "squizlabs/php_codesniffer=*"
+  - phpcs --version
 
+### Generic setup follows ###
 build_script:
-  - cd %APPVEYOR_BUILD_FOLDER%
-  - SET PATH=%LOCALAPPDATA%\atom\bin;%PATH%
-  - apm clean
-  - apm install
-  - apm test
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/atom/ci/master/build-package.ps1'))
+
+branches:
+  only:
+    - master
+
+version: "{build}"
+platform: x64
+clone_depth: 10
+skip_tags: true
+test: off
+deploy: off
