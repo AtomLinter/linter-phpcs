@@ -1,22 +1,13 @@
-machine:
-  php:
-    version: 5.6.14
-dependencies:
-  pre:
-    # Force updating wget due to the current containers being too out of date
-    - sudo apt-get update
-    - sudo apt-get install wget
-  override:
-    - wget -O atom-amd64.deb https://atom.io/download/deb
-    # - sudo apt-get update # Cut out until wget is fixed on the containers
-    - sudo dpkg --install atom-amd64.deb || true
-    - sudo apt-get -f install -y
-    - atom -v
-    - apm install
-    - composer config -g github-oauth.github.com cc4a091c096e7d3cfe053c3f669fb840be60ab98
-    - composer global require "squizlabs/php_codesniffer=*"
 test:
   override:
-    - ./node_modules/.bin/coffeelint lib
-    - ./node_modules/.bin/eslint spec
-    - apm test
+    - phpcs --version
+    - curl -s https://raw.githubusercontent.com/Arcanemagus/ci/atomlinter/build-package.sh | sh
+
+dependencies:
+  override:
+    - composer config -g github-oauth.github.com cc4a091c096e7d3cfe053c3f669fb840be60ab98
+    - composer global require "squizlabs/php_codesniffer=*"
+
+machine:
+  php:
+    version: 7.0.4
