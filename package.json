@@ -16,30 +16,37 @@
       "description": "Enter the path to your phpcs executable.",
       "order": 1
     },
+    "autoExecutableSearch": {
+      "title": "Search for executables",
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically search for any `vendor/bin/phpcs.bat` or `vendor/bin/phpcs` executable. Overrides the exectuable defined above.",
+      "order": 2
+    },
     "disableExecuteTimeout": {
       "type": "boolean",
       "default": false,
       "description": "Disable the 10 second timeout on running phpcs",
-      "order": 2
+      "order": 3
     },
     "codeStandardOrConfigFile": {
       "type": "string",
       "default": "PSR2",
       "description": "Enter path to config file or a coding standard, PSR2 for example.",
-      "order": 3
+      "order": 4
     },
     "disableWhenNoConfigFile": {
       "type": "boolean",
       "default": false,
       "description": "Disable the linter when the default configuration file is not found.",
-      "order": 4
+      "order": 5
     },
     "autoConfigSearch": {
       "title": "Search for configuration files",
       "type": "boolean",
       "default": true,
       "description": "Automatically search for any `phpcs.xml`, `phpcs.xml.dist`, `phpcs.ruleset.xml` or `ruleset.xml` file to use as configuration. Overrides custom standards defined above.",
-      "order": 5
+      "order": 6
     },
     "ignorePatterns": {
       "type": "array",
@@ -51,31 +58,31 @@
         "type": "string"
       },
       "description": "Enter filename patterns to ignore when running the linter.",
-      "order": 6
+      "order": 7
     },
     "displayErrorsOnly": {
       "type": "boolean",
       "default": false,
       "description": "Ignore warnings and display errors only.",
-      "order": 7
+      "order": 8
     },
     "warningSeverity": {
       "type": "integer",
       "default": 1,
       "description": "Set the warning severity level. Available when \"Display Errors Only\" is not checked.",
-      "order": 8
+      "order": 9
     },
     "tabWidth": {
       "type": "integer",
       "default": 0,
       "description": "Set the number of spaces that tab characters represent to the linter. Enter 0 to disable this option.",
-      "order": 9
+      "order": 10
     },
     "showSource": {
       "type": "boolean",
       "default": true,
       "description": "Show source in message.",
-      "order": 10
+      "order": 11
     }
   },
   "dependencies": {
