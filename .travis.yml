@@ -2,7 +2,7 @@
 env:
   global:
     - COMPOSER_DISABLE_XDEBUG_WARN="1"
-    - secure: "JmA5S4tIX7Mkt3VI4CZyi4sP8xt/SLXC2RwRkLLuuLWfMOSzQ9jSFiAi64XK/QYZI3Sc0thbA7+ZTxbEm92saHMQk7b7ktyFHZfVUBExMHBxrWf+wmUNUi1ldPkZQydQ9xgfoWcgusuVrjcJ9stvW23vCkbl5jSHGeWkAzH8DG0="
+    - COMPOSER_OAUTH_TOKEN="cc4a091c096e7d3cfe053c3f669fb840be60ab98"
 
 matrix:
   include:
@@ -50,7 +50,10 @@ before_script:
   - phpcs --version
 
 ### Generic setup follows ###
-script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+script:
+  - curl -s -O https://raw.githubusercontent.com/atom/ci/master/build-package.sh
+  - chmod u+x build-package.sh
+  - ./build-package.sh
 
 notifications:
   email:
