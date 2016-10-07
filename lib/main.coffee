@@ -16,6 +16,9 @@ module.exports =
         if version and version[1] is '1'
           @legacy = true
     )
+    @subscriptions.add atom.config.observe('linter-phpcs.autoExecutableSearch', (value) =>
+      @autoExecutableSearch = value
+    )
     @subscriptions.add atom.config.observe('linter-phpcs.disableWhenNoConfigFile', (value) =>
       @disableWhenNoConfigFile = value
     )
@@ -68,6 +71,23 @@ module.exports =
           ['phpcs.xml', 'phpcs.xml.dist', 'phpcs.ruleset.xml', 'ruleset.xml'])
         return [] if @disableWhenNoConfigFile and not confFile
 
+        command = @command
+        legacy = @legacy
+
+        # Check if a local phpcs executable is available
+        executable = helpers.find(path.dirname(filePath),
+          ['vendor/bin/phpcs.bat', 'vendor/bin/phpcs']) if @autoExecutableSearch
+
+        if executable
+          command = executable
+
+          # Determine if legacy mode needs to be set up (in case phpcs version = 1)
+          helpers.exec(command, ['--version']).then (result) =>
+            versionPattern = /^PHP_CodeSniffer version ([0-9]+)/i
+            version = result.match versionPattern
+            if version and version[1] is '1'
+              legacy = true
+
         parameters = ['--report=json']
         standard = if @autoConfigSearch and confFile then confFile else @standard
         parameters.push("--standard=#{standard}") if standard
@@ -77,14 +97,14 @@ module.exports =
         parameters.push('-s') if @showSource
 
         eolChar = textEditor.getBuffer().lineEndingForRow(0)
-        execPrefix = if not @legacy then 'phpcs_input_file: ' + filePath + eolChar else ''
+        execPrefix = if not legacy then 'phpcs_input_file: ' + filePath + eolChar else ''
         text = execPrefix + textEditor.getText()
         execOptions = {stdin: text}
         execOptions.timeout = Infinity if @disableExecuteTimeout
         execOptions.cwd = path.dirname(confFile) if confFile
         execOptions.ignoreExitCode = true
 
-        return helpers.exec(@command, parameters, execOptions).then (result) =>
+        return helpers.exec(command, parameters, execOptions).then (result) =>
           try
             result = JSON.parse(result.toString().trim())
           catch error
@@ -94,7 +114,7 @@ module.exports =
             )
             console.log('PHPCS Response', result)
             return []
-          if @legacy
+          if legacy
             return [] unless result.files.STDIN
             messages = result.files.STDIN.messages
           else
