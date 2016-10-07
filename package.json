@@ -32,7 +32,7 @@
     "codeStandardOrConfigFile": {
       "type": "string",
       "default": "PSR2",
-      "description": "Enter path to config file or a coding standard, PSR2 for example.",
+      "description": "Enter path to config file or a predefined coding standard name.",
       "order": 4
     },
     "disableWhenNoConfigFile": {
