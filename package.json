@@ -7,7 +7,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "atom": ">=1.4.0 <2.0.0"
+    "atom": ">=1.8.0 <2.0.0"
   },
   "configSchema": {
     "executablePath": {
@@ -90,7 +90,28 @@
       "items": {
         "type": "string"
       },
-      "description": "Command separated list of Sniffs to ignore. Ignored below PHPCS v2.6.2."
+      "description": "Command separated list of Sniffs to ignore. Ignored below PHPCS v2.6.2.",
+      "order": 12
+    },
+    "otherLanguages": {
+      "type": "object",
+      "collapsed": true,
+      "description": "If properly configured, PHPCS can run external tools to lint languages other than PHP. Only enable the below options if you have set this up.",
+      "order": 13,
+      "properties": {
+        "useCSSTools": {
+          "title": "Enable CSS Tools",
+          "description": "Enable sending CSS files to configured tools. **Requires configuration**",
+          "type": "boolean",
+          "default": false
+        },
+        "useJSTools": {
+          "title": "Enable JS Tools",
+          "description": "Enable sending JS files to configured tools. **Requires configuration**",
+          "type": "boolean",
+          "default": false
+        }
+      }
     }
   },
   "dependencies": {
