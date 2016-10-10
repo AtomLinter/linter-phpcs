@@ -30,21 +30,21 @@ describe('The phpcs provider for Linter', () => {
 
   describe('checks bad.php and', () => {
     let editor = null;
-    beforeEach(() => {
+    beforeEach(() =>
       waitsForPromise(() =>
         atom.workspace.open(badPath).then((openEditor) => { editor = openEditor; })
-      );
-    });
+      )
+    );
 
-    it('finds at least one message', () => {
+    it('finds at least one message', () =>
       waitsForPromise(() =>
         lint(editor).then(messages =>
           expect(messages.length).toBeGreaterThan(0)
         )
-      );
-    });
+      )
+    );
 
-    it('verifies the first message', () => {
+    it('verifies the first message', () =>
       waitsForPromise(() =>
         lint(editor).then((messages) => {
           expect(messages[0].type).toBe('ERROR');
@@ -56,8 +56,8 @@ describe('The phpcs provider for Linter', () => {
           expect(messages[0].filePath).toBe(badPath);
           expect(messages[0].range).toEqual([[1, 5], [1, 9]]);
         })
-      );
-    });
+      )
+    );
   });
 
   describe('checks tabs.php and', () => {
@@ -69,15 +69,15 @@ describe('The phpcs provider for Linter', () => {
       );
     });
 
-    it('finds at least two messages', () => {
+    it('finds at least two messages', () =>
       waitsForPromise(() =>
         lint(editor).then(messages =>
           expect(messages.length).toBeGreaterThan(1)
         )
-      );
-    });
+      )
+    );
 
-    it('verifies the second message', () => {
+    it('verifies the second message', () =>
       waitsForPromise(() =>
         lint(editor).then((messages) => {
           expect(messages[1].type).toBe('ERROR');
@@ -89,23 +89,23 @@ describe('The phpcs provider for Linter', () => {
           expect(messages[1].filePath).toBe(tabsPath);
           expect(messages[1].range).toEqual([[2, 6], [2, 10]]);
         })
-      );
-    });
+      )
+    );
   });
 
-  it('finds nothing wrong with an empty file', () => {
+  it('finds nothing wrong with an empty file', () =>
     waitsForPromise(() =>
       atom.workspace.open(emptyPath).then(editor =>
         lint(editor).then(messages => expect(messages.length).toBe(0))
       )
-    );
-  });
+    )
+  );
 
-  it('finds nothing wrong with a valid file', () => {
+  it('finds nothing wrong with a valid file', () =>
     waitsForPromise(() =>
       atom.workspace.open(goodPath).then(editor =>
         lint(editor).then(messages => expect(messages.length).toBe(0))
       )
-    );
-  });
+    )
+  );
 });
