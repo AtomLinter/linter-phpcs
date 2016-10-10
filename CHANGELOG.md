@@ -1,5 +1,28 @@
 # Change Log
 
+## [v1.5.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.0) (2016-10-10)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.4.1...v1.5.0)
+
+**Implemented enhancements:**
+
+- exclude sniffs option [\#168](https://github.com/AtomLinter/linter-phpcs/issues/168)
+- Add an option to get PHPCS executable path from composer.json dynamically [\#132](https://github.com/AtomLinter/linter-phpcs/issues/132)
+- Remove custom ignore handling [\#94](https://github.com/AtomLinter/linter-phpcs/issues/94)
+- Enable support for JS and CSS [\#203](https://github.com/AtomLinter/linter-phpcs/pull/203) ([Arcanemagus](https://github.com/Arcanemagus))
+- Implement --exclude option [\#202](https://github.com/AtomLinter/linter-phpcs/pull/202) ([Arcanemagus](https://github.com/Arcanemagus))
+- Version updates [\#201](https://github.com/AtomLinter/linter-phpcs/pull/201) ([Arcanemagus](https://github.com/Arcanemagus))
+- Rewrite in ES2017 [\#200](https://github.com/AtomLinter/linter-phpcs/pull/200) ([Arcanemagus](https://github.com/Arcanemagus))
+- Search for executables [\#198](https://github.com/AtomLinter/linter-phpcs/pull/198) ([jyggen](https://github.com/jyggen))
+- Update eslint-config-airbnb-base to version 8.0.0 🚀 [\#196](https://github.com/AtomLinter/linter-phpcs/pull/196) ([greenkeeperio-bot](https://github.com/greenkeeperio-bot))
+- Update CI configuration [\#195](https://github.com/AtomLinter/linter-phpcs/pull/195) ([Arcanemagus](https://github.com/Arcanemagus))
+- Update eslint to version 3.5.0 🚀 [\#193](https://github.com/AtomLinter/linter-phpcs/pull/193) ([greenkeeperio-bot](https://github.com/greenkeeperio-bot))
+
+**Fixed bugs:**
+
+- Version updates [\#201](https://github.com/AtomLinter/linter-phpcs/pull/201) ([Arcanemagus](https://github.com/Arcanemagus))
+- Rewrite in ES2017 [\#200](https://github.com/AtomLinter/linter-phpcs/pull/200) ([Arcanemagus](https://github.com/Arcanemagus))
+- Update CI configuration [\#199](https://github.com/AtomLinter/linter-phpcs/pull/199) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.4.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.4.1) (2016-09-14)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.4.0...v1.4.1)
 
