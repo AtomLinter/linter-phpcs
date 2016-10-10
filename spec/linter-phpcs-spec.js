@@ -36,17 +36,10 @@ describe('The phpcs provider for Linter', () => {
       )
     );
 
-    it('finds at least one message', () =>
-      waitsForPromise(() =>
-        lint(editor).then(messages =>
-          expect(messages.length).toBeGreaterThan(0)
-        )
-      )
-    );
-
-    it('verifies the first message', () =>
+    it('verifies the results', () =>
       waitsForPromise(() =>
         lint(editor).then((messages) => {
+          expect(messages.length).toBe(1);
           expect(messages[0].type).toBe('ERROR');
           expect(messages[0].text).not.toBeDefined();
           expect(messages[0].html).toBe('' +
@@ -108,4 +101,16 @@ describe('The phpcs provider for Linter', () => {
       )
     )
   );
+
+  it('allows specifying sniffs to ignore', () => {
+    atom.config.set('linter-phpcs.excludedSniffs', ['Generic.PHP.LowerCaseConstant']);
+    waitsForPromise(() =>
+      atom.workspace.open(badPath).then(editor =>
+        lint(editor).then(messages =>
+          // Note that we have earlier checked that it should be 1 normally
+          expect(messages.length).toBe(0)
+        )
+      )
+    );
+  });
 });

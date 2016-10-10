@@ -83,6 +83,14 @@
       "default": true,
       "description": "Show source in message.",
       "order": 11
+    },
+    "excludedSniffs": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "description": "Command separated list of Sniffs to ignore. Ignored below PHPCS v2.6.2."
     }
   },
   "dependencies": {
