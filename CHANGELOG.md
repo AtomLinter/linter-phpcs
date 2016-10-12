@@ -1,5 +1,17 @@
 # Change Log
 
+## [v1.5.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.1) (2016-10-11)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.0...v1.5.1)
+
+**Implemented enhancements:**
+
+- Display original message with errors [\#207](https://github.com/AtomLinter/linter-phpcs/pull/207) ([Arcanemagus](https://github.com/Arcanemagus))
+
+**Fixed bugs:**
+
+- Error: Column start greater than line length [\#204](https://github.com/AtomLinter/linter-phpcs/issues/204)
+- Default tabs to 4 characters [\#208](https://github.com/AtomLinter/linter-phpcs/pull/208) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.5.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.0) (2016-10-10)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.4.1...v1.5.0)
 
