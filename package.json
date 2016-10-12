@@ -57,7 +57,7 @@
       "items": {
         "type": "string"
       },
-      "description": "Enter filename patterns to ignore when running the linter.",
+      "description": "Enter Glob patterns to ignore when running the linter.",
       "order": 7
     },
     "displayErrorsOnly": {
