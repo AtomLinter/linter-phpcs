@@ -75,7 +75,7 @@
     "tabWidth": {
       "type": "integer",
       "default": 0,
-      "description": "Set the number of spaces that tab characters represent to the linter. Enter 0 to disable this option.",
+      "description": "Set the number of spaces that tab characters represent to the linter. Will use 4 if set to 0 as most PHPCS sniffs have that as a hidden default.",
       "order": 10
     },
     "showSource": {
