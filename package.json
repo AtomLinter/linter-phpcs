@@ -121,7 +121,6 @@
     "minimatch": "^3.0.0"
   },
   "devDependencies": {
-    "coffeelint": "^1.14.2",
     "eslint": "^3.6.0",
     "eslint-config-airbnb-base": "^8.0.0",
     "eslint-plugin-import": "^1.16.0"
