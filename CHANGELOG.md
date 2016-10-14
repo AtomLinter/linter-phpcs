@@ -1,5 +1,15 @@
 # Change Log
 
+## [v1.5.3](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.3) (2016-10-14)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.2...v1.5.3)
+
+**Fixed bugs:**
+
+- Allow Folder or Fullpath exclusions using Ignore Patterns [\#210](https://github.com/AtomLinter/linter-phpcs/pull/210) ([frytyler](https://github.com/frytyler))
+
+## [v1.5.2](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.2) (2016-10-13)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.1...v1.5.2)
+
 ## [v1.5.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.1) (2016-10-12)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.0...v1.5.1)
 
