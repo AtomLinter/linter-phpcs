@@ -7,6 +7,12 @@ environment:
   - ATOM_CHANNEL: beta
 
 install:
+  # Update Chocolatey
+  - choco upgrade chocolatey -y
+  # Enable Windows Update
+  # This is required for one of the dependencies of the Chocolatey PHP package
+  - sc config wuauserv start= auto
+  - net start wuauserv
   # The following installs and sets up PHP
   - cinst -y php
   - cd C:\tools\php
