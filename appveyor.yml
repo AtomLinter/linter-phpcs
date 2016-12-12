@@ -9,8 +9,12 @@ environment:
 install:
   # Update Chocolatey
   - choco upgrade chocolatey -y
+  # Enable Windows Update
+  # - Set-Service wuauserv -StartupType Automatic
+  - sc config wuauserv start= auto
+  - net start wuauserv
   # The following installs and sets up PHP
-  - cinst -y php --ignoredependencies
+  - cinst -y php
   - cd C:\tools\php
   - copy php.ini-production php.ini
   - echo date.timezone="UTC" >> php.ini
