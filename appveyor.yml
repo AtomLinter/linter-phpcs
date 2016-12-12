@@ -9,6 +9,8 @@ environment:
 install:
   # Update Chocolatey
   - choco upgrade chocolatey -y
+  # Enable the Windows Update Service
+  - cmd.exe /c "net start wuauserv 2>&1"
   # The following installs and sets up PHP
   - cinst -y php
   - cd C:\tools\php
