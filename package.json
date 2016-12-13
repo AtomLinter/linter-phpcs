@@ -51,8 +51,8 @@
     "ignorePatterns": {
       "type": "array",
       "default": [
-        "*.blade.php",
-        "*.twig.php"
+        "**/*.blade.php",
+        "**/*.twig.php"
       ],
       "items": {
         "type": "string"
