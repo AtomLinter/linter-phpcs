@@ -1,5 +1,20 @@
 # Change Log
 
+## [v1.5.4](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.4) (2016-12-13)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.3...v1.5.4)
+
+**Implemented enhancements:**
+
+- Update the readme [\#222](https://github.com/AtomLinter/linter-phpcs/pull/222) ([Arcanemagus](https://github.com/Arcanemagus))
+- Update to eslint-config-airbnb-base v11.0.0 [\#221](https://github.com/AtomLinter/linter-phpcs/pull/221) ([Arcanemagus](https://github.com/Arcanemagus))
+- PEAR not necessary [\#215](https://github.com/AtomLinter/linter-phpcs/issues/215)
+
+**Fixed bugs:**
+
+- \[1.5.3\] Checking ignored blade files  [\#213](https://github.com/AtomLinter/linter-phpcs/issues/213)
+- Fix default ignore patterns [\#223](https://github.com/AtomLinter/linter-phpcs/pull/223) ([Arcanemagus](https://github.com/Arcanemagus))
+- Fix PHP on AppVeyor [\#219](https://github.com/AtomLinter/linter-phpcs/pull/219) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.5.3](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.3) (2016-10-14)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.2...v1.5.3)
 
