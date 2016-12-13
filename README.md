@@ -1,31 +1,52 @@
-linter-phpcs
-=========================
-[![Build Status](https://travis-ci.org/AtomLinter/linter-phpcs.svg)](https://travis-ci.org/AtomLinter/linter-phpcs)
-[![Dependency Status](https://david-dm.org/AtomLinter/linter-phpcs.svg)](https://david-dm.org/AtomLinter/linter-phpcs)
-[![apm](https://img.shields.io/apm/v/linter-phpcs.svg)](https://atom.io/packages/linter-phpcs)
-[![apm](https://img.shields.io/apm/dm/linter-phpcs.svg)](https://atom.io/packages/linter-phpcs)
+# linter-phpcs
 
-This linter plugin for [Linter](https://github.com/steelbrain/linter) provides
-an interface to [phpcs](http://pear.php.net/package/PHP_CodeSniffer/). It will
-be used with files that have the "PHP" and "HTML" syntax.
+[![Build Status][travisci-badge]][travisci]
+[![Dependency Status][dabviddm-badge]][daviddm]
+[![apm](https://img.shields.io/apm/v/linter-phpcs.svg)][linter-phpcs]
+[![apm](https://img.shields.io/apm/dm/linter-phpcs.svg)][linter-phpcs]
 
-### phpcs Installation
-Before using this plugin, you must ensure that `phpcs` is installed on your system. To install `phpcs`, do the following:
+## Description
 
-0. Install [php](http://php.net).
-0. Install [pear](http://pear.php.net).
-0. Install `phpcs` by typing the following in a terminal:
-```ShellSession
-pear install PHP_CodeSniffer
-```
+This is a provider for [Linter][] that provides an interface to
+[PHP_CodeSniffer][PHPCS] (PHPCS). It supports files that have the "PHP" and
+"HTML" syntax.
 
-Now you can proceed to install the linter-phpcs plugin.
+## Installation
+
+### PHPCS Installation
+
+Before using this plugin, you must ensure that `phpcs` is installed and
+available on your `$PATH`. To install `phpcs`, the following:
+
+1.  Install [PHP](http://php.net).
+2.  Install [Composer](https://getcomposer.org/).
+3.  Install `phpcs` by typing the following in a terminal:
+
+    ```ShellSession
+    composer global require "squizlabs/php_codesniffer=*"
+    ```
+
+Full installation steps, including alternate installation methods, can be found
+on the PHPCS site [here][phpcs-install].
 
 ### Package Installation
+
 You can then install this package either from within Atom or by running the
 following command:
+
 ```ShellSession
 $ apm install linter-phpcs
 ```
-Note: If you do not already have the `linter` package installed it will be installed
-for you to provide an interface for this package.
+
+Note: If you do not already have the Linter package installed it will be
+installed for you to provide an interface for this package. If you are using an
+alternative interface simply disable the Linter package.
+
+[travisci]: https://travis-ci.org/AtomLinter/linter-phpcs
+[travisci-badge]: https://travis-ci.org/AtomLinter/linter-phpcs.svg
+[daviddm]: https://david-dm.org/AtomLinter/linter-phpcs
+[dabviddm-badge]: https://david-dm.org/AtomLinter/linter-phpcs.svg
+[linter-phpcs]: https://atom.io/packages/linter-phpcs
+[Linter]: https://github.com/steelbrain/linter
+[PHPCS]: https://github.com/squizlabs/PHP_CodeSniffer
+[phpcs-install]: https://github.com/squizlabs/PHP_CodeSniffer#installation
