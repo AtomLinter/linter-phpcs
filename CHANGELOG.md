@@ -1,13 +1,20 @@
 # Change Log
 
+## [v1.5.5](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.5) (2016-12-22)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.4...v1.5.5)
+
+**Fixed bugs:**
+
+- Use '-q' when phpcs supports it [\#225](https://github.com/AtomLinter/linter-phpcs/pull/225) ([weirdan](https://github.com/weirdan))
+
 ## [v1.5.4](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.4) (2016-12-13)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.3...v1.5.4)
 
 **Implemented enhancements:**
 
+- PEAR not necessary [\#215](https://github.com/AtomLinter/linter-phpcs/issues/215)
 - Update the readme [\#222](https://github.com/AtomLinter/linter-phpcs/pull/222) ([Arcanemagus](https://github.com/Arcanemagus))
 - Update to eslint-config-airbnb-base v11.0.0 [\#221](https://github.com/AtomLinter/linter-phpcs/pull/221) ([Arcanemagus](https://github.com/Arcanemagus))
-- PEAR not necessary [\#215](https://github.com/AtomLinter/linter-phpcs/issues/215)
 
 **Fixed bugs:**
 
