@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.5.6](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.6) (2017-01-10)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.5...v1.5.6)
+
+**Fixed bugs:**
+
+- € symbol in a line over 120 characters induce `Error: Invalid point encountered!` [\#211](https://github.com/AtomLinter/linter-phpcs/issues/211)
+- Added --encoding option [\#228](https://github.com/AtomLinter/linter-phpcs/pull/228) ([weirdan](https://github.com/weirdan))
+
 ## [v1.5.5](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.5) (2016-12-22)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.4...v1.5.5)
 
