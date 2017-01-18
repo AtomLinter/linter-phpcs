@@ -16,4 +16,4 @@ machine:
     version: 7.0.4
   environment:
     COMPOSER_DISABLE_XDEBUG_WARN: 1
-    PATH: "$HOME/.config/composer/vendor/bin:$PATH"
+    COMPOSER_HOME: "/home/ubuntu/.composer"
