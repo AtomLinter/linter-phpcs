@@ -1,5 +1,18 @@
 # Change Log
 
+## [v1.5.7](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.7) (2017-01-25)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.6...v1.5.7)
+
+**Implemented enhancements:**
+
+- Update CONTRIBUTING.md [\#230](https://github.com/AtomLinter/linter-phpcs/pull/230) ([weirdan](https://github.com/weirdan))
+
+**Fixed bugs:**
+
+- Error: Invalid point encountered - consistently with PHPCS 1.x [\#234](https://github.com/AtomLinter/linter-phpcs/pull/234) ([driskell](https://github.com/driskell))
+- Added encoding name translation [\#233](https://github.com/AtomLinter/linter-phpcs/pull/233) ([weirdan](https://github.com/weirdan))
+- Fix composer PATH and disable XDebug warning [\#231](https://github.com/AtomLinter/linter-phpcs/pull/231) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.5.6](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.6) (2017-01-10)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.5...v1.5.6)
 

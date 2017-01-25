@@ -1,6 +1,6 @@
 {
   "name": "linter-phpcs",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "main": "./lib/main.js",
   "description": "Lint PHP on the fly, using phpcs",
   "repository": "https://github.com/AtomLinter/linter-phpcs",
