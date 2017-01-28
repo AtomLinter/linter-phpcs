@@ -59,7 +59,10 @@ describe('The phpcs provider for Linter', () => {
     let editor = null;
     beforeEach(() =>
       waitsForPromise(() =>
-        atom.workspace.open(longCP1251Path).then((openEditor) => { editor = openEditor; }),
+        atom.workspace.open(longCP1251Path).then((openEditor) => {
+          editor = openEditor;
+          editor.getBuffer().setEncoding('windows1251');
+        }),
       ),
     );
     it('reports line length warning', () => {
@@ -76,7 +79,10 @@ describe('The phpcs provider for Linter', () => {
     let editor = null;
     beforeEach(() =>
       waitsForPromise(() =>
-        atom.workspace.open(shortCP1251Path).then((openEditor) => { editor = openEditor; }),
+        atom.workspace.open(shortCP1251Path).then((openEditor) => {
+          editor = openEditor;
+          editor.getBuffer().setEncoding('windows1251');
+        }),
       ),
     );
     it('reports no errors nor warnings', () => {
