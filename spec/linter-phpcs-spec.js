@@ -62,6 +62,11 @@ describe('The phpcs provider for Linter', () => {
         atom.workspace.open(longCP1251Path).then((openEditor) => {
           editor = openEditor;
           editor.getBuffer().setEncoding('windows1251');
+          // setting encoding will trigger async reload, so let's wait for that
+          // otherwise linter-phpcs will notice the file has changed and will abort linting
+          return new Promise((resolve) => {
+            editor.getBuffer().onDidReload(resolve);
+          });
         }),
       ),
     );
@@ -82,6 +87,11 @@ describe('The phpcs provider for Linter', () => {
         atom.workspace.open(shortCP1251Path).then((openEditor) => {
           editor = openEditor;
           editor.getBuffer().setEncoding('windows1251');
+          // setting encoding will trigger async reload, so let's wait for that
+          // otherwise linter-phpcs will notice the file has changed and will abort linting
+          return new Promise((resolve) => {
+            editor.getBuffer().onDidReload(resolve);
+          });
         }),
       ),
     );
