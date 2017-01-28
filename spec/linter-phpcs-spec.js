@@ -8,6 +8,8 @@ const goodPath = path.join(__dirname, 'files', 'good.php');
 const badPath = path.join(__dirname, 'files', 'bad.php');
 const tabsPath = path.join(__dirname, 'files', 'tabs.php');
 const emptyPath = path.join(__dirname, 'files', 'empty.php');
+const longCP1251Path = path.join(__dirname, 'files', 'long.cp1251.php');
+const shortCP1251Path = path.join(__dirname, 'files', 'short.cp1251.php');
 
 describe('The phpcs provider for Linter', () => {
   beforeEach(() => {
@@ -51,6 +53,39 @@ describe('The phpcs provider for Linter', () => {
         }),
       ),
     );
+  });
+
+  describe('checks long.cp1251.php and', () => {
+    let editor = null;
+    beforeEach(() =>
+      waitsForPromise(() =>
+        atom.workspace.open(longCP1251Path).then((openEditor) => { editor = openEditor; }),
+      ),
+    );
+    it('reports line length warning', () => {
+      waitsForPromise(() =>
+        lint(editor).then((messages) => {
+          expect(messages.length).toBe(1);
+          expect(messages[0].html).toMatch(/Line exceeds/);
+        }),
+      );
+    });
+  });
+
+  describe('checks short.cp1251.php and', () => {
+    let editor = null;
+    beforeEach(() =>
+      waitsForPromise(() =>
+        atom.workspace.open(shortCP1251Path).then((openEditor) => { editor = openEditor; }),
+      ),
+    );
+    it('reports no errors nor warnings', () => {
+      waitsForPromise(() =>
+        lint(editor).then(messages =>
+          expect(messages.length).toBe(0),
+        ),
+      );
+    });
   });
 
   describe('checks tabs.php and', () => {
