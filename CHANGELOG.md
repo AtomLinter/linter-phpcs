@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.5.8](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.8) (2017-01-30)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.7...v1.5.8)
+
+**Fixed bugs:**
+
+- Encodings again [\#236](https://github.com/AtomLinter/linter-phpcs/pull/236) ([weirdan](https://github.com/weirdan))
+
+**Closed issues:**
+
+- conversion from `utf8' to `UCS-4LE' is not allowed [\#232](https://github.com/AtomLinter/linter-phpcs/issues/232)
+
 ## [v1.5.7](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.7) (2017-01-25)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.6...v1.5.7)
 
