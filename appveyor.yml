@@ -20,7 +20,7 @@ install:
   - echo date.timezone="UTC" >> php.ini
   - echo extension_dir=ext >> php.ini
   - echo extension=php_openssl.dll >> php.ini
-  - SET PATH=C:\tools\php\;%PATH%
+  - SET PATH=C:\tools\php71\;%PATH%
   # Install Composer
   - php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=composer
   - php composer config -g github-oauth.github.com "%COMPOSER_OAUTH_TOKEN%"
