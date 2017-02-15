@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.5.9](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.9) (2017-02-15)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.8...v1.5.9)
+
+**Implemented enhancements:**
+
+- Update atom-linter to the latest version 🚀 [\#240](https://github.com/AtomLinter/linter-phpcs/pull/240) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
+
+**Fixed bugs:**
+
+- Encoding handling [\#235](https://github.com/AtomLinter/linter-phpcs/issues/235)
+
 ## [v1.5.8](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.8) (2017-01-30)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.7...v1.5.8)
 
