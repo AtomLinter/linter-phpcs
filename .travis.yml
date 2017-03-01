@@ -28,24 +28,6 @@ matrix:
         # Install PHPCS
         - composer global require "squizlabs/php_codesniffer=*"
 
-    - os: osx
-      # Note: The OSX builds do not natively support PHP, so the order is swapped
-      #  from the Linux builds.
-      # Installed for linting the project
-      language: generic
-      env: ATOM_CHANNEL=stable
-      install:
-        # Install PHP 5.6
-        - curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
-        - export PATH="/usr/local/php5/bin:$PATH"
-        # Install Composer
-        - php -r "readfile('https://getcomposer.org/installer');" | sudo php -- --filename=composer
-        - export PATH="$PATH:$HOME/.composer/vendor/bin"
-        # Set the GitHub OAuth token for Composer
-        - sudo php composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
-        # Install PHPCS
-        - sudo php composer global require "squizlabs/php_codesniffer=*"
-
 before_script:
   - phpcs --version
 
