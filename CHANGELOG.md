@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.5.10](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.10) (2017-03-02)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.9...v1.5.10)
+
+**Implemented enhancements:**
+
+- Remove macOS testing [\#243](https://github.com/AtomLinter/linter-phpcs/pull/243) ([Arcanemagus](https://github.com/Arcanemagus))
+
+**Fixed bugs:**
+
+- Update atom-linter to v9.0.1 [\#242](https://github.com/AtomLinter/linter-phpcs/pull/242) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.5.9](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.9) (2017-02-15)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.8...v1.5.9)
 
