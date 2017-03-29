@@ -117,7 +117,6 @@
   "dependencies": {
     "atom-linter": "^9.0.1",
     "atom-package-deps": "^4.0.1",
-    "escape-html": "^1.0.3",
     "minimatch": "^3.0.2"
   },
   "devDependencies": {
@@ -135,7 +134,7 @@
   "providedServices": {
     "linter": {
       "versions": {
-        "1.0.0": "provideLinter"
+        "2.0.0": "provideLinter"
       }
     }
   },
