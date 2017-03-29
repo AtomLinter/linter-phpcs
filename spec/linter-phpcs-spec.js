@@ -42,14 +42,14 @@ describe('The phpcs provider for Linter', () => {
       waitsForPromise(() =>
         lint(editor).then((messages) => {
           expect(messages.length).toBe(1);
-          expect(messages[0].type).toBe('ERROR');
-          expect(messages[0].text).not.toBeDefined();
-          expect(messages[0].html).toBe('' +
-            '<span class="badge badge-flexible">Generic.PHP.LowerCaseConstant.Found</span>' +
+          expect(messages[0].severity).toBe('error');
+          expect(messages[0].description).not.toBeDefined();
+          expect(messages[0].excerpt).toBe('' +
+            '[Generic.PHP.LowerCaseConstant.Found]' +
             ' TRUE, FALSE and NULL must be lowercase; ' +
-            'expected &quot;true&quot; but found &quot;TRUE&quot;');
-          expect(messages[0].filePath).toBe(badPath);
-          expect(messages[0].range).toEqual([[1, 5], [1, 9]]);
+            'expected "true" but found "TRUE"');
+          expect(messages[0].location.file).toBe(badPath);
+          expect(messages[0].location.position).toEqual([[1, 5], [1, 9]]);
         }),
       ),
     );
@@ -74,7 +74,7 @@ describe('The phpcs provider for Linter', () => {
       waitsForPromise(() =>
         lint(editor).then((messages) => {
           expect(messages.length).toBe(1);
-          expect(messages[0].html).toMatch(/Line exceeds/);
+          expect(messages[0].excerpt).toMatch(/Line exceeds/);
         }),
       );
     });
@@ -124,14 +124,14 @@ describe('The phpcs provider for Linter', () => {
     it('verifies the second message', () =>
       waitsForPromise(() =>
         lint(editor).then((messages) => {
-          expect(messages[1].type).toBe('ERROR');
-          expect(messages[1].text).not.toBeDefined();
-          expect(messages[1].html).toBe('' +
-            '<span class="badge badge-flexible">Generic.PHP.LowerCaseConstant.Found</span>' +
+          expect(messages[1].severity).toBe('error');
+          expect(messages[1].description).not.toBeDefined();
+          expect(messages[1].excerpt).toBe('' +
+            '[Generic.PHP.LowerCaseConstant.Found]' +
             ' TRUE, FALSE and NULL must be lowercase; ' +
-            'expected &quot;true&quot; but found &quot;TRUE&quot;');
-          expect(messages[1].filePath).toBe(tabsPath);
-          expect(messages[1].range).toEqual([[2, 6], [2, 10]]);
+            'expected "true" but found "TRUE"');
+          expect(messages[1].location.file).toBe(tabsPath);
+          expect(messages[1].location.position).toEqual([[2, 6], [2, 10]]);
         }),
       ),
     );
