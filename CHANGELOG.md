@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.6.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.0) (2017-03-30)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.10...v1.6.0)
+
+**Implemented enhancements:**
+
+- Upgraded to Linter v2 and updated the code to the new API. [\#246](https://github.com/AtomLinter/linter-phpcs/pull/246) ([Fernando-Marquardt](https://github.com/Fernando-Marquardt))
+
 ## [v1.5.10](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.10) (2017-03-02)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.9...v1.5.10)
 
