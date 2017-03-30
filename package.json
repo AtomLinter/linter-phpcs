@@ -116,7 +116,7 @@
   },
   "dependencies": {
     "atom-linter": "^9.0.1",
-    "atom-package-deps": "^4.0.1",
+    "atom-package-deps": "^4.5.0",
     "minimatch": "^3.0.2"
   },
   "devDependencies": {
@@ -125,7 +125,7 @@
     "eslint-plugin-import": "^2.2.0"
   },
   "package-deps": [
-    "linter"
+    "linter:2.0.0"
   ],
   "scripts": {
     "lint": "eslint .",
