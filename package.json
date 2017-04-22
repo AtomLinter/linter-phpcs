@@ -29,6 +29,12 @@
       "description": "Disable the 10 second timeout on running phpcs",
       "order": 3
     },
+    "executeTimeout": {
+      "type": "integer",
+      "default": 10000,
+      "description": "Set a custom timeout value",
+      "order": 3
+    },
     "codeStandardOrConfigFile": {
       "type": "string",
       "default": "PSR2",
