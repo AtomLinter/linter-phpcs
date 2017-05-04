@@ -23,30 +23,24 @@
       "description": "Automatically search for any `vendor/bin/phpcs.bat` or `vendor/bin/phpcs` executable. Overrides the exectuable defined above.",
       "order": 2
     },
-    "disableExecuteTimeout": {
-      "type": "boolean",
-      "default": false,
-      "description": "Disable the 10 second timeout on running phpcs",
-      "order": 3
-    },
     "codeStandardOrConfigFile": {
       "type": "string",
       "default": "PSR2",
       "description": "Enter path to config file or a predefined coding standard name.",
-      "order": 4
+      "order": 3
     },
     "disableWhenNoConfigFile": {
       "type": "boolean",
       "default": false,
       "description": "Disable the linter when the default configuration file is not found.",
-      "order": 5
+      "order": 4
     },
     "autoConfigSearch": {
       "title": "Search for configuration files",
       "type": "boolean",
       "default": true,
       "description": "Automatically search for any `phpcs.xml`, `phpcs.xml.dist`, `phpcs.ruleset.xml` or `ruleset.xml` file to use as configuration. Overrides custom standards defined above.",
-      "order": 6
+      "order": 5
     },
     "ignorePatterns": {
       "type": "array",
@@ -58,31 +52,31 @@
         "type": "string"
       },
       "description": "Enter Glob patterns to ignore when running the linter.",
-      "order": 7
+      "order": 6
     },
     "displayErrorsOnly": {
       "type": "boolean",
       "default": false,
       "description": "Ignore warnings and display errors only.",
-      "order": 8
+      "order": 7
     },
     "warningSeverity": {
       "type": "integer",
       "default": 1,
       "description": "Set the warning severity level. Available when \"Display Errors Only\" is not checked.",
-      "order": 9
+      "order": 8
     },
     "tabWidth": {
       "type": "integer",
       "default": 0,
       "description": "Set the number of spaces that tab characters represent to the linter. Will use 4 if set to 0 as most PHPCS sniffs have that as a hidden default.",
-      "order": 10
+      "order": 9
     },
     "showSource": {
       "type": "boolean",
       "default": true,
       "description": "Show source in message.",
-      "order": 11
+      "order": 10
     },
     "excludedSniffs": {
       "type": "array",
@@ -91,13 +85,13 @@
         "type": "string"
       },
       "description": "Command separated list of Sniffs to ignore. Ignored below PHPCS v2.6.2.",
-      "order": 12
+      "order": 11
     },
     "otherLanguages": {
       "type": "object",
       "collapsed": true,
       "description": "If properly configured, PHPCS can run external tools to lint languages other than PHP. Only enable the below options if you have set this up.",
-      "order": 13,
+      "order": 12,
       "properties": {
         "useCSSTools": {
           "title": "Enable CSS Tools",
