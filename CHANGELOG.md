@@ -1,5 +1,19 @@
 # Change Log
 
+## [v1.6.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.1) (2017-05-04)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.0...v1.6.1)
+
+**Implemented enhancements:**
+
+- Warning about killed process should be silenced [\#245](https://github.com/AtomLinter/linter-phpcs/issues/245)
+- Uniquely spawn PHPCS processes [\#255](https://github.com/AtomLinter/linter-phpcs/pull/255) ([Arcanemagus](https://github.com/Arcanemagus))
+- Update atom-linter to the latest version 🚀 [\#250](https://github.com/AtomLinter/linter-phpcs/pull/250) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
+
+**Fixed bugs:**
+
+- Class File Name Ruleset Showing Incorrect Error [\#248](https://github.com/AtomLinter/linter-phpcs/issues/248)
+- Remove unnecessary quotes in --stdin-path option [\#253](https://github.com/AtomLinter/linter-phpcs/pull/253) ([synthetiv](https://github.com/synthetiv))
+
 ## [v1.6.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.0) (2017-03-30)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.10...v1.6.0)
 
