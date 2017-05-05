@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.6.2](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.2) (2017-05-05)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.1...v1.6.2)
+
+**Fixed bugs:**
+
+- Ignore the exit code of the version check [\#257](https://github.com/AtomLinter/linter-phpcs/pull/257) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.6.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.1) (2017-05-04)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.0...v1.6.1)
 
@@ -7,7 +14,7 @@
 
 - Warning about killed process should be silenced [\#245](https://github.com/AtomLinter/linter-phpcs/issues/245)
 - Uniquely spawn PHPCS processes [\#255](https://github.com/AtomLinter/linter-phpcs/pull/255) ([Arcanemagus](https://github.com/Arcanemagus))
-- Update atom-linter to the latest version 🚀 [\#250](https://github.com/AtomLinter/linter-phpcs/pull/250) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
+- Update atom-linter to v10.0.0 🚀 [\#250](https://github.com/AtomLinter/linter-phpcs/pull/250) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
 
 **Fixed bugs:**
 
