@@ -135,6 +135,36 @@ describe('The phpcs provider for Linter', () => {
         }),
       ),
     );
+
+    it('verifies the position when tabWidth = 2', () =>
+      waitsForPromise(() => {
+        atom.config.set('linter-phpcs.tabWidth', 2);
+        atom.config.set('linter-phpcs.codeStandardOrConfigFile', 'PEAR');
+        return lint(editor).then((messages) => {
+          const lastMessage = messages[messages.length - 1];
+          expect(lastMessage.excerpt).toBe('' +
+            '[Generic.Files.LineLength.TooLong]' +
+            ' Line exceeds 85 characters; ' +
+            'contains 124 characters');
+          expect(lastMessage.location.position).toEqual([[3, 122], [3, 123]]);
+        });
+      }),
+    );
+
+    it('verifies the position when tabWidth = 6', () =>
+      waitsForPromise(() => {
+        atom.config.set('linter-phpcs.tabWidth', 6);
+        atom.config.set('linter-phpcs.codeStandardOrConfigFile', 'PEAR');
+        return lint(editor).then((messages) => {
+          const lastMessage = messages[messages.length - 1];
+          expect(lastMessage.excerpt).toBe('' +
+            '[Generic.Files.LineLength.TooLong]' +
+            ' Line exceeds 85 characters; ' +
+            'contains 128 characters');
+          expect(lastMessage.location.position).toEqual([[3, 122], [3, 123]]);
+        });
+      }),
+    );
   });
 
   it('finds nothing wrong with an empty file', () =>
