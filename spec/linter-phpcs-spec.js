@@ -1,6 +1,8 @@
 'use babel';
 
 import * as path from 'path';
+// eslint-disable-next-line no-unused-vars, import/no-extraneous-dependencies
+import { it, fit, wait, beforeEach, afterEach } from 'jasmine-fix';
 
 const lint = require('../lib/main.js').provideLinter().lint;
 
@@ -12,14 +14,10 @@ const longCP1251Path = path.join(__dirname, 'files', 'long.cp1251.php');
 const shortCP1251Path = path.join(__dirname, 'files', 'short.cp1251.php');
 
 describe('The phpcs provider for Linter', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     atom.workspace.destroyActivePaneItem();
-    waitsForPromise(() => {
-      atom.packages.activatePackage('linter-phpcs');
-      return atom.packages.activatePackage('language-php').then(() =>
-        atom.workspace.open(goodPath),
-      );
-    });
+    await atom.packages.activatePackage('linter-phpcs');
+    await atom.packages.activatePackage('language-php');
   });
 
   it('should be in the packages list', () =>
@@ -32,136 +30,105 @@ describe('The phpcs provider for Linter', () => {
 
   describe('checks bad.php and', () => {
     let editor = null;
-    beforeEach(() =>
-      waitsForPromise(() =>
-        atom.workspace.open(badPath).then((openEditor) => { editor = openEditor; }),
-      ),
-    );
+    beforeEach(async () => {
+      editor = await atom.workspace.open(badPath);
+    });
 
-    it('verifies the results', () =>
-      waitsForPromise(() =>
-        lint(editor).then((messages) => {
-          expect(messages.length).toBe(1);
-          expect(messages[0].severity).toBe('error');
-          expect(messages[0].description).not.toBeDefined();
-          expect(messages[0].excerpt).toBe('' +
-            '[Generic.PHP.LowerCaseConstant.Found]' +
-            ' TRUE, FALSE and NULL must be lowercase; ' +
-            'expected "true" but found "TRUE"');
-          expect(messages[0].location.file).toBe(badPath);
-          expect(messages[0].location.position).toEqual([[1, 5], [1, 9]]);
-        }),
-      ),
-    );
+    it('verifies the results', async () => {
+      const messages = await lint(editor);
+      expect(messages.length).toBe(1);
+      expect(messages[0].severity).toBe('error');
+      expect(messages[0].description).not.toBeDefined();
+      expect(messages[0].excerpt).toBe('' +
+        '[Generic.PHP.LowerCaseConstant.Found]' +
+        ' TRUE, FALSE and NULL must be lowercase; ' +
+        'expected "true" but found "TRUE"');
+      expect(messages[0].location.file).toBe(badPath);
+      expect(messages[0].location.position).toEqual([[1, 5], [1, 9]]);
+    });
   });
 
   describe('checks long.cp1251.php and', () => {
     let editor = null;
-    beforeEach(() =>
-      waitsForPromise(() =>
-        atom.workspace.open(longCP1251Path).then((openEditor) => {
-          editor = openEditor;
-          editor.getBuffer().setEncoding('windows1251');
-          // setting encoding will trigger async reload, so let's wait for that
-          // otherwise linter-phpcs will notice the file has changed and will abort linting
-          return new Promise((resolve) => {
-            editor.getBuffer().onDidReload(resolve);
-          });
-        }),
-      ),
-    );
-    it('reports line length warning', () => {
-      waitsForPromise(() =>
-        lint(editor).then((messages) => {
-          expect(messages.length).toBe(1);
-          expect(messages[0].excerpt).toMatch(/Line exceeds/);
-        }),
-      );
+    beforeEach(async () => {
+      editor = await atom.workspace.open(longCP1251Path);
+      const buffer = editor.getBuffer();
+      buffer.setEncoding('windows1251');
+      // setting encoding will trigger async reload, so let's wait for that
+      // otherwise linter-phpcs will notice the file has changed and will abort linting
+      return new Promise((resolve) => {
+        buffer.onDidReload(resolve);
+      });
+    });
+
+    it('reports line length warning', async () => {
+      const messages = await lint(editor);
+      expect(messages.length).toBe(1);
+      expect(messages[0].excerpt).toMatch(/Line exceeds/);
     });
   });
 
   describe('checks short.cp1251.php and', () => {
     let editor = null;
-    beforeEach(() =>
-      waitsForPromise(() =>
-        atom.workspace.open(shortCP1251Path).then((openEditor) => {
-          editor = openEditor;
-          editor.getBuffer().setEncoding('windows1251');
-          // setting encoding will trigger async reload, so let's wait for that
-          // otherwise linter-phpcs will notice the file has changed and will abort linting
-          return new Promise((resolve) => {
-            editor.getBuffer().onDidReload(resolve);
-          });
-        }),
-      ),
-    );
-    it('reports no errors nor warnings', () => {
-      waitsForPromise(() =>
-        lint(editor).then(messages =>
-          expect(messages.length).toBe(0),
-        ),
-      );
+    beforeEach(async () => {
+      editor = await atom.workspace.open(shortCP1251Path);
+      const buffer = editor.getBuffer();
+      buffer.setEncoding('windows1251');
+      // setting encoding will trigger async reload, so let's wait for that
+      // otherwise linter-phpcs will notice the file has changed and will abort linting
+      return new Promise((resolve) => {
+        buffer.onDidReload(resolve);
+      });
+    });
+
+    it('reports no errors nor warnings', async () => {
+      const messages = await lint(editor);
+      expect(messages.length).toBe(0);
     });
   });
 
   describe('checks tabs.php and', () => {
     let editor = null;
-    beforeEach(() => {
+    beforeEach(async () => {
       atom.config.set('linter-phpcs.tabWidth', 4);
-      waitsForPromise(() =>
-        atom.workspace.open(tabsPath).then((openEditor) => { editor = openEditor; }),
-      );
+      editor = await atom.workspace.open(tabsPath);
     });
 
-    it('finds at least two messages', () =>
-      waitsForPromise(() =>
-        lint(editor).then(messages =>
-          expect(messages.length).toBeGreaterThan(1),
-        ),
-      ),
-    );
+    it('finds at least two messages', async () => {
+      const messages = await lint(editor);
+      expect(messages.length).toBeGreaterThan(1);
+    });
 
-    it('verifies the second message', () =>
-      waitsForPromise(() =>
-        lint(editor).then((messages) => {
-          expect(messages[1].severity).toBe('error');
-          expect(messages[1].description).not.toBeDefined();
-          expect(messages[1].excerpt).toBe('' +
-            '[Generic.PHP.LowerCaseConstant.Found]' +
-            ' TRUE, FALSE and NULL must be lowercase; ' +
-            'expected "true" but found "TRUE"');
-          expect(messages[1].location.file).toBe(tabsPath);
-          expect(messages[1].location.position).toEqual([[2, 6], [2, 10]]);
-        }),
-      ),
-    );
+    it('verifies the second message', async () => {
+      const messages = await lint(editor);
+      expect(messages[1].severity).toBe('error');
+      expect(messages[1].description).not.toBeDefined();
+      expect(messages[1].excerpt).toBe('' +
+        '[Generic.PHP.LowerCaseConstant.Found]' +
+        ' TRUE, FALSE and NULL must be lowercase; ' +
+        'expected "true" but found "TRUE"');
+      expect(messages[1].location.file).toBe(tabsPath);
+      expect(messages[1].location.position).toEqual([[2, 6], [2, 10]]);
+    });
   });
 
-  it('finds nothing wrong with an empty file', () =>
-    waitsForPromise(() =>
-      atom.workspace.open(emptyPath).then(editor =>
-        lint(editor).then(messages => expect(messages.length).toBe(0)),
-      ),
-    ),
-  );
+  it('finds nothing wrong with an empty file', async () => {
+    const editor = await atom.workspace.open(emptyPath);
+    const messages = await lint(editor);
+    expect(messages.length).toBe(0);
+  });
 
-  it('finds nothing wrong with a valid file', () =>
-    waitsForPromise(() =>
-      atom.workspace.open(goodPath).then(editor =>
-        lint(editor).then(messages => expect(messages.length).toBe(0)),
-      ),
-    ),
-  );
+  it('finds nothing wrong with a valid file', async () => {
+    const editor = await atom.workspace.open(goodPath);
+    const messages = await lint(editor);
+    expect(messages.length).toBe(0);
+  });
 
-  it('allows specifying sniffs to ignore', () => {
+  it('allows specifying sniffs to ignore', async () => {
     atom.config.set('linter-phpcs.excludedSniffs', ['Generic.PHP.LowerCaseConstant']);
-    waitsForPromise(() =>
-      atom.workspace.open(badPath).then(editor =>
-        lint(editor).then(messages =>
-          // Note that we have earlier checked that it should be 1 normally
-          expect(messages.length).toBe(0),
-        ),
-      ),
-    );
+    const editor = await atom.workspace.open(badPath);
+    const messages = await lint(editor);
+    // Note that we have earlier checked that it should be 1 normally
+    expect(messages.length).toBe(0);
   });
 });
