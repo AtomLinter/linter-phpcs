@@ -1,10 +1,13 @@
 'use babel';
 
 import * as path from 'path';
+import { satisfies } from 'semver';
 // eslint-disable-next-line no-unused-vars, import/no-extraneous-dependencies
 import { it, fit, wait, beforeEach, afterEach } from 'jasmine-fix';
+import linterPhpcs from '../lib/main';
 
-const lint = require('../lib/main.js').provideLinter().lint;
+const lint = linterPhpcs.provideLinter().lint;
+let phpcsVer;
 
 const goodPath = path.join(__dirname, 'files', 'good.php');
 const badPath = path.join(__dirname, 'files', 'bad.php');
@@ -13,11 +16,38 @@ const emptyPath = path.join(__dirname, 'files', 'empty.php');
 const longCP1251Path = path.join(__dirname, 'files', 'long.cp1251.php');
 const shortCP1251Path = path.join(__dirname, 'files', 'short.cp1251.php');
 
+function throwingLint(editor) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await lint(editor);
+    } catch (e) {
+      resolve(true);
+    }
+    reject(false);
+  });
+}
+
 describe('The phpcs provider for Linter', () => {
   beforeEach(async () => {
     atom.workspace.destroyActivePaneItem();
     await atom.packages.activatePackage('linter-phpcs');
     await atom.packages.activatePackage('language-php');
+    // Set the expected PHPCS version
+    const fakeVer = {
+      '1.*': '1.0.0',
+      '<2.6': '2.5.1',
+      '2.6.1': '2.6.1',
+      '2.*': '2.9.0',
+      '*': '3.0.0',
+    };
+    let phpcsSpecVer;
+    if (Object.prototype.hasOwnProperty.call(process.env, 'PHPCS_VER')) {
+      // This will be set in the CI environments
+      phpcsSpecVer = process.env.PHPCS_VER;
+    } else {
+      phpcsSpecVer = '*';
+    }
+    phpcsVer = fakeVer[phpcsSpecVer];
   });
 
   it('should be in the packages list', () =>
@@ -62,9 +92,14 @@ describe('The phpcs provider for Linter', () => {
     });
 
     it('reports line length warning', async () => {
-      const messages = await lint(editor);
-      expect(messages.length).toBe(1);
-      expect(messages[0].excerpt).toMatch(/Line exceeds/);
+      if (satisfies(phpcsVer, '<2')) {
+        // PHPCS v1 has a bug with cp1251 encoded files and gives invalid points
+        expect(await throwingLint(editor)).toBe(true);
+      } else {
+        const messages = await lint(editor);
+        expect(messages.length).toBe(1);
+        expect(messages[0].excerpt).toMatch(/Line exceeds/);
+      }
     });
   });
 
@@ -90,25 +125,69 @@ describe('The phpcs provider for Linter', () => {
   describe('checks tabs.php and', () => {
     let editor = null;
     beforeEach(async () => {
-      atom.config.set('linter-phpcs.tabWidth', 4);
+      // NOTE: The default PSR2 standard forces tabWidth to 4
+      atom.config.set('linter-phpcs.codeStandardOrConfigFile', 'PEAR');
       editor = await atom.workspace.open(tabsPath);
     });
 
-    it('finds at least two messages', async () => {
+    it('works with a the default tab-width', async () => {
       const messages = await lint(editor);
-      expect(messages.length).toBeGreaterThan(1);
-    });
-
-    it('verifies the second message', async () => {
-      const messages = await lint(editor);
-      expect(messages[1].severity).toBe('error');
-      expect(messages[1].description).not.toBeDefined();
-      expect(messages[1].excerpt).toBe('' +
+      expect(messages.length).toBe(4);
+      const tabMessage = messages[3];
+      expect(tabMessage.severity).toBe('error');
+      expect(tabMessage.description).not.toBeDefined();
+      expect(tabMessage.excerpt).toBe('' +
         '[Generic.PHP.LowerCaseConstant.Found]' +
         ' TRUE, FALSE and NULL must be lowercase; ' +
         'expected "true" but found "TRUE"');
-      expect(messages[1].location.file).toBe(tabsPath);
-      expect(messages[1].location.position).toEqual([[2, 6], [2, 10]]);
+      expect(tabMessage.location.file).toBe(tabsPath);
+      expect(tabMessage.location.position).toEqual([[2, 6], [2, 10]]);
+    });
+
+    it('works with a non-default tab-width', async () => {
+      atom.config.set('linter-phpcs.tabWidth', 12);
+      const messages = await lint(editor);
+      let tabMessage;
+      if (satisfies(phpcsVer, '<2')) {
+        expect(messages.length).toBe(2);
+        tabMessage = messages[1];
+      } else {
+        expect(messages.length).toBe(3);
+        tabMessage = messages[2];
+      }
+      expect(tabMessage.severity).toBe('error');
+      expect(tabMessage.description).not.toBeDefined();
+      expect(tabMessage.excerpt).toBe('' +
+        '[Generic.PHP.LowerCaseConstant.Found]' +
+        ' TRUE, FALSE and NULL must be lowercase; ' +
+        'expected "true" but found "TRUE"');
+      expect(tabMessage.location.file).toBe(tabsPath);
+      expect(tabMessage.location.position).toEqual([[2, 6], [2, 10]]);
+    });
+
+    it('handles forced standards properly', async () => {
+      atom.config.set('linter-phpcs.codeStandardOrConfigFile', 'PSR2');
+      atom.config.set('linter-phpcs.tabWidth', 12);
+      const messages = await lint(editor);
+      let tabMessage;
+      if (satisfies(phpcsVer, '<2')) {
+        expect(messages.length).toBe(1);
+        tabMessage = messages[0];
+      } else {
+        expect(messages.length).toBe(2);
+        tabMessage = messages[1];
+      }
+      expect(tabMessage.severity).toBe('error');
+      expect(tabMessage.description).not.toBeDefined();
+      expect(tabMessage.excerpt).toBe('' +
+        '[Generic.PHP.LowerCaseConstant.Found]' +
+        ' TRUE, FALSE and NULL must be lowercase; ' +
+        'expected "true" but found "TRUE"');
+      expect(tabMessage.location.file).toBe(tabsPath);
+      // Note that for broken versions (v2.0.0 and up) the tab width setting
+      // is ignored. We can't test the raw value returned here, but we can check
+      // that it is being handled correctly.
+      expect(tabMessage.location.position).toEqual([[2, 6], [2, 10]]);
     });
   });
 
@@ -125,10 +204,16 @@ describe('The phpcs provider for Linter', () => {
   });
 
   it('allows specifying sniffs to ignore', async () => {
-    atom.config.set('linter-phpcs.excludedSniffs', ['Generic.PHP.LowerCaseConstant']);
-    const editor = await atom.workspace.open(badPath);
-    const messages = await lint(editor);
-    // Note that we have earlier checked that it should be 1 normally
-    expect(messages.length).toBe(0);
+    if (satisfies(phpcsVer, '<2.6.2')) {
+      // Versions below v2.6.2 don't support excluding sniffs
+      expect(true).toBe(true);
+    } else {
+      const editor = await atom.workspace.open(badPath);
+      let messages = await lint(editor);
+      expect(messages.length).toBe(1);
+      atom.config.set('linter-phpcs.excludedSniffs', ['Generic.PHP.LowerCaseConstant']);
+      messages = await lint(editor);
+      expect(messages.length).toBe(0);
+    }
   });
 });
