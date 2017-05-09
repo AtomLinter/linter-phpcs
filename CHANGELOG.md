@@ -1,5 +1,19 @@
 # Change Log
 
+## [v1.6.3](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.3) (2017-05-09)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.2...v1.6.3)
+
+**Implemented enhancements:**
+
+- Improve startup time [\#261](https://github.com/AtomLinter/linter-phpcs/pull/261) ([Arcanemagus](https://github.com/Arcanemagus))
+- Test all versions and fix tab handling [\#260](https://github.com/AtomLinter/linter-phpcs/pull/260) ([Arcanemagus](https://github.com/Arcanemagus))
+- Utilize the semver library [\#259](https://github.com/AtomLinter/linter-phpcs/pull/259) ([Arcanemagus](https://github.com/Arcanemagus))
+- Asyncify the specs [\#258](https://github.com/AtomLinter/linter-phpcs/pull/258) ([Arcanemagus](https://github.com/Arcanemagus))
+
+**Fixed bugs:**
+
+- Test all versions and fix tab handling [\#260](https://github.com/AtomLinter/linter-phpcs/pull/260) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.6.2](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.2) (2017-05-05)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.1...v1.6.2)
 
