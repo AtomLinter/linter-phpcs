@@ -1,6 +1,7 @@
 ### Project specific config ###
 environment:
   COMPOSER_OAUTH_TOKEN: "cc4a091c096e7d3cfe053c3f669fb840be60ab98"
+  PHPCS_VER: "*"
 
   matrix:
   - ATOM_CHANNEL: stable
@@ -26,7 +27,7 @@ install:
   - php composer config -g github-oauth.github.com "%COMPOSER_OAUTH_TOKEN%"
   - SET PATH=%APPDATA%\Composer\vendor\bin;%PATH%
   # Install PHPCS
-  - php composer global require "squizlabs/php_codesniffer=*"
+  - php composer global require "squizlabs/php_codesniffer %PHPCS_VER%"
   - phpcs --version
 
 ### Generic setup follows ###

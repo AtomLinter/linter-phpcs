@@ -8,25 +8,66 @@ matrix:
   include:
     - os: linux
       language: php
+      php: 7.1
+      env:
+        - ATOM_CHANNEL=stable
+        - PHPCS_VER="1.*"
+
+    - os: linux
+      language: php
+      php: 7.1
+      env:
+        - ATOM_CHANNEL=stable
+        - PHPCS_VER="<2.6"
+
+    - os: linux
+      language: php
+      php: 7.1
+      env:
+        - ATOM_CHANNEL=stable
+        - PHPCS_VER="2.6.1"
+
+    - os: linux
+      language: php
+      php: 7.1
+      env:
+        - ATOM_CHANNEL=stable
+        - PHPCS_VER="2.*"
+
+    - os: linux
+      language: php
       php: 5.6
-      env: ATOM_CHANNEL=stable
-      install:
-        # Set the GitHub OAuth token for Composer
-        - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
-        - export PATH="$PATH:$HOME/.composer/vendor/bin"
-        # Install PHPCS
-        - composer global require "squizlabs/php_codesniffer=*"
+      env:
+        - ATOM_CHANNEL=stable
+        - PHPCS_VER="*"
 
     - os: linux
       language: php
       php: 7.0
-      env: ATOM_CHANNEL=beta
-      install:
-        # Set the GitHub OAuth token for Composer
-        - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
-        - export PATH="$PATH:$HOME/.composer/vendor/bin"
-        # Install PHPCS
-        - composer global require "squizlabs/php_codesniffer=*"
+      env:
+        - ATOM_CHANNEL=stable
+        - PHPCS_VER="*"
+
+    - os: linux
+      language: php
+      php: 7.1
+      env:
+        - ATOM_CHANNEL=stable
+        - PHPCS_VER="*"
+
+    - os: linux
+      language: php
+      php: 7.1
+      env:
+        - ATOM_CHANNEL=beta
+        - PHPCS_VER="*"
+
+install:
+  # Set the GitHub OAuth token for Composer
+  - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
+  - export PATH="$PATH:$HOME/.composer/vendor/bin"
+  # Install PHPCS
+  - composer global require "squizlabs/php_codesniffer $PHPCS_VER"
 
 before_script:
   - phpcs --version
