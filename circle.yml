@@ -9,7 +9,7 @@ dependencies:
     - chmod u+x build-package.sh
     - composer --version
     - composer config -g github-oauth.github.com cc4a091c096e7d3cfe053c3f669fb840be60ab98
-    - composer global require "squizlabs/php_codesniffer=*"
+    - composer global require "squizlabs/php_codesniffer $PHPCS_VER"
 
 machine:
   php:
@@ -17,3 +17,4 @@ machine:
   environment:
     COMPOSER_DISABLE_XDEBUG_WARN: 1
     COMPOSER_HOME: "/home/ubuntu/.composer"
+    PHPCS_VER: "*"
