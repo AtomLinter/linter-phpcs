@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.6.4](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.4) (2017-05-12)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.3...v1.6.4)
+
+**Implemented enhancements:**
+
+- Add more WordPress standards to override list [\#263](https://github.com/AtomLinter/linter-phpcs/pull/263) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.6.3](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.3) (2017-05-09)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.2...v1.6.3)
 
