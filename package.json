@@ -42,6 +42,18 @@
       "description": "Automatically search for any `phpcs.xml`, `phpcs.xml.dist`, `phpcs.ruleset.xml` or `ruleset.xml` file to use as configuration. Overrides custom standards defined above.",
       "order": 5
     },
+    "extensions": {
+      "type": "array",
+      "default": [
+        "php",
+        "inc"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "description": "A comma separated list of file extensions to check. The type of the file can be specified using: ext/type e.g., module/php,es/js",
+      "order": 6
+    },
     "ignorePatterns": {
       "type": "array",
       "default": [
@@ -52,31 +64,31 @@
         "type": "string"
       },
       "description": "Enter Glob patterns to ignore when running PHPCS.",
-      "order": 6
+      "order": 7
     },
     "displayErrorsOnly": {
       "type": "boolean",
       "default": false,
       "description": "Ignore warnings and display errors only.",
-      "order": 7
+      "order": 8
     },
     "warningSeverity": {
       "type": "integer",
       "default": 1,
       "description": "Set the warning severity level. Available when \"Display Errors Only\" is not checked.",
-      "order": 8
+      "order": 9
     },
     "tabWidth": {
       "type": "integer",
       "default": 1,
       "description": "Set the number of spaces that tab characters represent to PHPCS.",
-      "order": 9
+      "order": 10
     },
     "showSource": {
       "type": "boolean",
       "default": true,
       "description": "Show source in message.",
-      "order": 10
+      "order": 11
     },
     "excludedSniffs": {
       "type": "array",
@@ -85,13 +97,13 @@
         "type": "string"
       },
       "description": "Command separated list of Sniffs to ignore. Ignored below PHPCS v2.6.2.",
-      "order": 11
+      "order": 12
     },
     "otherLanguages": {
       "type": "object",
       "collapsed": true,
       "description": "If properly configured, PHPCS can run external tools to lint languages other than PHP. Only enable the below options if you have set this up.",
-      "order": 12,
+      "order": 13,
       "properties": {
         "useCSSTools": {
           "title": "Enable CSS Tools",
