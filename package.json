@@ -51,7 +51,7 @@
       "items": {
         "type": "string"
       },
-      "description": "A comma separated list of file extensions to check. The type of the file can be specified using: ext/type e.g., module/php,es/js",
+      "description": "A comma separated list of file extensions to check.",
       "order": 6
     },
     "ignorePatterns": {
