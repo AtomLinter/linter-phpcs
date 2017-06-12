@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.6.5](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.5) (2017-06-12)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.4...v1.6.5)
+
+**Implemented enhancements:**
+
+- Add text.html.php to default scopes [\#274](https://github.com/AtomLinter/linter-phpcs/pull/274) ([Arcanemagus](https://github.com/Arcanemagus))
+
+**Fixed bugs:**
+
+- Move to the Trusty image on Travis CI [\#275](https://github.com/AtomLinter/linter-phpcs/pull/275) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.6.4](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.4) (2017-05-12)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.3...v1.6.4)
 
@@ -35,7 +46,7 @@
 
 - Warning about killed process should be silenced [\#245](https://github.com/AtomLinter/linter-phpcs/issues/245)
 - Uniquely spawn PHPCS processes [\#255](https://github.com/AtomLinter/linter-phpcs/pull/255) ([Arcanemagus](https://github.com/Arcanemagus))
-- Update atom-linter to v10.0.0 🚀 [\#250](https://github.com/AtomLinter/linter-phpcs/pull/250) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
+- Update atom-linter to v10.0.0 🚀 [\#250](https://github.com/AtomLinter/linter-phpcs/pull/250) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
 
 **Fixed bugs:**
 
@@ -65,7 +76,7 @@
 
 **Implemented enhancements:**
 
-- Update atom-linter to the latest version 🚀 [\#240](https://github.com/AtomLinter/linter-phpcs/pull/240) ([greenkeeper[bot]](https://github.com/integration/greenkeeper))
+- Update atom-linter to the latest version 🚀 [\#240](https://github.com/AtomLinter/linter-phpcs/pull/240) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
 
 **Fixed bugs:**
 
