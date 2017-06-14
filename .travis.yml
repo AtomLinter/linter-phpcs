@@ -36,6 +36,13 @@ matrix:
 
     - os: linux
       language: php
+      php: 7.1
+      env:
+        - ATOM_CHANNEL=stable
+        - PHPCS_VER="3.0.0"
+
+    - os: linux
+      language: php
       php: 5.6
       env:
         - ATOM_CHANNEL=stable
