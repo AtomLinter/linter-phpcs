@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.6.6](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.6) (2017-06-14)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.5...v1.6.6)
+
+**Implemented enhancements:**
+
+- Handle tabWidth setting properly in PHPCS v3.0.1 [\#276](https://github.com/AtomLinter/linter-phpcs/pull/276) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.6.5](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.5) (2017-06-12)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.4...v1.6.5)
 
