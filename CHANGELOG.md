@@ -1,5 +1,14 @@
 # Change Log
 
+## [v1.6.7](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.7) (2017-06-21)
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.6...v1.6.7)
+
+**Fixed bugs:**
+
+- Fix Travis CI beta builds [\#279](https://github.com/AtomLinter/linter-phpcs/pull/279) ([Arcanemagus](https://github.com/Arcanemagus))
+- Set minimum value for tabWidth setting [\#278](https://github.com/AtomLinter/linter-phpcs/pull/278) ([Arcanemagus](https://github.com/Arcanemagus))
+- Fix handling of forced standards with default tabWidth [\#277](https://github.com/AtomLinter/linter-phpcs/pull/277) ([Arcanemagus](https://github.com/Arcanemagus))
+
 ## [v1.6.6](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.6) (2017-06-14)
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.5...v1.6.6)
 
