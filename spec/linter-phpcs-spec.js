@@ -165,29 +165,40 @@ describe('The phpcs provider for Linter', () => {
       expect(tabMessage.location.position).toEqual([[2, 6], [2, 10]]);
     });
 
-    it('handles forced standards properly', async () => {
-      atom.config.set('linter-phpcs.codeStandardOrConfigFile', 'PSR2');
-      atom.config.set('linter-phpcs.tabWidth', 12);
-      const messages = await lint(editor);
-      let tabMessage;
-      if (satisfies(phpcsVer, '<2')) {
-        expect(messages.length).toBe(1);
-        tabMessage = messages[0];
-      } else {
-        expect(messages.length).toBe(2);
-        tabMessage = messages[1];
-      }
-      expect(tabMessage.severity).toBe('error');
-      expect(tabMessage.description).not.toBeDefined();
-      expect(tabMessage.excerpt).toBe('' +
+    describe('handles forced standards properly', () => {
+      async function checkForcedStandard() {
+        const messages = await lint(editor);
+        let tabMessage;
+        if (satisfies(phpcsVer, '<2')) {
+          expect(messages.length).toBe(1);
+          tabMessage = messages[0];
+        } else {
+          expect(messages.length).toBe(2);
+          tabMessage = messages[1];
+        }
+        expect(tabMessage.severity).toBe('error');
+        expect(tabMessage.description).not.toBeDefined();
+        expect(tabMessage.excerpt).toBe('' +
         '[Generic.PHP.LowerCaseConstant.Found]' +
         ' TRUE, FALSE and NULL must be lowercase; ' +
         'expected "true" but found "TRUE"');
-      expect(tabMessage.location.file).toBe(tabsPath);
-      // Note that for broken versions (v2.0.0 and up) the tab width setting
-      // is ignored. We can't test the raw value returned here, but we can check
-      // that it is being handled correctly.
-      expect(tabMessage.location.position).toEqual([[2, 6], [2, 10]]);
+        expect(tabMessage.location.file).toBe(tabsPath);
+        // Note that for broken versions (v2.0.0 through v3.0.0) the tab width
+        // setting is ignored. We can't test the raw value returned here, but we
+        // can check that it is being handled correctly.
+        expect(tabMessage.location.position).toEqual([[2, 6], [2, 10]]);
+      }
+
+      it('works with the default tab width', async () => {
+        atom.config.set('linter-phpcs.codeStandardOrConfigFile', 'PSR2');
+        await checkForcedStandard();
+      });
+
+      it('works with a forced tab width', async () => {
+        atom.config.set('linter-phpcs.codeStandardOrConfigFile', 'PSR2');
+        atom.config.set('linter-phpcs.tabWidth', 12);
+        await checkForcedStandard();
+      });
     });
   });
 
