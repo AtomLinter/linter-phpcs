@@ -69,6 +69,7 @@
     "tabWidth": {
       "type": "integer",
       "default": 1,
+      "minimum": 1,
       "description": "Set the number of spaces that tab characters represent to PHPCS.",
       "order": 9
     },
