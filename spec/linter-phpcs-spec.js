@@ -6,7 +6,7 @@ import { satisfies } from 'semver';
 import { it, fit, wait, beforeEach, afterEach } from 'jasmine-fix';
 import linterPhpcs from '../lib/main';
 
-const lint = linterPhpcs.provideLinter().lint;
+const { lint } = linterPhpcs.provideLinter();
 let phpcsVer;
 
 const goodPath = path.join(__dirname, 'files', 'good.php');
@@ -16,15 +16,13 @@ const emptyPath = path.join(__dirname, 'files', 'empty.php');
 const longCP1251Path = path.join(__dirname, 'files', 'long.cp1251.php');
 const shortCP1251Path = path.join(__dirname, 'files', 'short.cp1251.php');
 
-function throwingLint(editor) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      await lint(editor);
-    } catch (e) {
-      resolve(true);
-    }
-    reject(false);
-  });
+async function throwingLint(editor) {
+  try {
+    await lint(editor);
+  } catch (e) {
+    return true;
+  }
+  return false;
 }
 
 describe('The phpcs provider for Linter', () => {
@@ -51,12 +49,10 @@ describe('The phpcs provider for Linter', () => {
   });
 
   it('should be in the packages list', () =>
-    expect(atom.packages.isPackageLoaded('linter-phpcs')).toBe(true),
-  );
+    expect(atom.packages.isPackageLoaded('linter-phpcs')).toBe(true));
 
   it('should be an active package', () =>
-    expect(atom.packages.isPackageActive('linter-phpcs')).toBe(true),
-  );
+    expect(atom.packages.isPackageActive('linter-phpcs')).toBe(true));
 
   describe('checks bad.php and', () => {
     let editor = null;
@@ -158,10 +154,10 @@ describe('The phpcs provider for Linter', () => {
       let tabMessage;
       if (satisfies(phpcsVer, '<2')) {
         expect(messages.length).toBe(2);
-        tabMessage = messages[1];
+        [, tabMessage] = messages;
       } else {
         expect(messages.length).toBe(3);
-        tabMessage = messages[2];
+        [, , tabMessage] = messages;
       }
       checkTabMessage(tabMessage);
     });
@@ -173,10 +169,10 @@ describe('The phpcs provider for Linter', () => {
         let tabMessage;
         if (satisfies(phpcsVer, '<2')) {
           expect(messages.length).toBe(3);
-          tabMessage = messages[2];
+          [, , tabMessage] = messages;
         } else {
           expect(messages.length).toBe(2);
-          tabMessage = messages[1];
+          [, tabMessage] = messages;
         }
         checkTabMessage(tabMessage);
       });
@@ -188,10 +184,10 @@ describe('The phpcs provider for Linter', () => {
         let tabMessage;
         if (satisfies(phpcsVer, '<2')) {
           expect(messages.length).toBe(1);
-          tabMessage = messages[0];
+          [tabMessage] = messages;
         } else {
           expect(messages.length).toBe(2);
-          tabMessage = messages[1];
+          [, tabMessage] = messages;
         }
         checkTabMessage(tabMessage);
       });
