@@ -1,6 +1,23 @@
 # Change Log
 
+## [v1.6.8](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.8) (2017-10-03)
+
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.7...v1.6.8)
+
+**Implemented enhancements:**
+
+- Allow . to precede config file names [\#292](https://github.com/AtomLinter/linter-phpcs/issues/292)
+- Support . in front of config files [\#295](https://github.com/AtomLinter/linter-phpcs/pull/295) ([Arcanemagus](https://github.com/Arcanemagus))
+- Update eslint-config-airbnb-base to version 12.0.0 🚀 [\#288](https://github.com/AtomLinter/linter-phpcs/pull/288) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
+- Update eslint to version 4.3.0 🚀 [\#281](https://github.com/AtomLinter/linter-phpcs/pull/281) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
+
+**Fixed bugs:**
+
+- Doesn't show any error, warning or info [\#293](https://github.com/AtomLinter/linter-phpcs/issues/293)
+- Resolve symlinks for PHPCS output [\#294](https://github.com/AtomLinter/linter-phpcs/pull/294) ([EliaBR](https://github.com/EliaBR))
+
 ## [v1.6.7](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.7) (2017-06-21)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.6...v1.6.7)
 
 **Fixed bugs:**
@@ -10,6 +27,7 @@
 - Fix handling of forced standards with default tabWidth [\#277](https://github.com/AtomLinter/linter-phpcs/pull/277) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.6.6](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.6) (2017-06-14)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.5...v1.6.6)
 
 **Implemented enhancements:**
@@ -17,6 +35,7 @@
 - Handle tabWidth setting properly in PHPCS v3.0.1 [\#276](https://github.com/AtomLinter/linter-phpcs/pull/276) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.6.5](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.5) (2017-06-12)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.4...v1.6.5)
 
 **Implemented enhancements:**
@@ -28,6 +47,7 @@
 - Move to the Trusty image on Travis CI [\#275](https://github.com/AtomLinter/linter-phpcs/pull/275) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.6.4](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.4) (2017-05-12)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.3...v1.6.4)
 
 **Implemented enhancements:**
@@ -35,6 +55,7 @@
 - Add more WordPress standards to override list [\#263](https://github.com/AtomLinter/linter-phpcs/pull/263) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.6.3](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.3) (2017-05-09)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.2...v1.6.3)
 
 **Implemented enhancements:**
@@ -49,6 +70,7 @@
 - Test all versions and fix tab handling [\#260](https://github.com/AtomLinter/linter-phpcs/pull/260) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.6.2](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.2) (2017-05-05)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.1...v1.6.2)
 
 **Fixed bugs:**
@@ -56,6 +78,7 @@
 - Ignore the exit code of the version check [\#257](https://github.com/AtomLinter/linter-phpcs/pull/257) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.6.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.1) (2017-05-04)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.0...v1.6.1)
 
 **Implemented enhancements:**
@@ -70,6 +93,7 @@
 - Remove unnecessary quotes in --stdin-path option [\#253](https://github.com/AtomLinter/linter-phpcs/pull/253) ([synthetiv](https://github.com/synthetiv))
 
 ## [v1.6.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.6.0) (2017-03-30)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.10...v1.6.0)
 
 **Implemented enhancements:**
@@ -77,6 +101,7 @@
 - Upgraded to Linter v2 and updated the code to the new API. [\#246](https://github.com/AtomLinter/linter-phpcs/pull/246) ([Fernando-Marquardt](https://github.com/Fernando-Marquardt))
 
 ## [v1.5.10](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.10) (2017-03-02)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.9...v1.5.10)
 
 **Implemented enhancements:**
@@ -88,17 +113,19 @@
 - Update atom-linter to v9.0.1 [\#242](https://github.com/AtomLinter/linter-phpcs/pull/242) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.5.9](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.9) (2017-02-15)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.8...v1.5.9)
 
 **Implemented enhancements:**
 
-- Update atom-linter to the latest version 🚀 [\#240](https://github.com/AtomLinter/linter-phpcs/pull/240) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
+- Update atom-linter to version 9.0.0 🚀 [\#240](https://github.com/AtomLinter/linter-phpcs/pull/240) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
 
 **Fixed bugs:**
 
 - Encoding handling [\#235](https://github.com/AtomLinter/linter-phpcs/issues/235)
 
 ## [v1.5.8](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.8) (2017-01-30)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.7...v1.5.8)
 
 **Fixed bugs:**
@@ -110,6 +137,7 @@
 - conversion from `utf8' to `UCS-4LE' is not allowed [\#232](https://github.com/AtomLinter/linter-phpcs/issues/232)
 
 ## [v1.5.7](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.7) (2017-01-25)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.6...v1.5.7)
 
 **Implemented enhancements:**
@@ -123,6 +151,7 @@
 - Fix composer PATH and disable XDebug warning [\#231](https://github.com/AtomLinter/linter-phpcs/pull/231) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.5.6](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.6) (2017-01-10)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.5...v1.5.6)
 
 **Fixed bugs:**
@@ -131,6 +160,7 @@
 - Added --encoding option [\#228](https://github.com/AtomLinter/linter-phpcs/pull/228) ([weirdan](https://github.com/weirdan))
 
 ## [v1.5.5](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.5) (2016-12-22)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.4...v1.5.5)
 
 **Fixed bugs:**
@@ -138,6 +168,7 @@
 - Use '-q' when phpcs supports it [\#225](https://github.com/AtomLinter/linter-phpcs/pull/225) ([weirdan](https://github.com/weirdan))
 
 ## [v1.5.4](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.4) (2016-12-13)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.3...v1.5.4)
 
 **Implemented enhancements:**
@@ -153,6 +184,7 @@
 - Fix PHP on AppVeyor [\#219](https://github.com/AtomLinter/linter-phpcs/pull/219) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.5.3](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.3) (2016-10-14)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.2...v1.5.3)
 
 **Fixed bugs:**
@@ -160,9 +192,11 @@
 - Allow Folder or Fullpath exclusions using Ignore Patterns [\#210](https://github.com/AtomLinter/linter-phpcs/pull/210) ([frytyler](https://github.com/frytyler))
 
 ## [v1.5.2](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.2) (2016-10-13)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.1...v1.5.2)
 
 ## [v1.5.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.1) (2016-10-12)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.5.0...v1.5.1)
 
 **Implemented enhancements:**
@@ -175,6 +209,7 @@
 - Default tabs to 4 characters [\#208](https://github.com/AtomLinter/linter-phpcs/pull/208) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.5.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.5.0) (2016-10-10)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.4.1...v1.5.0)
 
 **Implemented enhancements:**
@@ -198,6 +233,7 @@
 - Update CI configuration [\#199](https://github.com/AtomLinter/linter-phpcs/pull/199) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.4.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.4.1) (2016-09-14)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.4.0...v1.4.1)
 
 **Implemented enhancements:**
@@ -212,6 +248,7 @@
 - Fix proposal for \#154 [\#159](https://github.com/AtomLinter/linter-phpcs/pull/159) ([henriquebremenkanp](https://github.com/henriquebremenkanp))
 
 ## [v1.4.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.4.0) (2016-05-06)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.3.2...v1.4.0)
 
 **Implemented enhancements:**
@@ -232,6 +269,7 @@
 - Update README URLs based on HTTP redirects [\#128](https://github.com/AtomLinter/linter-phpcs/pull/128) ([ReadmeCritic](https://github.com/ReadmeCritic))
 
 ## [v1.3.2](https://github.com/AtomLinter/linter-phpcs/tree/v1.3.2) (2016-04-05)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.3.1...v1.3.2)
 
 **Implemented enhancements:**
@@ -242,6 +280,7 @@
 - simplified some code [\#119](https://github.com/AtomLinter/linter-phpcs/pull/119) ([pfefferle](https://github.com/pfefferle))
 
 ## [v1.3.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.3.1) (2016-03-01)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.3.0...v1.3.1)
 
 **Implemented enhancements:**
@@ -273,6 +312,7 @@
 - Fix forcing the line endings to LF [\#79](https://github.com/AtomLinter/linter-phpcs/pull/79) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.3.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.3.0) (2015-11-02)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.2.2...v1.3.0)
 
 **Implemented enhancements:**
@@ -285,6 +325,7 @@
 - When Code Standard is set to PSR2, PHPCS is throwing comment / documentation errors. [\#73](https://github.com/AtomLinter/linter-phpcs/issues/73)
 
 ## [v1.2.2](https://github.com/AtomLinter/linter-phpcs/tree/v1.2.2) (2015-10-13)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.2.1...v1.2.2)
 
 **Implemented enhancements:**
@@ -296,6 +337,7 @@
 - fixes \#73 [\#74](https://github.com/AtomLinter/linter-phpcs/pull/74) ([pfefferle](https://github.com/pfefferle))
 
 ## [v1.2.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.2.1) (2015-10-13)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.2.0...v1.2.1)
 
 **Implemented enhancements:**
@@ -308,6 +350,7 @@
 - Ignore option doesn't work. [\#66](https://github.com/AtomLinter/linter-phpcs/issues/66)
 
 ## [v1.2.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.2.0) (2015-10-12)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.1.4...v1.2.0)
 
 **Implemented enhancements:**
@@ -319,6 +362,7 @@
 - Add Travis-CI [\#68](https://github.com/AtomLinter/linter-phpcs/pull/68) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.1.4](https://github.com/AtomLinter/linter-phpcs/tree/v1.1.4) (2015-10-01)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.1.3...v1.1.4)
 
 **Implemented enhancements:**
@@ -327,6 +371,7 @@
 - Add linter name [\#64](https://github.com/AtomLinter/linter-phpcs/pull/64) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.1.3](https://github.com/AtomLinter/linter-phpcs/tree/v1.1.3) (2015-09-29)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.1.2...v1.1.3)
 
 **Fixed bugs:**
@@ -335,6 +380,7 @@
 - Properly support stdin filenames [\#63](https://github.com/AtomLinter/linter-phpcs/pull/63) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.1.2](https://github.com/AtomLinter/linter-phpcs/tree/v1.1.2) (2015-09-25)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.1.1...v1.1.2)
 
 **Implemented enhancements:**
@@ -343,6 +389,7 @@
 - Auto install linter [\#62](https://github.com/AtomLinter/linter-phpcs/pull/62) ([Arcanemagus](https://github.com/Arcanemagus))
 
 ## [v1.1.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.1.1) (2015-09-23)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.1.0...v1.1.1)
 
 **Implemented enhancements:**
@@ -354,6 +401,7 @@
 - Filter out filename errors due to a bug in PHPCS [\#61](https://github.com/AtomLinter/linter-phpcs/pull/61) ([skyrpex](https://github.com/skyrpex))
 
 ## [v1.1.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.1.0) (2015-09-18)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.0.7...v1.1.0)
 
 **Implemented enhancements:**
@@ -362,6 +410,7 @@
 - Lints on the fly [\#58](https://github.com/AtomLinter/linter-phpcs/pull/58) ([skyrpex](https://github.com/skyrpex))
 
 ## [v1.0.7](https://github.com/AtomLinter/linter-phpcs/tree/v1.0.7) (2015-09-08)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.0.6...v1.0.7)
 
 **Implemented enhancements:**
@@ -370,6 +419,7 @@
 - add support for phpcs.ruleset.xml files [\#50](https://github.com/AtomLinter/linter-phpcs/pull/50) ([pfefferle](https://github.com/pfefferle))
 
 ## [v1.0.6](https://github.com/AtomLinter/linter-phpcs/tree/v1.0.6) (2015-07-23)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.0.5...v1.0.6)
 
 **Implemented enhancements:**
@@ -383,9 +433,11 @@
 - Error parsing PHPCS response [\#38](https://github.com/AtomLinter/linter-phpcs/issues/38)
 
 ## [v1.0.5](https://github.com/AtomLinter/linter-phpcs/tree/v1.0.5) (2015-07-13)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.0.4...v1.0.5)
 
 ## [v1.0.4](https://github.com/AtomLinter/linter-phpcs/tree/v1.0.4) (2015-07-10)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.0.3...v1.0.4)
 
 **Fixed bugs:**
@@ -394,6 +446,7 @@
 - spawn phpcs ENOENT [\#34](https://github.com/AtomLinter/linter-phpcs/issues/34)
 
 ## [v1.0.3](https://github.com/AtomLinter/linter-phpcs/tree/v1.0.3) (2015-07-09)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.0.2...v1.0.3)
 
 **Implemented enhancements:**
@@ -401,6 +454,7 @@
 - Config file \(phpcs.xml\) is never used [\#31](https://github.com/AtomLinter/linter-phpcs/issues/31)
 
 ## [v1.0.2](https://github.com/AtomLinter/linter-phpcs/tree/v1.0.2) (2015-07-08)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.0.1...v1.0.2)
 
 **Implemented enhancements:**
@@ -408,9 +462,11 @@
 - Would it be possible to add a command to run phpcbf on current file? [\#15](https://github.com/AtomLinter/linter-phpcs/issues/15)
 
 ## [v1.0.1](https://github.com/AtomLinter/linter-phpcs/tree/v1.0.1) (2015-07-07)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v1.0.0...v1.0.1)
 
 ## [v1.0.0](https://github.com/AtomLinter/linter-phpcs/tree/v1.0.0) (2015-07-07)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.15...v1.0.0)
 
 **Implemented enhancements:**
@@ -425,6 +481,7 @@
 - Upcoming linter changes [\#25](https://github.com/AtomLinter/linter-phpcs/issues/25)
 
 ## [v0.0.15](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.15) (2015-05-21)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.14...v0.0.15)
 
 **Fixed bugs:**
@@ -436,6 +493,7 @@
 - fix deprecation warning; fixes \#17, 18, 20 [\#22](https://github.com/AtomLinter/linter-phpcs/pull/22) ([stormwarning](https://github.com/stormwarning))
 
 ## [v0.0.14](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.14) (2015-04-15)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.12...v0.0.14)
 
 **Implemented enhancements:**
@@ -446,6 +504,7 @@
 - add per-project settings check/useage [\#13](https://github.com/AtomLinter/linter-phpcs/pull/13) ([stormwarning](https://github.com/stormwarning))
 
 ## [v0.0.12](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.12) (2014-09-24)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.11...v0.0.12)
 
 **Implemented enhancements:**
@@ -453,12 +512,15 @@
 - Adding Ignore warnings & Exclude Files [\#9](https://github.com/AtomLinter/linter-phpcs/pull/9) ([Xety](https://github.com/Xety))
 
 ## [v0.0.11](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.11) (2014-08-13)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.10...v0.0.11)
 
 ## [v0.0.10](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.10) (2014-07-07)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.9...v0.0.10)
 
 ## [v0.0.9](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.9) (2014-07-01)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.8...v0.0.9)
 
 **Fixed bugs:**
@@ -467,27 +529,37 @@
 - Fixed typo [\#1](https://github.com/AtomLinter/linter-phpcs/pull/1) ([pborreli](https://github.com/pborreli))
 
 ## [v0.0.8](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.8) (2014-05-10)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.7...v0.0.8)
 
 ## [v0.0.7](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.7) (2014-05-10)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.6...v0.0.7)
 
 ## [v0.0.6](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.6) (2014-05-10)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.5...v0.0.6)
 
 ## [v0.0.5](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.5) (2014-05-08)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.4...v0.0.5)
 
 ## [v0.0.4](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.4) (2014-05-08)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.3...v0.0.4)
 
 ## [v0.0.3](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.3) (2014-05-03)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.2...v0.0.3)
 
 ## [v0.0.2](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.2) (2014-04-18)
+
 [Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/v0.0.1...v0.0.2)
 
 ## [v0.0.1](https://github.com/AtomLinter/linter-phpcs/tree/v0.0.1) (2014-04-14)
+
+[Full Changelog](https://github.com/AtomLinter/linter-phpcs/compare/7c74597e3ffcbe467b5ba7030f7b83d0d90ca8e9...v0.0.1)
+
 
 
 \* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
