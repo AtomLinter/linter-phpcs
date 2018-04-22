@@ -49,9 +49,8 @@ jobs:
       # Since the deploy needs APM, currently the simplest method is to run
       # build-package.sh, which requires the specs to pass, so this must run in
       # the main language instead of Node.js.
-      after_script:
+      before_script:
         - export PATH=${PATH}:${HOME}/atom/usr/bin/
-      before_script: skip
       deploy:
         provider: script
         skip_cleanup: true
