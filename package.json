@@ -3,7 +3,10 @@
   "version": "1.6.8",
   "main": "./lib/main.js",
   "description": "Lint PHP on the fly, using phpcs",
-  "repository": "https://github.com/AtomLinter/linter-phpcs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AtomLinter/linter-phpcs.git"
+  },
   "private": true,
   "license": "MIT",
   "engines": {
