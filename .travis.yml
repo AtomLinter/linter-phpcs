@@ -1,73 +1,62 @@
 ### Project specific config ###
+os: linux
+language: php
 env:
   global:
     - COMPOSER_DISABLE_XDEBUG_WARN="1"
     - COMPOSER_OAUTH_TOKEN="cc4a091c096e7d3cfe053c3f669fb840be60ab98"
+    - ATOM_CHANNEL=stable
+    - PHPCS_VER="*"
+php: 7.2
 
-matrix:
+jobs:
   include:
-    - os: linux
-      language: php
-      php: 7.1
-      env:
-        - ATOM_CHANNEL=stable
-        - PHPCS_VER="1.*"
+    # Test PHP versions
+    - stage: test
+      php: '5.6'
+    - stage: test
+      php: '7.0'
+    - stage: test
+      php: '7.1'
+    - stage: test
+      php: '7.2'
+    - stage: test
+      env: ATOM_CHANNEL=beta
 
-    - os: linux
-      language: php
-      php: 7.1
-      env:
-        - ATOM_CHANNEL=stable
-        - PHPCS_VER="<2.6"
+    # Test PHPCS versions
+    - stage: test
+      env: PHPCS_VER="1.*"
+    - stage: test
+      env: PHPCS_VER="<2.6"
+    - stage: test
+      env: PHPCS_VER="2.6.1"
+    - stage: test
+      env: PHPCS_VER="2.*"
+    - stage: test
+      env: PHPCS_VER="3.0.0"
 
-    - os: linux
-      language: php
-      php: 7.1
-      env:
-        - ATOM_CHANNEL=stable
-        - PHPCS_VER="2.6.1"
+    # Check the commit messages
+    - stage: test
+      language: node_js
+      node_js: lts/*
+      before_script: skip
+      install:
+        - npm install
+      script:
+        - commitlint-travis
 
-    - os: linux
-      language: php
-      php: 7.1
-      env:
-        - ATOM_CHANNEL=stable
-        - PHPCS_VER="2.*"
-
-    - os: linux
-      language: php
-      php: 7.1
-      env:
-        - ATOM_CHANNEL=stable
-        - PHPCS_VER="3.0.0"
-
-    - os: linux
-      language: php
-      php: 5.6
-      env:
-        - ATOM_CHANNEL=stable
-        - PHPCS_VER="*"
-
-    - os: linux
-      language: php
-      php: 7.0
-      env:
-        - ATOM_CHANNEL=stable
-        - PHPCS_VER="*"
-
-    - os: linux
-      language: php
-      php: 7.1
-      env:
-        - ATOM_CHANNEL=stable
-        - PHPCS_VER="*"
-
-    - os: linux
-      language: php
-      php: 7.1
-      env:
-        - ATOM_CHANNEL=beta
-        - PHPCS_VER="*"
+    - stage: release
+      # Since the deploy needs APM, currently the simplest method is to run
+      # build-package.sh, which requires the specs to pass, so this must run in
+      # the main language instead of Node.js.
+      after_script:
+        - export PATH=${PATH}:${HOME}/atom/usr/bin/
+      before_script: skip
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - npx semantic-release
 
 install:
   # Set the GitHub OAuth token for Composer
@@ -83,7 +72,7 @@ before_script:
 script:
   - curl -s -O https://raw.githubusercontent.com/atom/ci/master/build-package.sh
   - chmod u+x build-package.sh
-  - ./build-package.sh
+  - "./build-package.sh"
 
 notifications:
   email:
@@ -93,6 +82,7 @@ notifications:
 branches:
   only:
     - master
+    - "/^greenkeeper/.*$/"
 
 git:
   depth: 10
@@ -103,22 +93,13 @@ dist: "trusty"
 
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
-    - g++-6
-    - fakeroot
-    - git
-    - libsecret-1-dev
+      - build-essential
+      - git
+      - libgnome-keyring-dev
+      - fakeroot
 
-node_js: lts/*
-
-after_success:
-  # Add apm to the PATH
-  - export PATH=${PATH}:${HOME}/atom/usr/bin/
-
-deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-    - npx semantic-release
+stages:
+  - test
+  - name: release
+    if: (NOT type = pull_request) AND branch = master
