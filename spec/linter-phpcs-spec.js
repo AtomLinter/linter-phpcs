@@ -2,8 +2,10 @@
 
 import * as path from 'path';
 import { satisfies } from 'semver';
-// eslint-disable-next-line no-unused-vars, import/no-extraneous-dependencies
-import { it, fit, wait, beforeEach, afterEach } from 'jasmine-fix';
+import {
+  // eslint-disable-next-line no-unused-vars
+  it, fit, wait, beforeEach, afterEach,
+} from 'jasmine-fix';
 import linterPhpcs from '../lib/main';
 
 const { lint } = linterPhpcs.provideLinter();
@@ -48,11 +50,13 @@ describe('The phpcs provider for Linter', () => {
     phpcsVer = fakeVer[phpcsSpecVer];
   });
 
-  it('should be in the packages list', () =>
-    expect(atom.packages.isPackageLoaded('linter-phpcs')).toBe(true));
+  it('should be in the packages list', () => {
+    expect(atom.packages.isPackageLoaded('linter-phpcs')).toBe(true);
+  });
 
-  it('should be an active package', () =>
-    expect(atom.packages.isPackageActive('linter-phpcs')).toBe(true));
+  it('should be an active package', () => {
+    expect(atom.packages.isPackageActive('linter-phpcs')).toBe(true);
+  });
 
   describe('checks bad.php and', () => {
     let editor = null;
@@ -65,10 +69,10 @@ describe('The phpcs provider for Linter', () => {
       expect(messages.length).toBe(1);
       expect(messages[0].severity).toBe('error');
       expect(messages[0].description).not.toBeDefined();
-      expect(messages[0].excerpt).toBe('' +
-        '[Generic.PHP.LowerCaseConstant.Found]' +
-        ' TRUE, FALSE and NULL must be lowercase; ' +
-        'expected "true" but found "TRUE"');
+      expect(messages[0].excerpt).toBe(''
+        + '[Generic.PHP.LowerCaseConstant.Found]'
+        + ' TRUE, FALSE and NULL must be lowercase; '
+        + 'expected "true" but found "TRUE"');
       expect(messages[0].location.file).toBe(badPath);
       expect(messages[0].location.position).toEqual([[1, 5], [1, 9]]);
     });
@@ -124,10 +128,10 @@ describe('The phpcs provider for Linter', () => {
     function checkTabMessage(tabMessage) {
       expect(tabMessage.severity).toBe('error');
       expect(tabMessage.description).not.toBeDefined();
-      expect(tabMessage.excerpt).toBe('' +
-      '[Generic.PHP.LowerCaseConstant.Found]' +
-      ' TRUE, FALSE and NULL must be lowercase; ' +
-      'expected "true" but found "TRUE"');
+      expect(tabMessage.excerpt).toBe(''
+        + '[Generic.PHP.LowerCaseConstant.Found]'
+        + ' TRUE, FALSE and NULL must be lowercase; '
+        + 'expected "true" but found "TRUE"');
       expect(tabMessage.location.file).toBe(tabsPath);
       // Note that for broken versions (v2.0.0 through v3.0.0) the tab width
       // setting is ignored. We can't test the raw value returned here, but we
