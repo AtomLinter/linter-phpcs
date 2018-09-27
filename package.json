@@ -123,7 +123,7 @@
     "@commitlint/config-conventional": "7.1.2",
     "@commitlint/travis-cli": "7.1.2",
     "@semantic-release/apm-config": "5.0.2",
-    "husky": "0.14.3",
+    "husky": "1.0.1",
     "semantic-release": "15.9.16",
     "eslint": "4.19.1",
     "eslint-config-airbnb-base": "12.1.0",
@@ -134,7 +134,6 @@
     "linter:2.0.0"
   ],
   "scripts": {
-    "commitmsg": "commitlint -e $GIT_PARAMS",
     "lint": "eslint .",
     "test": "apm test"
   },
@@ -186,5 +185,10 @@
         "groupName": "ESLint packages"
       }
     ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
