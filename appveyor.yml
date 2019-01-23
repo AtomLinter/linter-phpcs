@@ -2,10 +2,7 @@
 environment:
   COMPOSER_OAUTH_TOKEN: "cc4a091c096e7d3cfe053c3f669fb840be60ab98"
   PHPCS_VER: "*"
-
-  matrix:
-  - ATOM_CHANNEL: stable
-  - ATOM_CHANNEL: beta
+  ATOM_CHANNEL: stable
 
 install:
   # Update Chocolatey

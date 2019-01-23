@@ -20,8 +20,6 @@ jobs:
       php: '7.2'
     - stage: test
       php: '7.3'
-    - stage: test
-      env: ATOM_CHANNEL=beta
 
     # Test PHPCS versions
     - stage: test
