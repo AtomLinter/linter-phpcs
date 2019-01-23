@@ -2,10 +2,7 @@
 environment:
   COMPOSER_OAUTH_TOKEN: "cc4a091c096e7d3cfe053c3f669fb840be60ab98"
   PHPCS_VER: "*"
-
-  matrix:
-  - ATOM_CHANNEL: stable
-  - ATOM_CHANNEL: beta
+  ATOM_CHANNEL: stable
 
 install:
   # Update Chocolatey
@@ -16,12 +13,12 @@ install:
   - net start wuauserv
   # The following installs and sets up PHP
   - cinst -y php
-  - cd C:\tools\php72
+  - cd C:\tools\php73
   - copy php.ini-production php.ini
   - echo date.timezone="UTC" >> php.ini
   - echo extension_dir=ext >> php.ini
   - echo extension=php_openssl.dll >> php.ini
-  - SET PATH=C:\tools\php72\;%PATH%
+  - SET PATH=C:\tools\php73\;%PATH%
   # Install Composer
   - php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=composer
   - php composer config -g github-oauth.github.com "%COMPOSER_OAUTH_TOKEN%"
