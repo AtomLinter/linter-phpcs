@@ -23,14 +23,22 @@ jobs:
 
     # Test PHPCS versions
     - stage: test
+      # NOTE: PHPCS v1.* only supports up to PHP 7.2
+      php: '7.2'
       env: PHPCS_VER="1.*"
     - stage: test
+      # NOTE: PHPCS <2.6 only supports up to PHP 7.2
+      php: '7.2'
       env: PHPCS_VER="<2.6"
     - stage: test
+      # NOTE: PHPCS v2.6.1 only supports up to PHP 7.2
+      php: '7.2'
       env: PHPCS_VER="2.6.1"
     - stage: test
       env: PHPCS_VER="2.*"
     - stage: test
+      # NOTE: PHPCS v3.0.0 only supports up to PHP 7.2
+      php: '7.2'
       env: PHPCS_VER="3.0.0"
 
     # Check the commit messages
