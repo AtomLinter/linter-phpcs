@@ -1,3 +1,10 @@
+## [1.6.12](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.11...v1.6.12) (2019-01-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency atom-package-deps to v5 ([765d3d3](https://github.com/AtomLinter/linter-phpcs/commit/765d3d3))
+
 ## [1.6.11](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.10...v1.6.11) (2018-10-11)
 
 
