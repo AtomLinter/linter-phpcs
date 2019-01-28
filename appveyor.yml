@@ -1,6 +1,7 @@
 ### Project specific config ###
 environment:
-  COMPOSER_OAUTH_TOKEN: "cc4a091c096e7d3cfe053c3f669fb840be60ab98"
+  COMPOSER_OAUTH_TOKEN:
+    secure: PY0tnExp9ix66O1q0TuLbVwUg3YS6PIzFuI7B/3vUt8xPtLejPRlE4ewGTbgzmWH
   PHPCS_VER: "*"
   ATOM_CHANNEL: stable
 
@@ -21,7 +22,10 @@ install:
   - SET PATH=C:\tools\php73\;%PATH%
   # Install Composer
   - php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=composer
-  - php composer config -g github-oauth.github.com "%COMPOSER_OAUTH_TOKEN%"
+  - ps: >-
+      If ($Env:COMPOSER_OAUTH_TOKEN -ne '') {
+        php composer config -g -- github-oauth.github.com "$Env:COMPOSER_OAUTH_TOKEN"
+      }
   - SET PATH=%APPDATA%\Composer\vendor\bin;%PATH%
   # Install PHPCS
   - php composer global require "squizlabs/php_codesniffer %PHPCS_VER%"
