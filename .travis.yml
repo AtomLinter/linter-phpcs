@@ -4,7 +4,6 @@ language: php
 env:
   global:
     - COMPOSER_DISABLE_XDEBUG_WARN="1"
-    - COMPOSER_OAUTH_TOKEN="cc4a091c096e7d3cfe053c3f669fb840be60ab98"
     - ATOM_CHANNEL=stable
     - PHPCS_VER="*"
 php: 7.3

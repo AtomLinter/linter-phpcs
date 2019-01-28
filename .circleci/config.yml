@@ -5,7 +5,6 @@ defaults: &defaults
   docker:
     - image: arcanemagus/atom-docker-ci:stable
   environment:
-    COMPOSER_TOKEN: "cc4a091c096e7d3cfe053c3f669fb840be60ab98"
     COMPOSER_DISABLE_XDEBUG_WARN: 1
     PHPCS_VER: "*"
   steps:
@@ -51,7 +50,7 @@ defaults: &defaults
           echo 'export PATH="/home/atom/.composer/vendor/bin:$PATH"' >> $BASH_ENV
     - run:
         name: Configure Composer token
-        command: composer config -g github-oauth.github.com "${COMPOSER_TOKEN}"
+        command: composer config -g github-oauth.github.com "${COMPOSER_OAUTH_TOKEN}"
     - run:
         name: Composer version
         command: composer --version
