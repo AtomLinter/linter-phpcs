@@ -63,8 +63,11 @@ jobs:
           - npx semantic-release
 
 install:
-  # Set the GitHub OAuth token for Composer
-  - composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN"
+  # Set the GitHub OAuth token for Composer if it is available
+  - |
+    if [[ -n "$COMPOSER_OAUTH_TOKEN" ]]; then
+      composer config -g github-oauth.github.com "$COMPOSER_OAUTH_TOKEN";
+    fi
   - export PATH="$PATH:$HOME/.config/composer/vendor/bin"
   # Install PHPCS
   - composer global require "squizlabs/php_codesniffer $PHPCS_VER"
