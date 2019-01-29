@@ -23,7 +23,7 @@ install:
   # Install Composer
   - php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=composer
   - ps: >-
-      If ($Env:COMPOSER_OAUTH_TOKEN -ne '') {
+      If (Test-Path variable:global:COMPOSER_OAUTH_TOKEN) {
         php composer config -g -- github-oauth.github.com "$Env:COMPOSER_OAUTH_TOKEN"
       }
   - SET PATH=%APPDATA%\Composer\vendor\bin;%PATH%
