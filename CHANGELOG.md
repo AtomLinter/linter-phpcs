@@ -1,3 +1,10 @@
+## [1.6.13](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.12...v1.6.13) (2019-03-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency semver to v6 ([4c4b43c](https://github.com/AtomLinter/linter-phpcs/commit/4c4b43c))
+
 ## [1.6.12](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.11...v1.6.12) (2019-01-23)
 
 
