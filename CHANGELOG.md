@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.14...v1.7.0) (2019-05-15)
+
+
+### Features
+
+* adding ./bin/ to the list of autoloaded phpcs paths ([280ee36](https://github.com/AtomLinter/linter-phpcs/commit/280ee36))
+
 ## [1.6.14](https://github.com/AtomLinter/linter-phpcs/compare/v1.6.13...v1.6.14) (2019-04-22)
 
 
