@@ -195,6 +195,15 @@ describe('The phpcs provider for Linter', () => {
         }
         checkTabMessage(tabMessage);
       });
+
+      it('works with tabs error at the end of the line', async () => {
+        const phpcsVersion = process.env.PHPCS_VER && +process.env.PHPCS_VER.replace(/^.*?(\d+).*$/, '$1');
+        const lineEndError = path.resolve(__dirname, `./standards/LineEndError${phpcsVersion && phpcsVersion < 3 ? 'V1' : ''}`);
+        atom.config.set('linter-phpcs.codeStandardOrConfigFile', lineEndError);
+        atom.config.set('linter-phpcs.tabWidth', 2);
+        const messages = await lint(editor);
+        expect(messages.length).toBe(4);
+      });
     });
   });
 
