@@ -23,7 +23,7 @@
       "title": "Search for executables",
       "type": "boolean",
       "default": true,
-      "description": "Automatically search for any `vendor/bin/` or `bin/` for the `phpcs` executable. Overrides the exectuable defined above.",
+      "description": "Automatically search for any `vendor/bin/` or `bin/` for the `phpcs` executable. Overrides the executable defined above.",
       "order": 2
     },
     "codeStandardOrConfigFile": {
