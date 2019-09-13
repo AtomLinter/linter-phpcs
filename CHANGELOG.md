@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.2...v1.7.3) (2019-09-13)
+
+
+### Bug Fixes
+
+* column at end of tabbed line ([1e7a4f1](https://github.com/AtomLinter/linter-phpcs/commit/1e7a4f1))
+
 ## [1.7.2](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.1...v1.7.2) (2019-06-24)
 
 
