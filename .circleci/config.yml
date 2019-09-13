@@ -51,8 +51,9 @@ defaults: &defaults
     - run:
         name: Configure Composer token
         command: |
-          [[ -n "${COMPOSER_OAUTH_TOKEN}" ]] && \
-          composer config -g github-oauth.github.com "${COMPOSER_OAUTH_TOKEN}"
+          if [[ -n "${COMPOSER_OAUTH_TOKEN}" ]]; then
+            composer config -g github-oauth.github.com "${COMPOSER_OAUTH_TOKEN}";
+          fi
     - run:
         name: Composer version
         command: composer --version
