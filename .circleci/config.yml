@@ -50,7 +50,9 @@ defaults: &defaults
           echo 'export PATH="/home/atom/.composer/vendor/bin:$PATH"' >> $BASH_ENV
     - run:
         name: Configure Composer token
-        command: composer config -g github-oauth.github.com "${COMPOSER_OAUTH_TOKEN}"
+        command: |
+          [[ -n "${COMPOSER_OAUTH_TOKEN}" ]] && \
+          composer config -g github-oauth.github.com "${COMPOSER_OAUTH_TOKEN}"
     - run:
         name: Composer version
         command: composer --version
