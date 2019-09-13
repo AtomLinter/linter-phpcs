@@ -17,6 +17,7 @@ const tabsPath = path.join(__dirname, 'files', 'tabs.php');
 const emptyPath = path.join(__dirname, 'files', 'empty.php');
 const longCP1251Path = path.join(__dirname, 'files', 'long.cp1251.php');
 const shortCP1251Path = path.join(__dirname, 'files', 'short.cp1251.php');
+const standardsPath = path.join(__dirname, 'standards');
 
 async function throwingLint(editor) {
   try {
@@ -197,8 +198,8 @@ describe('The phpcs provider for Linter', () => {
       });
 
       it('works with tabs error at the end of the line', async () => {
-        const phpcsVersion = process.env.PHPCS_VER && +process.env.PHPCS_VER.replace(/^.*?(\d+).*$/, '$1');
-        const lineEndError = path.resolve(__dirname, `./standards/LineEndError${phpcsVersion && phpcsVersion < 3 ? 'V1' : ''}`);
+        const lineEndError = path.join(standardsPath,
+          `LineEndError${satisfies(phpcsVer, '<3') ? 'V1' : ''}`);
         atom.config.set('linter-phpcs.codeStandardOrConfigFile', lineEndError);
         atom.config.set('linter-phpcs.tabWidth', 2);
         const messages = await lint(editor);
