@@ -1,3 +1,10 @@
+## [1.7.5](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.4...v1.7.5) (2019-09-13)
+
+
+### Bug Fixes
+
+* typo in package.json ([f0bfa4f](https://github.com/AtomLinter/linter-phpcs/commit/f0bfa4f))
+
 ## [1.7.4](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.3...v1.7.4) (2019-09-13)
 
 
