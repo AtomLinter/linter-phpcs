@@ -1,3 +1,10 @@
+## [1.7.4](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.3...v1.7.4) (2019-09-13)
+
+
+### Bug Fixes
+
+* path.dirname must be a string ([d2ff804](https://github.com/AtomLinter/linter-phpcs/commit/d2ff804))
+
 ## [1.7.3](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.2...v1.7.3) (2019-09-13)
 
 
