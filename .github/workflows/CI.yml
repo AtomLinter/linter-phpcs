@@ -18,7 +18,27 @@ jobs:
           - macos-latest
           - windows-latest
         atom_channel: [stable, beta]
-        php_version: ['5.6', '7.1', '7.2', '7.3', '7.4', '8.0']
+        php_version: ['5.6', '7.4', '8.0']
+        phpcs_version: '*'
+
+        include:
+            # PHPCS v1.* only supports up to PHP 7.2
+          - os: ubuntu-latest
+            atom_channel: stable
+            php_version: '7.2'
+            phpcs_version: '1.*'
+
+            # PHPCS v2.* only supports up to PHP 7.2
+          - os: ubuntu-latest
+            atom_channel: stable
+            php_version: '7.2'
+            phpcs_version: '2.*'
+
+            # PHPCS v3.* only supports up to PHP 7.2
+          - os: ubuntu-latest
+            atom_channel: stable
+            php_version: '7.2'
+            phpcs_version: '3.*'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,7 +51,7 @@ jobs:
         with:
           php-version: ${{ matrix.php_version }}
       - name: Install PHPCS
-        run: composer global require "squizlabs/php_codesniffer=*"
+        run: composer global require "squizlabs/php_codesniffer ${{ matrix.phpcs_version }}"
       - name: Versions
         run: |
           atom -v
