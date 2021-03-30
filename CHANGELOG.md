@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.7...v1.8.0) (2021-03-30)
+
+
+### Features
+
+* **settings:** extensions to include ([#451](https://github.com/AtomLinter/linter-phpcs/issues/451)) ([c07e1d5](https://github.com/AtomLinter/linter-phpcs/commit/c07e1d55a40b241d8fa882f7a8a68d6126f0321a))
+
 ## [1.7.7](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.6...v1.7.7) (2021-03-30)
 
 
