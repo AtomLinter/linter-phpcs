@@ -240,18 +240,20 @@ describe('The phpcs provider for Linter', () => {
   it('allows specifying other extentions', async () => {
     const editor = await atom.workspace.open(badModulePath);
     let messages = await lint(editor);
-    console.log(messages);
-    expect(messages.length).toBe(0);
+    // extensions are ignored by phpcs for v1.* and v2.*
+    const expected = satisfies(phpcsVer, '<3.0.0') ? 1 : 0;
+    expect(messages.length).toBe(expected);
     atom.config.set('linter-phpcs.includeExtensions', ['module']);
     messages = await lint(editor);
-    console.log(messages);
     expect(messages.length).toBe(1);
   });
 
   it('allows php, inc, lib extentions by default', async () => {
     let editor = await atom.workspace.open(badModulePath);
     let messages = await lint(editor);
-    expect(messages.length).toBe(0);
+    // extensions are ignored by phpcs for v1.* and v2.*
+    const expected = satisfies(phpcsVer, '<3.0.0') ? 1 : 0;
+    expect(messages.length).toBe(expected);
     editor = await atom.workspace.open(badPath);
     messages = await lint(editor);
     expect(messages.length).toBe(1);
