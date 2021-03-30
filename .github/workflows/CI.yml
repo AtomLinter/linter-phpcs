@@ -66,8 +66,6 @@ jobs:
       - name: Install dependencies
         run: apm install
       - name: Run tests 👩🏾‍💻
-        env:
-          PHPCS_VER: ${{ matrix.phpcs_version }}
         run: npm run test
 
   Lint:
