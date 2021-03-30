@@ -11,6 +11,9 @@ import linterPhpcs, { getPHPCSVersion, loadDeps } from '../lib/main';
 const { lint } = linterPhpcs.provideLinter();
 
 const goodPath = path.join(__dirname, 'files', 'good.php');
+const badIncPath = path.join(__dirname, 'files', 'bad.inc');
+const badLibPath = path.join(__dirname, 'files', 'bad.lib');
+const badModulePath = path.join(__dirname, 'files', 'bad.module');
 const badPath = path.join(__dirname, 'files', 'bad.php');
 const tabsPath = path.join(__dirname, 'files', 'tabs.php');
 const emptyPath = path.join(__dirname, 'files', 'empty.php');
@@ -218,5 +221,33 @@ describe('The phpcs provider for Linter', () => {
       messages = await lint(editor);
       expect(messages.length).toBe(0);
     }
+  });
+
+  it('allows specifying other extentions', async () => {
+    const editor = await atom.workspace.open(badModulePath);
+    let messages = await lint(editor);
+    // extensions are ignored by phpcs for v1.* and v2.*
+    const expected = satisfies(phpcsVer, '<3.0.0') ? 1 : 0;
+    expect(messages.length).toBe(expected);
+    atom.config.set('linter-phpcs.includeExtensions', ['module']);
+    messages = await lint(editor);
+    expect(messages.length).toBe(1);
+  });
+
+  it('allows php, inc, lib extentions by default', async () => {
+    let editor = await atom.workspace.open(badModulePath);
+    let messages = await lint(editor);
+    // extensions are ignored by phpcs for v1.* and v2.*
+    const expected = satisfies(phpcsVer, '<3.0.0') ? 1 : 0;
+    expect(messages.length).toBe(expected);
+    editor = await atom.workspace.open(badPath);
+    messages = await lint(editor);
+    expect(messages.length).toBe(1);
+    editor = await atom.workspace.open(badIncPath);
+    messages = await lint(editor);
+    expect(messages.length).toBe(1);
+    editor = await atom.workspace.open(badLibPath);
+    messages = await lint(editor);
+    expect(messages.length).toBe(1);
   });
 });
