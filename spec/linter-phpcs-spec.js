@@ -6,10 +6,9 @@ import {
   // eslint-disable-next-line no-unused-vars
   it, fit, wait, beforeEach, afterEach,
 } from 'jasmine-fix';
-import linterPhpcs from '../lib/main';
+import linterPhpcs, { getPHPCSVersion, loadDeps } from '../lib/main';
 
 const { lint } = linterPhpcs.provideLinter();
-let phpcsVer;
 
 const goodPath = path.join(__dirname, 'files', 'good.php');
 const badPath = path.join(__dirname, 'files', 'bad.php');
@@ -29,26 +28,13 @@ async function throwingLint(editor) {
 }
 
 describe('The phpcs provider for Linter', () => {
+  let phpcsVer;
   beforeEach(async () => {
     atom.workspace.destroyActivePaneItem();
     await atom.packages.activatePackage('linter-phpcs');
     await atom.packages.activatePackage('language-php');
-    // Set the expected PHPCS version
-    const fakeVer = {
-      '1.*': '1.0.0',
-      '<2.6': '2.5.1',
-      '2.6.1': '2.6.1',
-      '2.*': '2.9.0',
-      '*': '3.0.0',
-    };
-    let phpcsSpecVer;
-    if (Object.prototype.hasOwnProperty.call(process.env, 'PHPCS_VER')) {
-      // This will be set in the CI environments
-      phpcsSpecVer = process.env.PHPCS_VER;
-    } else {
-      phpcsSpecVer = '*';
-    }
-    phpcsVer = fakeVer[phpcsSpecVer];
+    loadDeps();
+    phpcsVer = await getPHPCSVersion('phpcs');
   });
 
   it('should be in the packages list', () => {
