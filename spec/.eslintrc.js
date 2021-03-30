@@ -1,6 +1,6 @@
 module.exports = {
   env: {
     jasmine: true,
-    atomtest: true
-  }
+    atomtest: true,
+  },
 };
