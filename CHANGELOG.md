@@ -1,3 +1,10 @@
+## [1.7.7](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.6...v1.7.7) (2021-03-30)
+
+
+### Bug Fixes
+
+* update deps ([#465](https://github.com/AtomLinter/linter-phpcs/issues/465)) ([95d6367](https://github.com/AtomLinter/linter-phpcs/commit/95d6367b6ce8b1a6f9e2abb4ef56719e07904860))
+
 ## [1.7.6](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.5...v1.7.6) (2019-09-13)
 
 
