@@ -8,7 +8,7 @@ on:
 jobs:
   Test:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    name: ${{ matrix.os }} - Atom ${{ matrix.atom_channel }}
+    name: ${{ matrix.os }} - Atom ${{ matrix.atom_channel }} - PHP ${{ matrix.php_version }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -18,13 +18,26 @@ jobs:
           - macos-latest
           - windows-latest
         atom_channel: [stable, beta]
+        php_version: ['5.6', '7.1', '7.2', '7.3', '7.4', '8.0']
     steps:
-      - uses: actions/checkout@v2
-      - uses: UziTech/action-setup-atom@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Atom ${{ matrix.atom_channel }}
+        uses: UziTech/action-setup-atom@v1
         with:
           channel: ${{ matrix.atom_channel }}
+      - name: Install PHP ${{ matrix.php_version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php_version }}
+      - name: Install PHPCS
+        run: composer global require "squizlabs/php_codesniffer=*"
       - name: Versions
-        run: apm -v
+        run: |
+          atom -v
+          apm -v
+          php -v
+          phpcs --version
       - name: Install dependencies
         run: apm install
       - name: Run tests 👩🏾‍💻
