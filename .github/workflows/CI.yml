@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Lint ✨
-        run: npm test.lint
+        run: npm run test.lint
 
   CommitLint:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
@@ -63,8 +63,6 @@ jobs:
       - uses: UziTech/action-setup-atom@v1
       - name: NPM install
         run: npm install
-      - name: Build and Commit
-        run: npm run build-commit
       - name: Release 🎉
         uses: cycjimmy/semantic-release-action@v2
         with:

@@ -132,7 +132,7 @@
   ],
   "scripts": {
     "lint": "eslint . --fix",
-    "test": "apm test",
+    "test": "atom --test ./spec",
     "test.lint": "eslint ."
   },
   "providedServices": {
