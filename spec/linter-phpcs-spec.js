@@ -240,9 +240,11 @@ describe('The phpcs provider for Linter', () => {
   it('allows specifying other extentions', async () => {
     const editor = await atom.workspace.open(badModulePath);
     let messages = await lint(editor);
+    console.log(messages);
     expect(messages.length).toBe(0);
     atom.config.set('linter-phpcs.includeExtensions', ['module']);
     messages = await lint(editor);
+    console.log(messages);
     expect(messages.length).toBe(1);
   });
 
