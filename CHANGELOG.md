@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/AtomLinter/linter-phpcs/compare/v1.8.0...v1.8.1) (2021-03-31)
+
+
+### Bug Fixes
+
+* throw error if phpcs version cannot be parsed ([0fe6c09](https://github.com/AtomLinter/linter-phpcs/commit/0fe6c093236d5d7f9c1c79560dc702037fb4e418))
+
 # [1.8.0](https://github.com/AtomLinter/linter-phpcs/compare/v1.7.7...v1.8.0) (2021-03-30)
 
 
